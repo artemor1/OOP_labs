@@ -1,0 +1,11 @@
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\bin\Debug\MyComplexCalculator.exe.config
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\bin\Debug\MyComplexCalculator.exe
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\bin\Debug\MyComplexCalculator.pdb
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\obj\Debug\MyComplexCalculator.csproj.AssemblyReference.cache
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\obj\Debug\MyComplexCalculator.Form1.resources
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\obj\Debug\MyComplexCalculator.Properties.Resources.resources
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\obj\Debug\MyComplexCalculator.csproj.GenerateResource.cache
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\obj\Debug\MyComplexCalculator.csproj.CoreCompileInputs.cache
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\obj\Debug\MyComplexCalculator.exe
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\obj\Debug\MyComplexCalculator.pdb
+C:\Users\Артём\source\repos\MyComplexCalculator\MyComplexCalculator\obj\Debug\MyComplexCalculator.exe.config

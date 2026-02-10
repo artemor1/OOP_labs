@@ -1,0 +1,11 @@
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\obj\Debug\net8.0\Mycomplex.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\obj\Debug\net8.0\Mycomplex.AssemblyInfoInputs.cache
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\obj\Debug\net8.0\Mycomplex.AssemblyInfo.cs
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\obj\Debug\net8.0\Mycomplex.csproj.CoreCompileInputs.cache
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\bin\Debug\net8.0\Mycomplex.deps.json
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\bin\Debug\net8.0\Mycomplex.dll
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\bin\Debug\net8.0\Mycomplex.pdb
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\obj\Debug\net8.0\Mycomplex.dll
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\obj\Debug\net8.0\refint\Mycomplex.dll
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\obj\Debug\net8.0\Mycomplex.pdb
+C:\Users\Артём\source\repos\Mycomplex\Mycomplex\obj\Debug\net8.0\ref\Mycomplex.dll
