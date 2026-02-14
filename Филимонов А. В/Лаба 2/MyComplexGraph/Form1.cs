@@ -8,13 +8,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using nsMycomplex;
+
+
 namespace Лаба_2
 {
     public partial class Form1 : Form
     {
+        List<PointF> contour;
+        MyComplexSignal signal;
+        Graphics gr;
+        Canvas cnv;
+        PointF loc;
         public Form1()
         {
             InitializeComponent();
+            pbCanvas.Image = new Bitmap(pbCanvas.Width, pbCanvas.Height);
+            cnv = new Canvas(pbCanvas.Image.Size);
+            gr = Graphics.FromImage(pbCanvas.Image);
+            cnv.DrawGrid(gr);
+
+            loc = new PointF(1, 1);
+            var a = new List<PointF>();
+            a.Add(new PointF(1, 0));
+            a.Add(new PointF(1, 1));
+            a.Add(new PointF(-2, 0));
+            a.Add(new PointF(0, -1));
+            signal = MyComplexSignal.FromPointF(a);
+            contour = signal.ToPointF();
+            cnv.DrawContour(gr, contour, loc);
+            signal = MyComplexSignal.Rotate(signal, 90 * Math.PI / 180);
+            contour = signal.ToPointF();
+            var loc1= new PointF(5, 1);
+            cnv.DrawContour(gr, contour, loc1);
         }
 
 
@@ -99,10 +125,9 @@ public void DrawGrid(Graphics gr)
                 }
             }
         }
-   
 
 
-
+        
 
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -135,17 +160,20 @@ public void DrawGrid(Graphics gr)
             //pbCanvas.Image = bmp;
             //pbCanvas.Refresh();
             #endregion
-            pbCanvas.Image = new Bitmap(pbCanvas.Width, pbCanvas.Height);
-            var cnv = new Canvas(pbCanvas.Image.Size);
-            var gr = Graphics.FromImage(pbCanvas.Image);
-            cnv.DrawGrid(gr);
+        }
 
-            PointF loc = new PointF(1, 1);
-            var contour = new List<PointF>();
-            contour.Add(new PointF(1, 0));
-            contour.Add(new PointF(1, 1));
-            contour.Add(new PointF(-2, 0));
-            contour.Add(new PointF(0, -1));
+        private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            signal = MyComplexSignal.Rotate(signal, 45 * Math.PI / 180);
+            contour = signal.ToPointF();
+            cnv.DrawContour(gr, contour, loc);
+        }
+
+        private void drawToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            contour = signal.ToPointF();
+
             cnv.DrawContour(gr, contour, loc);
         }
     }

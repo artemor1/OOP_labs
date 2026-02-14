@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplexgraph\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C7F89FDC-A078-017F-33CE-3DDBE94153F8}|..\\Mycomplex\\Mycomplex\\Mycomplex.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplex\\mycomplex\\mycomplex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MyComplex.cs",
+              "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\Mycomplex\\Mycomplex\\MyComplex.cs",
+              "RelativeDocumentMoniker": "..\\Mycomplex\\Mycomplex\\MyComplex.cs",
+              "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\Mycomplex\\Mycomplex\\MyComplex.cs",
+              "RelativeToolTip": "..\\Mycomplex\\Mycomplex\\MyComplex.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-14T15:34:00.536Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\Form1.cs*",
+              "RelativeToolTip": "Form1.cs*",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwCcAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T19:39:12.875Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T19:39:10.184Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -22,3 +22,15 @@ C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Л�
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\obj\Debug\Лаба 2.csproj.CoreCompileInputs.cache
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\obj\Debug\Лаба 2.exe
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\obj\Debug\Лаба 2.pdb
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\bin\Debug\Лаба 2.exe.config
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\bin\Debug\Лаба 2.exe
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\bin\Debug\Лаба 2.pdb
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.csproj.AssemblyReference.cache
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.exe.config
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба_2.Form1.resources
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба_2.Properties.Resources.resources
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба_2.UserControl1.resources
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.csproj.GenerateResource.cache
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.csproj.CoreCompileInputs.cache
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.exe
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.pdb

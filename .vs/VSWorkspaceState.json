@@ -1,6 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Филимонов А. В",
+    "\\Филимонов А. В\\Лаба 2",
+    "\\Филимонов А. В\\Лаба 2\\Mycomplex",
+    "\\Филимонов А. В\\Лаба 2\\Mycomplex\\Mycomplex",
+    "\\Филимонов А. В\\Лаба 2\\UnitTestMyComples",
+    "\\Филимонов А. В\\Лаба 2\\UnitTestMyComples\\UnitTestMyComples"
   ],
+  "SelectedNode": "\\Филимонов А. В\\Лаба 2\\UnitTestMyComples\\UnitTestMyComples\\UnitTest1.cs",
   "PreviewInSolutionExplorer": false
 }

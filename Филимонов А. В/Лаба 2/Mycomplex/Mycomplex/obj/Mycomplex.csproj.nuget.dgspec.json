@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Артём\\source\\repos\\Mycomplex\\Mycomplex\\Mycomplex.csproj": {}
+    "C:\\Users\\Артём\\source\\repos\\artemor1\\OOP_labs\\Филимонов А. В\\Лаба 2\\Mycomplex\\Mycomplex\\Mycomplex.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Артём\\source\\repos\\Mycomplex\\Mycomplex\\Mycomplex.csproj": {
+    "C:\\Users\\Артём\\source\\repos\\artemor1\\OOP_labs\\Филимонов А. В\\Лаба 2\\Mycomplex\\Mycomplex\\Mycomplex.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Артём\\source\\repos\\Mycomplex\\Mycomplex\\Mycomplex.csproj",
+        "projectUniqueName": "C:\\Users\\Артём\\source\\repos\\artemor1\\OOP_labs\\Филимонов А. В\\Лаба 2\\Mycomplex\\Mycomplex\\Mycomplex.csproj",
         "projectName": "Mycomplex",
-        "projectPath": "C:\\Users\\Артём\\source\\repos\\Mycomplex\\Mycomplex\\Mycomplex.csproj",
+        "projectPath": "C:\\Users\\Артём\\source\\repos\\artemor1\\OOP_labs\\Филимонов А. В\\Лаба 2\\Mycomplex\\Mycomplex\\Mycomplex.csproj",
         "packagesPath": "C:\\Users\\Артём\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Артём\\source\\repos\\Mycomplex\\Mycomplex\\obj\\",
+        "outputPath": "C:\\Users\\Артём\\source\\repos\\artemor1\\OOP_labs\\Филимонов А. В\\Лаба 2\\Mycomplex\\Mycomplex\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
