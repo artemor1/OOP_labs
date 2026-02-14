@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
-namespace Mycomplex
+namespace nsMycomplex
 {
     public class MyComplex
     {
@@ -37,9 +38,15 @@ namespace Mycomplex
             return string.Format($"{re} + {im} i");
         }
 
+        public static MyComplex Copy(MyComplex a)
+        {
+            return new MyComplex(a.X, a.Y);
+        }
+
         #endregion
         #region Static methods 
 
+        #region summ
         //Метод сложения 
         public static MyComplex Add(MyComplex a, MyComplex b)
         {
@@ -51,7 +58,8 @@ namespace Mycomplex
         {
             return new MyComplex(a.re + b.re, a.im + b.im);
         }
-
+        #endregion
+        #region sub
         public static MyComplex Sub(MyComplex a, MyComplex b)
         {
             return new MyComplex(a.re - b.re, a.im - b.im);
@@ -61,27 +69,56 @@ namespace Mycomplex
         {
             return new MyComplex(a.re - b.re, a.im - b.im);
         }
-
+        #endregion
+        #region mult
         //Оператор умножения 
-        // 
+
         public static MyComplex operator *(MyComplex a, MyComplex b)
         {
             return new MyComplex(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re);
         }
 
 
-        //Сложение с double 
+        //Умножение на double 
         public static MyComplex operator *(MyComplex a, double b)
         {
             return new MyComplex(a.re * b, a.im * b);
         }
+        #endregion
+        #region div
+        
+        //Деление на double
 
+        public static MyComplex operator/(MyComplex a, double b)
+        {
+            return new MyComplex(a.X/ b, a.Y / b);
+        }
+        #endregion
+        #region other
         //Скалярное произведение
         public double ScalarDot(MyComplex a, MyComplex b)
         {
             return a.X * b.X + a.Y * b.Y;
         }
 
+        //Получить противоположный вектор
+
+        public void Reverse()
+        {
+            re = -re;
+            im = -im;
+        }
+
+        //Поворот вектора на определённое кол-во радиан
+        public void Rotate(double radian)
+        {   double oldre = re;
+            double oldim = im;
+            Debug.WriteLine($"Before rotation: re={re}; im={im}");
+            re = (oldre * Math.Cos(radian)) - (oldim * Math.Sin(radian));
+            im = (oldim * Math.Cos(radian)) + (oldre* Math.Sin(radian));
+            Debug.WriteLine($"after rotation: re={re}; im={im}");
+        }
+        #endregion
 
         #endregion
         #region Properties 
@@ -101,7 +138,7 @@ namespace Mycomplex
         #region Parsing
 
         //Метод для парсинга строки в комплексное число
-        public static MyComplex strParse(string s)
+        public static MyComplex Parse(string s)
         {
             // Удаляем пробелы из строки
             s = s.Replace(" ", "");
@@ -156,5 +193,145 @@ namespace Mycomplex
 
         #endregion
 
+    }
+
+
+
+    public class MyComplexSignal
+    {
+        #region Fields 
+        public List<MyComplex> data = new List<MyComplex>();
+        public double norm = 0;
+        #endregion
+        #region Constructors
+        public MyComplexSignal()
+        { }
+        public MyComplexSignal(double[] X, double[] Y)
+        {
+            data = new List<MyComplex>(X.Length);
+            for (int i = 0; i < X.Length; i++)
+            {
+                data.Add(new MyComplex(X[i], Y[i]));
+            }
+            GetNorm();
+        }
+
+        #endregion
+
+        #region Methods 
+
+        public double GetNorm()
+        {
+            double norm = 0;
+
+            foreach (var v in data)
+            {
+                norm += v.Abs();
+            }
+            norm = data.Count > 0 ? norm / data.Count : 0;
+            this.norm = norm;
+            return norm;
+        }
+        public int Normalize()
+        {
+            if (data.Count == 0) return 1;
+            double coeff = GetNorm();
+
+            coeff = coeff == 0 ? 0 : 1 / coeff;
+            for (int i = 0; i < data.Count; i++)
+            {
+                data[i] = data[i] * coeff;
+            }
+            return 0;
+        }
+        public static MyComplexSignal Scale(MyComplexSignal a, double scale)
+        {
+            var res = new MyComplexSignal();
+            int count = a.data.Count;
+            res.data = new List<MyComplex>(count);
+            for (int i = 0; i < count; i++)
+            {
+                res.data.Add(new MyComplex(a.data[i].x * scale, a.data[i].y * scale));
+            }
+            res.GetNorm();
+            return res;
+        }
+        //Rotate 
+        public static MyComplexSignal Rotate(MyComplexSignal a, double angle)
+        {
+            var res = new MyComplexSignal();
+            int count = a.data.Count;
+            MyComplex r = new MyComplex(Math.Cos(angle), Math.Sin(angle));
+            res.data = new List<MyComplex>(count);
+            for (int i = 0; i < count; i++)
+            {
+                res.data.Add(a.data[i] * r);
+            }
+            res.GetNorm();
+
+            return res;
+        }
+        public static MyComplexSignal Move(MyComplexSignal a, MyComplex shift)
+        {
+            var res = new MyComplexSignal();
+            int count = a.data.Count;
+            res.data = new List<MyComplex>(count);
+            for (int i = 0; i < count; i++)
+            {
+                res.data.Add(a.data[i] + shift);
+            }
+            res.GetNorm();
+            return res;
+        }
+        public static MyComplexSignal Conjugate(MyComplexSignal a)
+        {
+            var res = new MyComplexSignal();
+            int count = a.data.Count;
+            res.data = new List<MyComplex>(count);
+            for (int i = 0; i < count; i++)
+            {
+                res.data.Add(new MyComplex(a.data[i].x, -a.data[i].y));
+            }
+            res.GetNorm();
+            return res;
+        }
+
+        public static MyComplexSignal MathAction(MyComplexSignal a, MyComplexSignal  b, Func<MyComplex, MyComplex, MyComplex> func)
+        {
+            var res = new MyComplexSignal();
+            int count = a.data.Count < b.data.Count ? a.data.Count : b.data.Count;
+            res.data = new List<MyComplex>(count);
+            for (int i = 0; i < count; i++)
+            {
+                var tmp = func(a.data[i], b.data[i]);
+                res.data.Add(tmp);
+            }
+            res.GetNorm();
+            return res;
+        }
+
+        public static MyComplex Scalar(MyComplexSignal a, MyComplexSignal b)
+        {
+            var temp = MathAction(a, b, MyComplex.ScalarDot(a,b);
+            var sum = new MyComplex(0, 0);
+            foreach (var t in temp.data)
+            {
+                sum = sum + t;
+            }
+            return sum;
+        }
+        public static MyComplexSignal Mult(MyComplexSignal a, MyComplexSignal b)
+        {
+            return MathAction(a, b, (x, y) => x * y);
+        }
+        public static MyComplexSignal Sum(MyComplexSignal a, MyComplexSignal b)
+        {
+            return MathAction(a, b, (x, y) => x + y);
+        }
+        public static MyComplexSignal Sub(MyComplexSignal a, MyComplexSignal b)
+        {
+            return MathAction(a, b, (x, y) => x - y);
+        }
+        #endregion
     }
 }

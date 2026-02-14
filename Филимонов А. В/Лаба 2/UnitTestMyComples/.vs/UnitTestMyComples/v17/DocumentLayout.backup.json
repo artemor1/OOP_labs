@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\UnitTestMyComples\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{33FE2EA8-7255-4CE6-83CD-71A57E57AA89}|UnitTestMyComples\\UnitTestMyComples.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\UnitTestMyComples\\unittestmycomples\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{33FE2EA8-7255-4CE6-83CD-71A57E57AA89}|UnitTestMyComples\\UnitTestMyComples.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\unittestmycomples\\unittestmycomples\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33FE2EA8-7255-4CE6-83CD-71A57E57AA89}|UnitTestMyComples\\UnitTestMyComples.csproj|solutionrelative:unittestmycomples\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -19,6 +19,20 @@
           "DockedWidth": 200,
           "SelectedChildIndex": 10,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MyComplex.cs",
+              "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\Mycomplex\\Mycomplex\\MyComplex.cs",
+              "RelativeDocumentMoniker": "..\\Mycomplex\\Mycomplex\\MyComplex.cs",
+              "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\Mycomplex\\Mycomplex\\MyComplex.cs",
+              "RelativeToolTip": "..\\Mycomplex\\Mycomplex\\MyComplex.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAD4v3kAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-10T23:08:01.849Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -57,26 +71,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MyComplex.cs",
-              "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\Mycomplex\\Mycomplex\\MyComplex.cs",
-              "RelativeDocumentMoniker": "..\\Mycomplex\\Mycomplex\\MyComplex.cs",
-              "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\Mycomplex\\Mycomplex\\MyComplex.cs",
-              "RelativeToolTip": "..\\Mycomplex\\Mycomplex\\MyComplex.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-10T23:08:01.849Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "UnitTest1.cs",
               "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\UnitTestMyComples\\UnitTestMyComples\\UnitTest1.cs",
               "RelativeDocumentMoniker": "UnitTestMyComples\\UnitTest1.cs",
               "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\UnitTestMyComples\\UnitTestMyComples\\UnitTest1.cs*",
               "RelativeToolTip": "UnitTestMyComples\\UnitTest1.cs*",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAiwEcAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAuwGoAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-10T20:40:02.012Z",
               "EditorCaption": ""

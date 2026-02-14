@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Mycomplex;
+using nsMycomplex;
 
 namespace UnitTestMyComples
 {
@@ -49,7 +49,7 @@ namespace UnitTestMyComples
         {
             string s = "2 + 3 i";
             MyComplex expected = new MyComplex(2, 3);
-            MyComplex actual = MyComplex.strParse(s);
+            MyComplex actual = MyComplex.Parse(s);
             Assert.AreEqual(expected.re, actual.re, 0.001);
             Assert.AreEqual(expected.im, actual.im, 0.001);
         }
@@ -59,7 +59,7 @@ namespace UnitTestMyComples
         {
             string s = "-2.5 - 3.5 i";
             MyComplex expected = new MyComplex(-2.5, -3.5);
-            MyComplex actual = MyComplex.strParse(s);
+            MyComplex actual = MyComplex.Parse(s);
             Assert.AreEqual(expected.re, actual.re, 0.001, "Реальная часть считывается некорректно");
             Assert.AreEqual(expected.im, actual.im, 0.001, "Воображаемая часть считывается некорректно");
         }
@@ -70,20 +70,42 @@ namespace UnitTestMyComples
         {
             string s = "-3.3 i";
             MyComplex expected = new MyComplex(0, -3.3);
-            MyComplex actual = MyComplex.strParse(s);
+            MyComplex actual = MyComplex.Parse(s);
             Assert.AreEqual(expected.re, actual.re, 0.001, "Реальная часть считывается некорректно");
             Assert.AreEqual(expected.im, actual.im, 0.001, "Воображаемая часть считывается некорректно");
         }
 
         [TestMethod]
 
-       public void noImaginaryParseTest()
+        public void noImaginaryParseTest()
         {
             string s = "-3.3";
             MyComplex expected = new MyComplex(-3.3, 0);
-            MyComplex actual = MyComplex.strParse(s);
+            MyComplex actual = MyComplex.Parse(s);
             Assert.AreEqual(expected.re, actual.re, 0.001, "Реальная часть считывается некорректно");
             Assert.AreEqual(expected.im, actual.im, 0.001, "Воображаемая часть считывается некорректно");
+        }
+
+        [TestMethod]
+
+        public void RotateTeset()
+        {
+            MyComplex actual = new MyComplex(2, 1);
+            MyComplex expected = new MyComplex(2, 1);
+            actual.Rotate(1);
+            Assert.AreEqual(expected.Abs(), actual.Abs(), 0.001);
+
+        }
+
+        [TestMethod]
+
+        public void ReverseTest()
+        {
+            MyComplex actual = new MyComplex(2, 1);
+            MyComplex expected = new MyComplex(2, 1);
+            actual.Reverse();
+            expected.Rotate(90 * Math.PI / 180.0);
+            Assert.AreEqual(expected.Abs(), actual.Abs(), 0.001);
         }
     }
 }
