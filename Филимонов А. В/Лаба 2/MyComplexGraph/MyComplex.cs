@@ -368,6 +368,10 @@ namespace nsMycomplex
         }
 
 
+
+      
+
+
         public List<PointF> ToPointF()
         {    
             var res = new List<PointF>(data.Count);
@@ -383,6 +387,18 @@ namespace nsMycomplex
             foreach(var item in a)
             {
                 res.data.Add(MyComplex.FromPointF(item));
+            }
+            return res;
+        }
+
+
+        public static List<string> ToString(MyComplexSignal a)
+        {
+            List<string> res = new List<string>(a.data.Count);
+
+            foreach (var item in a.data)
+            {
+                res.Add(item.ToString());
             }
             return res;
         }

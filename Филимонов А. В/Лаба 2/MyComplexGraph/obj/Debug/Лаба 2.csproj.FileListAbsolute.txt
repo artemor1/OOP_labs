@@ -34,3 +34,4 @@ C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Л�
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.csproj.CoreCompileInputs.cache
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.exe
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\Лаба 2.pdb
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\MyComplexGraph\obj\Debug\MyComplexCalculator.Form2.resources

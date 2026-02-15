@@ -1,6 +1,6 @@
 ﻿namespace MyComplexCalculator
 {
-    partial class Form1
+    partial class Form2
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -140,8 +140,8 @@
             this.Controls.Add(this.tbValueB);
             this.Controls.Add(this.tbValueA);
             this.Controls.Add(this.btnCalc);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Form2";
+            this.Text = "Form2";
             this.ResumeLayout(false);
             this.PerformLayout();
 

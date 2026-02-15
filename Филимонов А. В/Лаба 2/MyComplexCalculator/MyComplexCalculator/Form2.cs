@@ -7,15 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Mycomplex;
+using nsMycomplex;
 
 namespace MyComplexCalculator
 {
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -23,9 +24,9 @@ namespace MyComplexCalculator
             try
             {
                 string str = tbValueA.Text;
-                MyComplex a = MyComplex.strParse(str);
+                MyComplex a = MyComplex.Parse(str);
                 str = tbValueB.Text;
-                MyComplex b = MyComplex.strParse(str);
+                MyComplex b = MyComplex.Parse(str);
                 //Определение оператора 
                 string op = (string)cbOperator.SelectedItem;
                 MyComplex res = new MyComplex();
@@ -47,7 +48,7 @@ namespace MyComplexCalculator
                         res.X = b.Abs();
                         break;
                     case "\tscalar":
-                        res.ScalarDot(a,b);
+                        res.X=MyComplex.ScalarDot(a,b);
                         break;
                     default: break;
                 }
