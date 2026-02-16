@@ -47,9 +47,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Mycomplex\Mycomplex\MyComplex.cs">
+    <Compile Include="..\..\MyComplexGraph\MyComplex.cs">
       <Link>MyComplex.cs</Link>
     </Compile>
     <Compile Include="UnitTest1.cs" />

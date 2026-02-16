@@ -19,3 +19,24 @@ C:\Users\Артём\source\repos\UnitTestMyComples\UnitTestMyComples\bin\Debug\M
 C:\Users\Артём\source\repos\UnitTestMyComples\UnitTestMyComples\obj\Debug\UnitTest.CC19106D.Up2Date
 C:\Users\Артём\source\repos\UnitTestMyComples\UnitTestMyComples\obj\Debug\UnitTestMyComples.dll
 C:\Users\Артём\source\repos\UnitTestMyComples\UnitTestMyComples\obj\Debug\UnitTestMyComples.pdb
+c:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\obj\Debug\UnitTestMyComples.csproj.AssemblyReference.cache
+c:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\obj\Debug\UnitTestMyComples.csproj.CoreCompileInputs.cache
+c:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\obj\Debug\UnitTestMyComples.dll
+c:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\obj\Debug\UnitTestMyComples.pdb
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\ru\Microsoft.TestPlatform.AdapterUtilities.resources.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\ru\Microsoft.TestPlatform.CoreUtilities.resources.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\Microsoft.TestPlatform.AdapterUtilities.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\UnitTestMyComples.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\UnitTestMyComples.pdb
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Лаба 2\UnitTestMyComples\UnitTestMyComples\obj\Debug\UnitTest.CC19106D.Up2Date
