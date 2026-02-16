@@ -38,10 +38,17 @@
             this.downToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.drawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.upToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.downToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.drawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.furieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iDFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotationTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -71,12 +78,18 @@
             this.pbCanvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbCanvas.TabIndex = 0;
             this.pbCanvas.TabStop = false;
+            this.pbCanvas.Click += new System.EventHandler(this.pbCanvas_Click);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItem,
-            this.drawToolStripMenuItem});
+            this.drawToolStripMenuItem,
+            this.getDataToolStripMenuItem,
+            this.furieToolStripMenuItem,
+            this.normalizeToolStripMenuItem,
+            this.rotationTestToolStripMenuItem,
+            this.saveToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -90,14 +103,14 @@
             this.moveToolStripMenuItem,
             this.scaleToolStripMenuItem});
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
-            this.testToolStripMenuItem.Text = "test";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.testToolStripMenuItem.Text = "actions";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // rotateToolStripMenuItem
             // 
             this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.rotateToolStripMenuItem.Text = "rotate";
             this.rotateToolStripMenuItem.Click += new System.EventHandler(this.rotateToolStripMenuItem_Click);
             // 
@@ -109,7 +122,7 @@
             this.leftToolStripMenuItem,
             this.rightToolStripMenuItem});
             this.moveToolStripMenuItem.Name = "moveToolStripMenuItem";
-            this.moveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.moveToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.moveToolStripMenuItem.Text = "move";
             // 
             // upToolStripMenuItem
@@ -140,6 +153,29 @@
             this.rightToolStripMenuItem.Text = "right";
             this.rightToolStripMenuItem.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
             // 
+            // scaleToolStripMenuItem
+            // 
+            this.scaleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.upToolStripMenuItem1,
+            this.downToolStripMenuItem1});
+            this.scaleToolStripMenuItem.Name = "scaleToolStripMenuItem";
+            this.scaleToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.scaleToolStripMenuItem.Text = "scale";
+            // 
+            // upToolStripMenuItem1
+            // 
+            this.upToolStripMenuItem1.Name = "upToolStripMenuItem1";
+            this.upToolStripMenuItem1.Size = new System.Drawing.Size(104, 22);
+            this.upToolStripMenuItem1.Text = "up";
+            this.upToolStripMenuItem1.Click += new System.EventHandler(this.upToolStripMenuItem1_Click);
+            // 
+            // downToolStripMenuItem1
+            // 
+            this.downToolStripMenuItem1.Name = "downToolStripMenuItem1";
+            this.downToolStripMenuItem1.Size = new System.Drawing.Size(104, 22);
+            this.downToolStripMenuItem1.Text = "down";
+            this.downToolStripMenuItem1.Click += new System.EventHandler(this.downToolStripMenuItem1_Click);
+            // 
             // drawToolStripMenuItem
             // 
             this.drawToolStripMenuItem.Name = "drawToolStripMenuItem";
@@ -147,28 +183,56 @@
             this.drawToolStripMenuItem.Text = "draw";
             this.drawToolStripMenuItem.Click += new System.EventHandler(this.drawToolStripMenuItem_Click);
             // 
-            // scaleToolStripMenuItem
+            // getDataToolStripMenuItem
             // 
-            this.scaleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.upToolStripMenuItem1,
-            this.downToolStripMenuItem1});
-            this.scaleToolStripMenuItem.Name = "scaleToolStripMenuItem";
-            this.scaleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.scaleToolStripMenuItem.Text = "scale";
+            this.getDataToolStripMenuItem.Name = "getDataToolStripMenuItem";
+            this.getDataToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.getDataToolStripMenuItem.Text = "get data";
+            this.getDataToolStripMenuItem.Click += new System.EventHandler(this.getDataToolStripMenuItem_Click);
             // 
-            // upToolStripMenuItem1
+            // furieToolStripMenuItem
             // 
-            this.upToolStripMenuItem1.Name = "upToolStripMenuItem1";
-            this.upToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.upToolStripMenuItem1.Text = "up";
-            this.upToolStripMenuItem1.Click += new System.EventHandler(this.upToolStripMenuItem1_Click);
+            this.furieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dFTToolStripMenuItem,
+            this.iDFTToolStripMenuItem});
+            this.furieToolStripMenuItem.Name = "furieToolStripMenuItem";
+            this.furieToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.furieToolStripMenuItem.Text = "fourier";
             // 
-            // downToolStripMenuItem1
+            // dFTToolStripMenuItem
             // 
-            this.downToolStripMenuItem1.Name = "downToolStripMenuItem1";
-            this.downToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.downToolStripMenuItem1.Text = "down";
-            this.downToolStripMenuItem1.Click += new System.EventHandler(this.downToolStripMenuItem1_Click);
+            this.dFTToolStripMenuItem.Name = "dFTToolStripMenuItem";
+            this.dFTToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.dFTToolStripMenuItem.Text = "DFT";
+            this.dFTToolStripMenuItem.Click += new System.EventHandler(this.dFTToolStripMenuItem_Click);
+            // 
+            // iDFTToolStripMenuItem
+            // 
+            this.iDFTToolStripMenuItem.Name = "iDFTToolStripMenuItem";
+            this.iDFTToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.iDFTToolStripMenuItem.Text = "IDFT";
+            this.iDFTToolStripMenuItem.Click += new System.EventHandler(this.iDFTToolStripMenuItem_Click);
+            // 
+            // normalizeToolStripMenuItem
+            // 
+            this.normalizeToolStripMenuItem.Name = "normalizeToolStripMenuItem";
+            this.normalizeToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.normalizeToolStripMenuItem.Text = "normalize";
+            this.normalizeToolStripMenuItem.Click += new System.EventHandler(this.normalizeToolStripMenuItem_Click);
+            // 
+            // rotationTestToolStripMenuItem
+            // 
+            this.rotationTestToolStripMenuItem.Name = "rotationTestToolStripMenuItem";
+            this.rotationTestToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.rotationTestToolStripMenuItem.Text = "rotation test";
+            this.rotationTestToolStripMenuItem.Click += new System.EventHandler(this.rotationTestToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.saveToolStripMenuItem.Text = "save ";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -204,6 +268,13 @@
         private System.Windows.Forms.ToolStripMenuItem scaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem upToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem downToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem getDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem furieToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dFTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iDFTToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem normalizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rotationTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }
 

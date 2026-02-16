@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.PanelMod2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.PanelMod1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -43,29 +45,37 @@
             this.tbValueB = new System.Windows.Forms.TextBox();
             this.tbValueA = new System.Windows.Forms.TextBox();
             this.btnCalc = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.PanelMod2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.PanelMod1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelMod2
             // 
-            this.PanelMod2.Controls.Add(this.button2);
+            this.PanelMod2.Controls.Add(this.button4);
+            this.PanelMod2.Controls.Add(this.pictureBox1);
             this.PanelMod2.Controls.Add(this.dataGridView1);
+            this.PanelMod2.Controls.Add(this.button3);
+            this.PanelMod2.Controls.Add(this.button2);
             this.PanelMod2.Location = new System.Drawing.Point(0, 0);
             this.PanelMod2.Name = "PanelMod2";
             this.PanelMod2.Size = new System.Drawing.Size(801, 453);
             this.PanelMod2.TabIndex = 18;
+            this.PanelMod2.TabStop = true;
             // 
-            // button2
+            // pictureBox1
             // 
-            this.button2.Location = new System.Drawing.Point(358, 400);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(135, 23);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "switch to calculator";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.pictureBox1.Location = new System.Drawing.Point(475, 77);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(248, 241);
+            this.pictureBox1.TabIndex = 23;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
             // dataGridView1
             // 
@@ -82,6 +92,26 @@
             this.Column1.HeaderText = "Текущий сигнал";
             this.Column1.Name = "Column1";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(531, 337);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "get vector";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(358, 400);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(135, 23);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "switch to calculator";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // PanelMod1
             // 
             this.PanelMod1.AutoSize = true;
@@ -96,12 +126,10 @@
             this.PanelMod1.Controls.Add(this.tbValueB);
             this.PanelMod1.Controls.Add(this.tbValueA);
             this.PanelMod1.Controls.Add(this.btnCalc);
-            this.PanelMod1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelMod1.Location = new System.Drawing.Point(0, 0);
+            this.PanelMod1.Location = new System.Drawing.Point(651, 400);
             this.PanelMod1.Name = "PanelMod1";
-            this.PanelMod1.Size = new System.Drawing.Size(800, 450);
+            this.PanelMod1.Size = new System.Drawing.Size(693, 414);
             this.PanelMod1.TabIndex = 19;
-            this.PanelMod1.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelMod1_Paint_1);
             // 
             // button1
             // 
@@ -195,6 +223,16 @@
             this.btnCalc.UseVisualStyleBackColor = true;
             this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(68, 337);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(63, 23);
+            this.button4.TabIndex = 24;
+            this.button4.Text = "Clear";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,6 +243,7 @@
             this.Name = "Form2";
             this.Text = "Form2";
             this.PanelMod2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.PanelMod1.ResumeLayout(false);
             this.PanelMod1.PerformLayout();
@@ -229,6 +268,9 @@
         private System.Windows.Forms.TextBox tbValueB;
         private System.Windows.Forms.TextBox tbValueA;
         private System.Windows.Forms.Button btnCalc;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button4;
     }
 }
 

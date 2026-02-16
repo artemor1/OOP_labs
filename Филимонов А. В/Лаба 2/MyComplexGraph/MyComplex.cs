@@ -36,11 +36,11 @@ namespace nsMycomplex
 
         public override string ToString()
         {
-            if (im < 0) return string.Format($"{re} – {-im} i");
+            if (im < 0) return string.Format($"{re} - {-im} i");
             return string.Format($"{re} + {im} i");
         }
 
-        public MyComplex Copy(MyComplex a)
+        public  static MyComplex Copy(MyComplex a)
         {
             return new MyComplex(a.X, a.Y);
         }
@@ -97,12 +97,12 @@ namespace nsMycomplex
         }
         #endregion
         #region div
-        
+
         //Деление на double
 
-        public static MyComplex operator/(MyComplex a, double b)
+        public static MyComplex operator /(MyComplex a, double b)
         {
-            return new MyComplex(a.X/ b, a.Y / b);
+            return new MyComplex(a.X / b, a.Y / b);
         }
         #endregion
         #region other
@@ -122,11 +122,12 @@ namespace nsMycomplex
 
         //Поворот вектора на определённое кол-во радиан
         public void Rotate(double radian)
-        {   double oldre = re;
+        {
+            double oldre = re;
             double oldim = im;
             Debug.WriteLine($"Before rotation: re={re}; im={im}");
             re = (oldre * Math.Cos(radian)) - (oldim * Math.Sin(radian));
-            im = (oldim * Math.Cos(radian)) + (oldre* Math.Sin(radian));
+            im = (oldim * Math.Cos(radian)) + (oldre * Math.Sin(radian));
             Debug.WriteLine($"after rotation: re={re}; im={im}");
         }
         #endregion
@@ -150,7 +151,7 @@ namespace nsMycomplex
 
         //Метод для парсинга строки в комплексное число
         public static MyComplex Parse(string s)
-        {
+        {   
             // Удаляем пробелы из строки
             s = s.Replace(" ", "");
             s = s.Replace('.', ','); // Заменяем точку на запятую для корректного парсинга чисел с плавающей точкой
@@ -160,13 +161,14 @@ namespace nsMycomplex
             int splitIndex = plusIndex > 0 ? plusIndex : minusIndex; // Выбираем индекс для разделения
 
 
-            string realPart,imaginaryPart;
+            string realPart, imaginaryPart;
             // Если ни '+' ни '-' не найдены, то мнимая или реальная часть отсутствует
             if (splitIndex < 0)
-            {   if(s.EndsWith("i")) // Проверяем, заканчивается ли строка на 'i'
+            {
+                if (s.EndsWith("i")) // Проверяем, заканчивается ли строка на 'i'
                 {
                     splitIndex = s.Length - 1; // Устанавливаем индекс разделения на последний символ
-                   imaginaryPart = s.Substring(0, splitIndex); // мнимая часть
+                    imaginaryPart = s.Substring(0, splitIndex); // мнимая часть
                     realPart = "0"; // Реальная часть равна 0, если нет реальной части
                 }
                 else
@@ -175,7 +177,7 @@ namespace nsMycomplex
                     imaginaryPart = "0"; // Мнимая часть равна 0
                     realPart = s.Substring(0, splitIndex);
                 }
-     
+
             }
             // Разделяем строку на реальную и мнимую части
             else
@@ -190,13 +192,16 @@ namespace nsMycomplex
                 double im = double.Parse(imaginaryPart);
                 return new MyComplex(re, im);
             }
-            catch(Exception er)
+            catch (Exception er)
             {
-                Debug.WriteLine($"error={er.ToString()}\n" +
+                Debug.WriteLine
+                    (
+                    $"error={er.ToString()}\n" +
                     $"re ={realPart} im = {imaginaryPart}\n" +
                     $"string={s}\n" +
-                    $"splitIndex={splitIndex}");
-                return null; // Некорректный формат чисел
+                    $"splitIndex={splitIndex}"
+                    );
+                return new MyComplex(1,1); // Некорректный формат чисел
             }
 
         }
@@ -369,11 +374,11 @@ namespace nsMycomplex
 
 
 
-      
+
 
 
         public List<PointF> ToPointF()
-        {    
+        {
             var res = new List<PointF>(data.Count);
             foreach (var item in data)
             {
@@ -383,8 +388,8 @@ namespace nsMycomplex
         }
         public static MyComplexSignal FromPointF(List<PointF> a)
         {
-            var res = new MyComplexSignal();  
-            foreach(var item in a)
+            var res = new MyComplexSignal();
+            foreach (var item in a)
             {
                 res.data.Add(MyComplex.FromPointF(item));
             }
@@ -402,6 +407,83 @@ namespace nsMycomplex
             }
             return res;
         }
-        #endregion
+
+
+        public static MyComplexSignal Parse(List<string> data)
+        { 
+            MyComplexSignal res = new MyComplexSignal();
+            foreach (var item in data)
+            {
+                res.data.Add(MyComplex.Parse(item));
+            }
+            return res;
+        }
+
+
+
+
+
+        public static MyComplexSignal DFT(MyComplexSignal a)
+        {
+            int N = a.data.Count;
+            var result = new MyComplexSignal();
+
+            for (int k = 0; k < N; k++)
+            {
+                MyComplex sum = new MyComplex(0, 0);
+
+                for (int n = 0; n < N; n++)
+                {
+                    double angle = -2.0 * Math.PI * k * n / N;
+
+                    MyComplex w = new MyComplex(
+                        Math.Cos(angle),
+                        Math.Sin(angle)
+                    );
+
+                    sum = sum + a.data[n] * w;
+                }
+
+                result.data.Add(sum);
+            }
+
+            result.GetNorm();
+            result.Normalize();
+            return result;
+        }
+
+
+        public static MyComplexSignal IDFT(MyComplexSignal a)
+        {
+            int N = a.data.Count;
+            var result = new MyComplexSignal();
+
+            for (int n = 0; n < N; n++)
+            {
+                MyComplex sum = new MyComplex(0, 0);
+
+                for (int k = 0; k < N; k++)
+                {
+                    double angle = 2.0 * Math.PI * k * n / N;
+
+                    MyComplex w = new MyComplex(
+                        Math.Cos(angle),
+                        Math.Sin(angle)
+                    );
+
+                    sum = sum + a.data[k] * w;
+                }
+
+                sum = sum / N;   // нормировка
+
+                result.data.Add(sum);
+            }
+            result.GetNorm();
+            result.Normalize();
+            return result;
+
+
+            #endregion
+        }
     }
 }
