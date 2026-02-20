@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -28,10 +29,10 @@ namespace MyComplexCalculator
         public Form2()
         {
             InitializeComponent();
-
+            DataRequested?.Invoke($"{Double.NaN}");
         }
 
-     
+
 
         public void DataGrid_GetData(List<string> data)
         {
@@ -46,7 +47,7 @@ namespace MyComplexCalculator
 
         public List<string> DataGrid_PushData()
         {
-    
+
             List<string> data = new List<string>();
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -59,7 +60,7 @@ namespace MyComplexCalculator
 
             }
             return data;
-           
+
         }
         public void DataGrid_Clear()
         {
@@ -71,7 +72,7 @@ namespace MyComplexCalculator
 
         public void DataGrid_AddData(string data)
         {
-           
+
             dataGridView1.Rows.Add(data);
             dataGridView1.Refresh();
         }
@@ -166,18 +167,18 @@ namespace MyComplexCalculator
                 end_point = e.Location;
             }
             double x = end_point.X - start_point.X;
-            double y = end_point.Y- start_point.Y;
-       
-            vector = new MyComplex(x,y*-1);
+            double y = end_point.Y - start_point.Y;
+
+            vector = new MyComplex(x, y * -1);
             #region normalize
             double norm = vector.Abs();
             vector.X /= norm;
             vector.Y /= norm;
-            vector.X = Math.Round(vector.X,3);
-            vector.Y = Math.Round(vector.Y,3);
+            vector.X = Math.Round(vector.X, 3);
+            vector.Y = Math.Round(vector.Y, 3);
             #endregion
             pictureBox1.Invalidate();
-         
+
         }
         Pen pen = new Pen(Color.Red, 3);
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -205,6 +206,84 @@ namespace MyComplexCalculator
         {
             DataGrid_Clear();
         }
-    }
 
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex < 0|e.ColumnIndex<0) return;
+            
+            var value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            if (value == null) return;
+
+            string data = value.ToString();
+            data.Replace(',', '.');
+            MyComplex a = MyComplex.Parse(data);
+            a.re = Math.Round(a.X, 3);
+            a.im = Math.Round(a.Y, 3);
+            try
+            {
+
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = a.ToString();
+                DataRequested?.Invoke(vector.ToString());
+
+            }
+            catch (Exception er)
+            {
+                Debug.WriteLine($"\n{er}" +
+                    $"data = {data}\n"+
+                    $"signal = {a}\n");
+            }
+            }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            double k = double.Parse(textBox1.Text);
+            double m = double.Parse(textBox2.Text);
+            MyComplexSignal a = new MyComplexSignal();
+            a.data.Add( new MyComplex(3, 0));
+            for (int i = 1; i < k; i++)
+            {
+                a.data.Add(new MyComplex(Math.Round( Math.Cos(2 * Math.PI / k * m * i),3)*3, Math.Round(Math.Sin(2 * Math.PI / k * m * i),3)*3));
+            }
+            DataGrid_GetData(MyComplexSignal.ToString(a));
+            ListDataRequested?.Invoke(MyComplexSignal.ToString(a));
+        }
+        #region strelki
+        private void button6_Click(object sender, EventArgs e)
+        {
+            double a = double.Parse(textBox1.Text);
+            a++;
+            textBox1.Text = a.ToString();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            double a = double.Parse(textBox1.Text);
+            a--;
+            textBox1.Text = a.ToString();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            double a = double.Parse(textBox2.Text);
+            a++;
+            textBox2.Text = a.ToString();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            double a = double.Parse(textBox2.Text);
+            a--;
+            textBox2.Text = a.ToString();
+        }
+        #endregion
+    }
 }
+

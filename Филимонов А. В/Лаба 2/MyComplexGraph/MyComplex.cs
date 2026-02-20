@@ -397,7 +397,7 @@ namespace nsMycomplex
         }
 
 
-        public static List<string> ToString(MyComplexSignal a)
+        public static  List<string> ToString(MyComplexSignal a)
         {
             List<string> res = new List<string>(a.data.Count);
 

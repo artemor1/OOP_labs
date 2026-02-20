@@ -1,15 +1,15 @@
-﻿using System;
+﻿using MyComplexCalculator;
+using nsMycomplex;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using MyComplexCalculator;
-using nsMycomplex;
 
 
 namespace Лаба_2
@@ -107,38 +107,54 @@ namespace Лаба_2
             #endregion
             public void DrawContour(Graphics gr, List<PointF> source, PointF shift)
             {
-                var pen = new Pen(Color.Red, 3);
-                pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-                PointF lastPoint = new PointF(shift.X * stepPxl + location.X,
-                sourceSize.Height - (shift.Y * stepPxl) - location.Y);
-                PointF currentPoint = new PointF(lastPoint.X + source.First().X * stepPxl,
-                  lastPoint.Y - (source.First().Y * stepPxl));
-                // Первый вектор с точкой в начале 
-                pen.StartCap = System.Drawing.Drawing2D.LineCap.RoundAnchor;
-                gr.DrawLine(pen, lastPoint, currentPoint);
-                lastPoint = currentPoint;
-                // Остальные — только стрелка 
-                pen.StartCap = System.Drawing.Drawing2D.LineCap.NoAnchor;
-                for (int i = 1; i < source.Count; i++)
+                try
                 {
-                    currentPoint.X = lastPoint.X + source[i].X * stepPxl;
-                    currentPoint.Y = lastPoint.Y - (source[i].Y * stepPxl);
+                    var pen = new Pen(Color.Red, 3);
+                    pen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                    PointF lastPoint = new PointF(shift.X * stepPxl + location.X,
+                    sourceSize.Height - (shift.Y * stepPxl) - location.Y);
+                    PointF currentPoint = new PointF(lastPoint.X + source.First().X * stepPxl,
+                      lastPoint.Y - (source.First().Y * stepPxl));
+                    // Первый вектор с точкой в начале 
+                    pen.StartCap = System.Drawing.Drawing2D.LineCap.RoundAnchor;
                     gr.DrawLine(pen, lastPoint, currentPoint);
                     lastPoint = currentPoint;
+                    // Остальные — только стрелка 
+                    pen.StartCap = System.Drawing.Drawing2D.LineCap.NoAnchor;
+                    for (int i = 1; i < source.Count; i++)
+                    {
+                        currentPoint.X = lastPoint.X + source[i].X * stepPxl;
+                        currentPoint.Y = lastPoint.Y - (source[i].Y * stepPxl);
+                        gr.DrawLine(pen, lastPoint, currentPoint);
+                        lastPoint = currentPoint;
+                    }
+                }
+            
+                    catch (Exception er)
+                {
+                    Debug.WriteLine($"{er.ToString()}\n");
+                    for (int i = 0; i < source.Count; i++)
+                    {
+                        Debug.WriteLine($"i = {i};" +
+                            $"{source[i].ToString()}\n");
+                    }
                 }
             }
-        }
+            }
+        
 
         private void DrawSignal()
-        {  
-            cnv.DrawGrid(gr);
-            contour = signal.ToPointF();
-            signal.data.Remove(new MyComplex(0, 0));
-            cnv.DrawContour(gr, contour, loc);
-            pbCanvas.Refresh();
+        {
+           
+                cnv.DrawGrid(gr);
+                contour = signal.ToPointF();
+                signal.data.Remove(new MyComplex(0, 0));
+                cnv.DrawContour(gr, contour, loc);
+                pbCanvas.Refresh();
 
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
+               
+            
+            
         }
 
 
@@ -187,7 +203,8 @@ namespace Лаба_2
 
             signal = MyComplexSignal.Rotate(signal, 45 * Math.PI / 180);
             DrawSignal();
-
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
         }
 
 
@@ -196,7 +213,8 @@ namespace Лаба_2
 
             loc = new PointF(loc.X, loc.Y + 1);
             DrawSignal();
-
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
         }
 
         private void downToolStripMenuItem_Click(object sender, EventArgs e)
@@ -204,6 +222,8 @@ namespace Лаба_2
 
             loc = new PointF(loc.X, loc.Y - 1);
             DrawSignal();
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
         }
 
         private void leftToolStripMenuItem_Click(object sender, EventArgs e)
@@ -211,6 +231,8 @@ namespace Лаба_2
 
             loc = new PointF(loc.X - 1, loc.Y);
             DrawSignal();
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
 
         }
 
@@ -219,19 +241,25 @@ namespace Лаба_2
 
             loc = new PointF(loc.X + 1, loc.Y);
             DrawSignal();
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
 
         }
 
         private void upToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             signal = MyComplexSignal.Scale(signal, 2);
-            DrawSignal();
+            DrawSignal(); 
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
         }
 
         private void downToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             signal = MyComplexSignal.Scale(signal, 0.5);
             DrawSignal();
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
         }
 
 
@@ -240,18 +268,21 @@ namespace Лаба_2
 
             signal = MyComplexSignal.Parse(data);
             DrawSignal();
+     
         }
         public void GetSignalFromData(string data)
         {
 
             signal.data.Add(MyComplex.Parse(data));
             DrawSignal();
+         
         }
 
         private void getDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<string> data = f2.DataGrid_PushData();
             GetSignalFromData(data);
+
         }
 
 
@@ -261,12 +292,16 @@ namespace Лаба_2
         {
             signal = MyComplexSignal.DFT(signal);
             DrawSignal();
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
         }
 
         private void iDFTToolStripMenuItem_Click(object sender, EventArgs e)
         {
             signal =MyComplexSignal.IDFT(signal);
             DrawSignal();
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
         }
 
         private void normalizeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -274,20 +309,24 @@ namespace Лаба_2
             signal.GetNorm();
             signal.Normalize();
             DrawSignal();
+            List<string> grid_data = MyComplexSignal.ToString(signal);
+            f2.DataGrid_GetData(grid_data);
         }
 
-        private void rotationTestToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            signal.data.Clear();
-            signal.data.Add(new MyComplex(0, 1));
-            for (int i = 0; i < 11; i++)
-            {
-                signal.data[i].Rotate(-30 * Math.PI / 180);
-                var temp = MyComplex.Copy(signal.data[i]);
-                signal.data.Add(temp);
-            }
-            DrawSignal();
-        }
+        //private void rotationTestToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    signal.data.Clear();
+        //    signal.data.Add(new MyComplex(0, 1));
+        //    for (int i = 0; i < 11; i++)
+        //    {
+        //        signal.data[i].Rotate(-30 * Math.PI / 180);
+        //        var temp = MyComplex.Copy(signal.data[i]);
+        //        signal.data.Add(temp);
+        //    }
+        //    DrawSignal();
+        //    List<string> grid_data = MyComplexSignal.ToString(signal);
+        //    f2.DataGrid_GetData(grid_data);
+        //}
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -298,6 +337,7 @@ namespace Лаба_2
             {
                 pbCanvas.Image.Save(sfd.FileName);
             }
+
         }
 
         private void pbCanvas_Click(object sender, EventArgs e)

@@ -47,7 +47,6 @@
             this.dFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iDFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.normalizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rotationTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).BeginInit();
@@ -88,7 +87,6 @@
             this.getDataToolStripMenuItem,
             this.furieToolStripMenuItem,
             this.normalizeToolStripMenuItem,
-            this.rotationTestToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -220,13 +218,6 @@
             this.normalizeToolStripMenuItem.Text = "normalize";
             this.normalizeToolStripMenuItem.Click += new System.EventHandler(this.normalizeToolStripMenuItem_Click);
             // 
-            // rotationTestToolStripMenuItem
-            // 
-            this.rotationTestToolStripMenuItem.Name = "rotationTestToolStripMenuItem";
-            this.rotationTestToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
-            this.rotationTestToolStripMenuItem.Text = "rotation test";
-            this.rotationTestToolStripMenuItem.Click += new System.EventHandler(this.rotationTestToolStripMenuItem_Click);
-            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
@@ -273,7 +264,6 @@
         private System.Windows.Forms.ToolStripMenuItem dFTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iDFTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem normalizeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rotationTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }
