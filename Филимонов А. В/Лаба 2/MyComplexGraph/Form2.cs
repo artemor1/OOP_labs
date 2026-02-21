@@ -250,6 +250,7 @@ namespace MyComplexCalculator
             a.data.Add(new MyComplex(3, 0));
             for (int i = 1; i < k; i++)
             {
+
                 a.data.Add(new MyComplex(Math.Round(Math.Cos(2 * Math.PI / k * m * i), 3) * 3, Math.Round(Math.Sin(2 * Math.PI / k * m * i), 3) * 3));
             }
             DataGrid_GetData(MyComplexSignal.ToString(a));
