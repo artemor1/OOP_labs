@@ -2,29 +2,79 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Лаба_2;
+using static Лаба_2.Form1;
 namespace MyComplexCalculator
 {
     public partial class Form2 : Form
     {
-        // Ссылка на ту же коллекцию, что используется в Form1
-        private readonly BindingList<MyComplex> signalData;
-        private readonly BindingSource signalBindingSource = new BindingSource();
-        MyComplex vector = new MyComplex();
+        private Form1 f1;
+        MyComplex vector;
 
-        public Form2(BindingList<MyComplex> signalData)
+
+
+        public event Action<string> DataRequested;
+        public event Action<List<string>> ListDataRequested;
+
+
+
+        public Form2()
         {
             InitializeComponent();
-            this.signalData = signalData;
-            // DataGridView работает как представление общей модели
-            signalBindingSource.DataSource = this.signalData;
-            dataGridView1.AutoGenerateColumns = false;
-            Column1.DataPropertyName = nameof(MyComplex.ComplexText);
-            dataGridView1.DataSource = signalBindingSource;
+            DataRequested?.Invoke($"{Double.NaN}");
+        }
+
+
+
+        public void DataGrid_GetData(List<string> data)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (var item in data)
+            {
+
+                dataGridView1.Rows.Add(item);
+            }
+            dataGridView1.Refresh();
+        }
+
+        public List<string> DataGrid_PushData()
+        {
+
+            List<string> data = new List<string>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                // Skip the new empty row (if AllowUserToAddRows = true)
+                if (!row.IsNewRow)
+                {
+                    data.Add(row.Cells[0].Value?.ToString());
+                }
+
+            }
+            return data;
+
+        }
+        public void DataGrid_Clear()
+        {
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
+            List<string> a = DataGrid_PushData();
+            ListDataRequested?.Invoke(a);
+        }
+
+        public void DataGrid_AddData(string data)
+        {
+
+            dataGridView1.Rows.Add(data);
+            dataGridView1.Refresh();
         }
 
 
@@ -154,25 +204,26 @@ namespace MyComplexCalculator
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // Добавляем в общую коллекцию новый вектор из режима рисования
-            signalData.Add(MyComplex.Copy(vector));
+
+            DataGrid_AddData(vector.ToString());
+
+            DataRequested?.Invoke(vector.ToString());
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            // Очистка общей модели — график обновится через ListChanged в Form1
-            signalData.Clear();
+            DataGrid_Clear();
         }
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (e.RowIndex < 0|e.ColumnIndex<0) return;
             
             var value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
             if (value == null) return;
 
             string data = value.ToString();
-            data = data.Replace(',', '.');
+            data.Replace(',', '.');
             MyComplex a = MyComplex.Parse(data);
             a.re = Math.Round(a.X, 3);
             a.im = Math.Round(a.Y, 3);
@@ -180,11 +231,7 @@ namespace MyComplexCalculator
             {
 
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = a.ToString();
-                if (e.RowIndex < signalData.Count)
-                {
-                    // Обновляем именно отредактированный элемент модели
-                    signalData[e.RowIndex] = MyComplex.Copy(a);
-                }
+                DataRequested?.Invoke(vector.ToString());
 
             }
             catch (Exception er)
@@ -205,12 +252,8 @@ namespace MyComplexCalculator
             {
                 a.data.Add(new MyComplex(Math.Round(Math.Cos(2 * Math.PI / k * m * i), 3) * 3, Math.Round(Math.Sin(2 * Math.PI / k * m * i), 3) * 3));
             }
-            signalData.Clear();
-            // Генератор контура полностью заменяет текущий сигнал в общей коллекции
-            foreach (var value in a.data)
-            {
-                signalData.Add(MyComplex.Copy(value));
-            }
+            DataGrid_GetData(MyComplexSignal.ToString(a));
+            ListDataRequested?.Invoke(MyComplexSignal.ToString(a));
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -256,3 +299,4 @@ namespace MyComplexCalculator
         #endregion
     }
 }
+
