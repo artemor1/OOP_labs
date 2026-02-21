@@ -155,25 +155,30 @@ namespace MyComplexCalculator
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             if (!isDrawing)
-            {
+            {   
                 isDrawing = true;
                 hasLine = false;
                 start_point = e.Location;
+                //offset so start point is in the middle of the cursor, not on the edge of it
+                start_point.X -= 7;
+                start_point.Y -= 5;
+
             }
             else
             {
                 isDrawing = false;
                 hasLine = true;
                 end_point = e.Location;
+                
             }
             double x = end_point.X - start_point.X;
             double y = end_point.Y - start_point.Y;
 
             vector = new MyComplex(x, y * -1);
             #region normalize
-            double norm = vector.Abs();
-            vector.X /= norm;
-            vector.Y /= norm;
+
+            vector.X /= (pictureBox1.Width)/3;
+            vector.Y /= (pictureBox1.Height)/3;
             vector.X = Math.Round(vector.X, 3);
             vector.Y = Math.Round(vector.Y, 3);
             #endregion
@@ -185,11 +190,14 @@ namespace MyComplexCalculator
         {
             if (isDrawing)
             {
-                e.Graphics.DrawString("*", new Font("Arial", 16), Brushes.Red, start_point);
+               
+                e.Graphics.DrawString("*", new Font("Arial", 16), Brushes.Red,start_point);
             }
 
             if (hasLine)
             {
+                start_point.X += 10;
+                start_point.Y += 5;
                 e.Graphics.DrawLine(pen, start_point, end_point);
             }
         }
@@ -206,14 +214,6 @@ namespace MyComplexCalculator
         {
             DataGrid_Clear();
         }
-
-        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-
-
-
-        }
-
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -241,19 +241,23 @@ namespace MyComplexCalculator
                     $"signal = {a}\n");
             }
             }
-
-        private void button5_Click(object sender, EventArgs e)
+        #region countir
+        private void BuildCountur()
         {
             double k = double.Parse(textBox1.Text);
             double m = double.Parse(textBox2.Text);
             MyComplexSignal a = new MyComplexSignal();
-            a.data.Add( new MyComplex(3, 0));
+            a.data.Add(new MyComplex(3, 0));
             for (int i = 1; i < k; i++)
             {
-                a.data.Add(new MyComplex(Math.Round( Math.Cos(2 * Math.PI / k * m * i),3)*3, Math.Round(Math.Sin(2 * Math.PI / k * m * i),3)*3));
+                a.data.Add(new MyComplex(Math.Round(Math.Cos(2 * Math.PI / k * m * i), 3) * 3, Math.Round(Math.Sin(2 * Math.PI / k * m * i), 3) * 3));
             }
             DataGrid_GetData(MyComplexSignal.ToString(a));
             ListDataRequested?.Invoke(MyComplexSignal.ToString(a));
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            BuildCountur();
         }
         #region strelki
         private void button6_Click(object sender, EventArgs e)
@@ -261,28 +265,37 @@ namespace MyComplexCalculator
             double a = double.Parse(textBox1.Text);
             a++;
             textBox1.Text = a.ToString();
+            BuildCountur();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             double a = double.Parse(textBox1.Text);
             a--;
+            if (a < 0) a = 0;
             textBox1.Text = a.ToString();
+            BuildCountur();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             double a = double.Parse(textBox2.Text);
-            a++;
+            double b = double.Parse(textBox1.Text);
+            if ( b-1 > a) a++;
             textBox2.Text = a.ToString();
+            BuildCountur();
         }
+
 
         private void button9_Click(object sender, EventArgs e)
         {
             double a = double.Parse(textBox2.Text);
             a--;
+            if (a < 0) a = 0;
             textBox2.Text = a.ToString();
+            BuildCountur();
         }
+        #endregion
         #endregion
     }
 }

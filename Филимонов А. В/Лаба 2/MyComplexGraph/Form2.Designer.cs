@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.PanelMod2 = new System.Windows.Forms.Panel();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -47,14 +55,6 @@
             this.tbValueB = new System.Windows.Forms.TextBox();
             this.tbValueA = new System.Windows.Forms.TextBox();
             this.btnCalc = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.PanelMod2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -82,6 +82,80 @@
             this.PanelMod2.Size = new System.Drawing.Size(801, 453);
             this.PanelMod2.TabIndex = 18;
             this.PanelMod2.TabStop = true;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(405, 193);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(13, 20);
+            this.button9.TabIndex = 36;
+            this.button9.Text = "↓";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(292, 193);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(13, 20);
+            this.button8.TabIndex = 35;
+            this.button8.Text = "↓";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(350, 193);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(13, 20);
+            this.button7.TabIndex = 34;
+            this.button7.Text = "↑";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(237, 193);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(13, 20);
+            this.button6.TabIndex = 33;
+            this.button6.Text = "↑";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(347, 177);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(109, 13);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Number of contour, m";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(360, 193);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(49, 20);
+            this.textBox2.TabIndex = 31;
+            this.textBox2.Text = "0";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(234, 177);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 13);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Size of contour, k";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(247, 193);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(49, 20);
+            this.textBox1.TabIndex = 29;
+            this.textBox1.Text = "0";
             // 
             // button5
             // 
@@ -124,7 +198,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(143, 283);
             this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
             // Column1
@@ -262,80 +335,6 @@
             this.btnCalc.Text = "Calculate";
             this.btnCalc.UseVisualStyleBackColor = true;
             this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(234, 177);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 13);
-            this.label6.TabIndex = 30;
-            this.label6.Text = "Size of contour, k";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(247, 193);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(49, 20);
-            this.textBox1.TabIndex = 29;
-            this.textBox1.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(347, 177);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(109, 13);
-            this.label5.TabIndex = 32;
-            this.label5.Text = "Number of contour, m";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(360, 193);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(49, 20);
-            this.textBox2.TabIndex = 31;
-            this.textBox2.Text = "0";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(237, 193);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(13, 20);
-            this.button6.TabIndex = 33;
-            this.button6.Text = "↑";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(350, 193);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(13, 20);
-            this.button7.TabIndex = 34;
-            this.button7.Text = "↑";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(292, 193);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(13, 20);
-            this.button8.TabIndex = 35;
-            this.button8.Text = "↓";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(405, 193);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(13, 20);
-            this.button9.TabIndex = 36;
-            this.button9.Text = "↓";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // Form2
             // 
