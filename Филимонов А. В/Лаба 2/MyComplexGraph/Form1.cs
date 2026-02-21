@@ -18,11 +18,12 @@ namespace Лаба_2
     {
        
         List<PointF> contour;
-        public MyComplexSignal signal;
+        // Общая модель сигнала: одна коллекция для графика и таблицы
+        private readonly BindingList<MyComplex> signalData;
         Graphics gr;
         Canvas cnv;
         PointF loc;
-        Form2 f2 = new Form2();
+        Form2 f2;
         
         public Form1()
         {
@@ -33,15 +34,12 @@ namespace Лаба_2
             cnv.DrawGrid(gr);
             
             loc = new PointF(5, 5);
-            if (signal == null)
-            {
-                var a = new List<PointF>();
-                a.Add(new PointF(0, 0));
-
-                signal = MyComplexSignal.FromPointF(a);
-            }
-            f2.DataRequested += GetSignalFromData;
-            f2.ListDataRequested += GetSignalFromData;
+            // Инициализируем общую коллекцию и подписываемся на любые изменения
+            signalData = new BindingList<MyComplex>();
+            signalData.ListChanged += SignalData_ListChanged;
+            // Стартовая точка, чтобы не рисовать пустой контур при запуске
+            signalData.Add(new MyComplex(0, 0));
+            f2 = new Form2(signalData);
             f2.Show();
           
         }
@@ -147,8 +145,13 @@ namespace Лаба_2
         {
            
                 cnv.DrawGrid(gr);
-                contour = signal.ToPointF();
-                signal.data.Remove(new MyComplex(0, 0));
+                contour = ToSignal().ToPointF();
+                if (contour.Count == 0)
+                {
+                    // Если список пустой — просто очищаем поле и выходим
+                    pbCanvas.Refresh();
+                    return;
+                }
                 cnv.DrawContour(gr, contour, loc);
                 pbCanvas.Refresh();
 
@@ -200,11 +203,7 @@ namespace Лаба_2
 
         private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            signal = MyComplexSignal.Rotate(signal, 45 * Math.PI / 180);
-            DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
+            ApplyTransform(x => MyComplexSignal.Rotate(x, 45 * Math.PI / 180));
         }
 
 
@@ -213,8 +212,6 @@ namespace Лаба_2
 
             loc = new PointF(loc.X, loc.Y + 1);
             DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
         }
 
         private void downToolStripMenuItem_Click(object sender, EventArgs e)
@@ -222,8 +219,6 @@ namespace Лаба_2
 
             loc = new PointF(loc.X, loc.Y - 1);
             DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
         }
 
         private void leftToolStripMenuItem_Click(object sender, EventArgs e)
@@ -231,8 +226,6 @@ namespace Лаба_2
 
             loc = new PointF(loc.X - 1, loc.Y);
             DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
 
         }
 
@@ -241,47 +234,29 @@ namespace Лаба_2
 
             loc = new PointF(loc.X + 1, loc.Y);
             DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
 
         }
 
         private void upToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            signal = MyComplexSignal.Scale(signal, 2);
-            DrawSignal(); 
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
+            ApplyTransform(x => MyComplexSignal.Scale(x, 2));
         }
 
         private void downToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            signal = MyComplexSignal.Scale(signal, 0.5);
-            DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
+            ApplyTransform(x => MyComplexSignal.Scale(x, 0.5));
         }
 
 
-        public void GetSignalFromData(List<string> data)
+        private void SignalData_ListChanged(object sender, ListChangedEventArgs e)
         {
-
-            signal = MyComplexSignal.Parse(data);
+            // Любое изменение коллекции сразу отражаем на графике
             DrawSignal();
-     
-        }
-        public void GetSignalFromData(string data)
-        {
-
-            signal.data.Add(MyComplex.Parse(data));
-            DrawSignal();
-         
         }
 
         private void getDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> data = f2.DataGrid_PushData();
-            GetSignalFromData(data);
+            DrawSignal();
 
         }
 
@@ -290,27 +265,52 @@ namespace Лаба_2
 
         private void dFTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            signal = MyComplexSignal.DFT(signal);
-            DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
+            ApplyTransform(MyComplexSignal.DFT);
         }
 
         private void iDFTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            signal =MyComplexSignal.IDFT(signal);
-            DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
+            ApplyTransform(MyComplexSignal.IDFT);
         }
 
         private void normalizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var signal = ToSignal();
             signal.GetNorm();
             signal.Normalize();
+            ReplaceSignal(signal);
+        }
+
+        private void ApplyTransform(Func<MyComplexSignal, MyComplexSignal> transform)
+        {
+            // Адаптер для операций над сигналом: List -> MyComplexSignal -> List
+            var transformedSignal = transform(ToSignal());
+            ReplaceSignal(transformedSignal);
+        }
+
+        private MyComplexSignal ToSignal()
+        {
+            // Создаём копию, чтобы операции не меняли объекты из BindingList напрямую
+            var signal = new MyComplexSignal();
+            foreach (var item in signalData)
+            {
+                signal.data.Add(MyComplex.Copy(item));
+            }
+            return signal;
+        }
+
+        private void ReplaceSignal(MyComplexSignal signal)
+        {
+            // Временно отключаем подписку, чтобы не перерисовывать график на каждом Add
+            signalData.ListChanged -= SignalData_ListChanged;
+            signalData.Clear();
+            foreach (var item in signal.data)
+            {
+                signalData.Add(MyComplex.Copy(item));
+            }
+            signalData.ListChanged += SignalData_ListChanged;
+            // Одна финальная перерисовка после полной замены сигнала
             DrawSignal();
-            List<string> grid_data = MyComplexSignal.ToString(signal);
-            f2.DataGrid_GetData(grid_data);
         }
 
         //private void rotationTestToolStripMenuItem_Click(object sender, EventArgs e)

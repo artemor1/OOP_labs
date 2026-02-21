@@ -146,6 +146,18 @@ namespace nsMycomplex
             get => im; set => this.im = value;
         }
 
+        public string ComplexText
+        {
+            get => ToString();
+            set
+            {
+                // Нужен для data-binding в таблице: строка <-> комплексное число
+                var parsed = Parse(value ?? "0 + 0i");
+                X = Math.Round(parsed.X, 3);
+                Y = Math.Round(parsed.Y, 3);
+            }
+        }
+
         #endregion
         #region Parsing
 
