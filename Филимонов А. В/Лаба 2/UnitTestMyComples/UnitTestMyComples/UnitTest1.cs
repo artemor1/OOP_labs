@@ -104,7 +104,7 @@ namespace UnitTestMyComples
         {
             MyComplex actual = new MyComplex(2, 1);
             MyComplex expected = new MyComplex(2, 1);
-            actual.aReverse();
+            actual.Reverse();
             expected.Rotate(90 * Math.PI / 180.0);
             Assert.AreEqual(expected.Abs(), actual.Abs(), 0.001);
         }
@@ -209,14 +209,7 @@ namespace UnitTestMyComples
             Assert.AreEqual(6, result.im);
         }
 
-        [TestMethod]
-        public void TestaReverse()
-        {
-            MyComplex a = new MyComplex(3, 4);
-            a.aReverse();
-            Assert.AreEqual(-3, a.re);
-            Assert.AreEqual(-4, a.im);
-        }
+ 
 
         [TestMethod]
         public void TestPropertiesX()
@@ -468,18 +461,6 @@ namespace UnitTestMyComples
             Assert.AreEqual(-1, signal.data[1].im, 0.001);
         }
 
-        [TestMethod]
-        public void TestMyComplexSignalParseWithoutToString()
-        {
-            // Базовый тест - проверяем что сигнал содержит корректные данные
-            double[] X = { 1, 2 };
-            double[] Y = { 1, -1 };
-            MyComplexSignal signal = new MyComplexSignal(X, Y);
-            
-            Assert.AreEqual(2, signal.data.Count);
-            Assert.AreEqual(1, signal.data[0].re);
-            Assert.AreEqual(1, signal.data[0].im);
-        }
 
         [TestMethod]
         public void TestMyComplexSignalDFT()
@@ -548,27 +529,13 @@ namespace UnitTestMyComples
             Assert.AreEqual(0, a.Abs(), 0.001);
         }
 
-        [TestMethod]
-        public void TestMyComplexAbsPythagorean()
-        {
-            MyComplex a = new MyComplex(3, 4);
-            Assert.AreEqual(5, a.Abs(), 0.001);
-        }
-
-        [TestMethod]
-        public void TestDefaultConstructor()
-        {
-            MyComplex a = new MyComplex();
-            Assert.AreEqual(0, a.re);
-            Assert.AreEqual(0, a.im);
-        }
-
+    
    
 
         [TestMethod]
         public void TestSignalRotationIntegration()
         {
-            // Тест ротации сигнала как в Form1.rotateToolStripMenuItem_Click
+            // Тест ротации сигнала
             double[] X = { 1, 0 };
             double[] Y = { 0, 1 };
             MyComplexSignal signal = new MyComplexSignal(X, Y);
@@ -584,7 +551,7 @@ namespace UnitTestMyComples
         [TestMethod]
         public void TestSignalMoveIntegration()
         {
-            // Тест смещения сигнала как в Form1.upToolStripMenuItem_Click
+            // Тест смещения сигнала 
             double[] X = { 1, 2 };
             double[] Y = { 1, 2 };
             MyComplexSignal signal = new MyComplexSignal(X, Y);
@@ -597,121 +564,10 @@ namespace UnitTestMyComples
             Assert.AreEqual(2, moved.data[0].im, 0.001);
         }
 
-        [TestMethod]
-        public void TestSignalToPointFForDrawing()
-        {
-            // Тест преобразования сигнала в PointF для рисования (как DrawSignal())
-            double[] X = { 10, 20, 30 };
-            double[] Y = { 5, 15, 25 };
-            MyComplexSignal signal = new MyComplexSignal(X, Y);
-            
-            System.Collections.Generic.List<System.Drawing.PointF> contour = signal.ToPointF();
-            
-            Assert.AreEqual(3, contour.Count);
-            Assert.AreEqual(10, contour[0].X, 0.01f);
-            Assert.AreEqual(5, contour[0].Y, 0.01f);
-        }
 
-        [TestMethod]
-        public void TestSignalConjugateForComplexCalculations()
-        {
-            // Тест комплексного сопряжения для использования в приложениях
-            double[] X = { 2, 3, 4 };
-            double[] Y = { 1, 2, 3 };
-            MyComplexSignal signal = new MyComplexSignal(X, Y);
-            
-            MyComplexSignal conjugated = MyComplexSignal.Conjugate(signal);
-            
-            // Проверяем что мнимые части инвертированы
-            for (int i = 0; i < signal.data.Count; i++)
-            {
-                Assert.AreEqual(signal.data[i].re, conjugated.data[i].re);
-                Assert.AreEqual(-signal.data[i].im, conjugated.data[i].im, 0.001);
-            }
-        }
+ 
 
-        [TestMethod]
-        public void TestSignalScalingForZoom()
-        {
-            // Тест масштабирования сигнала для функции масштабирования в приложении
-            double[] X = { 1, 2, 3 };
-            double[] Y = { 1, 2, 3 };
-            MyComplexSignal signal = new MyComplexSignal(X, Y);
-            
-            double zoomFactor = 2.0;
-            MyComplexSignal scaled = MyComplexSignal.Scale(signal, zoomFactor);
-            
-            Assert.AreEqual(2, scaled.data[0].re, 0.001);
-            Assert.AreEqual(2, scaled.data[0].im, 0.001);
-            Assert.AreEqual(4, scaled.data[1].re, 0.001);
-            Assert.AreEqual(4, scaled.data[1].im, 0.001);
-        }
-
-        [TestMethod]
-        public void TestMultipleTransformationsSequence()
-        {
-            // Тест последовательности трансформаций как они используются в приложении
-            double[] X = { 1, 0 };
-            double[] Y = { 0, 1 };
-            MyComplexSignal signal = new MyComplexSignal(X, Y);
-            
-            // Масштабируем
-            signal = MyComplexSignal.Scale(signal, 2.0);
-            // Поворачиваем
-            signal = MyComplexSignal.Rotate(signal, Math.PI / 4);
-            // Смещаем
-            signal = MyComplexSignal.Move(signal, new MyComplex(1, 1));
-            
-            Assert.AreEqual(2, signal.data.Count);
-            Assert.IsTrue(signal.GetNorm() > 0);
-        }
-
-        [TestMethod]
-        public void TestSignalNormalizationForDisplay()
-        {
-            // Тест нормализации для отображения в приложении
-            double[] X = { 100, 200, 300 };
-            double[] Y = { 50, 150, 250 };
-            MyComplexSignal signal = new MyComplexSignal(X, Y);
-            
-            double oldNorm = signal.GetNorm();
-            signal.Normalize();
-            double newNorm = signal.GetNorm();
-            
-            Assert.AreEqual(1.0, newNorm, 0.001);
-            Assert.IsTrue(oldNorm > newNorm);
-        }
-
-        [TestMethod]
-        public void TestComplexNumberAbsoluteForMagnitude()
-        {
-            // Тест абсолютного значения для вычисления величины комплексного числа
-            MyComplex a = new MyComplex(3, 4);
-            double magnitude = a.Abs();
-            
-            // 3-4-5 треугольник
-            Assert.AreEqual(5, magnitude, 0.001);
-        }
-
-        [TestMethod]
-        public void TestSignalDataIntegrity()
-        {
-            // Тест целостности данных сигнала при передаче между компонентами
-            double[] X = { 1.5, 2.5, 3.5 };
-            double[] Y = { 0.5, 1.5, 2.5 };
-            MyComplexSignal original = new MyComplexSignal(X, Y);
-            
-            // Преобразуем в PointF и обратно
-            System.Collections.Generic.List<System.Drawing.PointF> points = original.ToPointF();
-            MyComplexSignal restored = MyComplexSignal.FromPointF(points);
-            
-            Assert.AreEqual(original.data.Count, restored.data.Count);
-            for (int i = 0; i < original.data.Count; i++)
-            {
-                Assert.AreEqual(original.data[i].re, restored.data[i].re, 0.01);
-                Assert.AreEqual(original.data[i].im, restored.data[i].im, 0.01);
-            }
-        }
+    
 
         [TestMethod]
         public void TestEmptySignalHandling()

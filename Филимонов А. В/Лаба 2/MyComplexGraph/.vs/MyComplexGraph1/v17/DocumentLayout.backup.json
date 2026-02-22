@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplexgraph\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplexgraph\\mycomplex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|solutionrelative:mycomplex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplexgraph\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplexgraph\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplexgraph\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566C5B8F-F110-426D-B9FF-D89DC184C563}|\u041B\u0430\u0431\u0430 2.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MyComplex.cs",
+              "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\MyComplex.cs",
+              "RelativeDocumentMoniker": "MyComplex.cs",
+              "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\MyComplex.cs*",
+              "RelativeToolTip": "MyComplex.cs*",
+              "ViewState": "AgIAADEAAAAAAAAAAAAUwIkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-22T18:42:27.576Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -62,13 +79,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Form2.cs",
               "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\Form2.cs",
               "RelativeDocumentMoniker": "Form2.cs",
               "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\Form2.cs",
               "RelativeToolTip": "Form2.cs",
-              "ViewState": "AgIAANoAAAAAAAAAAADwvwUBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAOgAAAAAAAAAAAAqwAUBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-21T22:08:24.051Z",
               "EditorCaption": ""
@@ -81,7 +98,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAKkAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAqwKkAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-21T22:08:02.486Z",
               "EditorCaption": ""

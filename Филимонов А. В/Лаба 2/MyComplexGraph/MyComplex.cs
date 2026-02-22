@@ -40,19 +40,31 @@ namespace nsMycomplex
             return string.Format($"{re} + {im} i");
         }
 
-        public  static MyComplex Copy(MyComplex a)
-        {
-            return new MyComplex(a.X, a.Y);
-        }
+       
 
         public PointF ToPointF()
         {
             return new PointF((float)X, (float)Y);
         }
 
-        public static MyComplex FromPointF(PointF a)
+       
+        //Получить противоположный вектор
+
+        public void Reverse()
         {
-            return new MyComplex((double)(a.X), (double)(a.Y));
+            re = -re;
+            im = -im;
+        }
+
+        //Поворот вектора на определённое кол-во радиан
+        public void Rotate(double radian)
+        {
+            double oldre = re;
+            double oldim = im;
+            Debug.WriteLine($"Before rotation: re={re}; im={im}");
+            re = (oldre * Math.Cos(radian)) - (oldim * Math.Sin(radian));
+            im = (oldim * Math.Cos(radian)) + (oldre * Math.Sin(radian));
+            Debug.WriteLine($"after rotation: re={re}; im={im}");
         }
         #endregion
         #region Static methods 
@@ -112,23 +124,13 @@ namespace nsMycomplex
             return a.X * b.X + a.Y * b.Y;
         }
 
-        //Получить противоположный вектор
-
-        public void aReverse()
+        public static MyComplex FromPointF(PointF a)
         {
-            re = -re;
-            im = -im;
+            return new MyComplex((double)(a.X), (double)(a.Y));
         }
-
-        //Поворот вектора на определённое кол-во радиан
-        public void Rotate(double radian)
+        public static MyComplex Copy(MyComplex a)
         {
-            double oldre = re;
-            double oldim = im;
-            Debug.WriteLine($"Before rotation: re={re}; im={im}");
-            re = (oldre * Math.Cos(radian)) - (oldim * Math.Sin(radian));
-            im = (oldim * Math.Cos(radian)) + (oldre * Math.Sin(radian));
-            Debug.WriteLine($"after rotation: re={re}; im={im}");
+            return new MyComplex(a.X, a.Y);
         }
         #endregion
 
