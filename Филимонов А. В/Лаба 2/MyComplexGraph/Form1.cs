@@ -140,21 +140,16 @@ namespace Лаба_2
                     }
                 }
             }
-            }
+        }
         
 
         private void DrawSignal()
         {
-           
                 cnv.DrawGrid(gr);
                 contour = signal.ToPointF();
                 signal.data.Remove(new MyComplex(0, 0));
                 cnv.DrawContour(gr, contour, loc);
                 pbCanvas.Refresh();
-
-               
-            
-            
         }
 
 

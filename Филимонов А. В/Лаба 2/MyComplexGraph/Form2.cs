@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,8 +24,14 @@ namespace MyComplexCalculator
 
         public event Action<string> DataRequested;
         public event Action<List<string>> ListDataRequested;
+        const int EM_SETCUEBANNER = 0x1501;
 
-
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern Int32 SendMessage(
+            IntPtr hWnd,
+            int msg,
+            int wParam,
+            string lParam);
 
         public Form2()
         {
@@ -32,8 +39,78 @@ namespace MyComplexCalculator
             DataRequested?.Invoke($"{Double.NaN}");
         }
 
+        #region Panel 1
+        void SetPlaceholder(TextBox box, string text)
+        {
+            SendMessage(box.Handle, EM_SETCUEBANNER, 0, text);
+        }
 
+        private void cbOperator_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch ((string)cbOperator.SelectedItem)
+            {
+                case "\t|a|":
+                    SetPlaceholder(tbValueB, "Get A lenght");
+                    SetPlaceholder(tbValueA, " ");
+                    break;
+                case "\t|b|":
+                    SetPlaceholder(tbValueA, "Get Б lenhgt");
+                    SetPlaceholder(tbValueB, " ");
+                    break;
+                default:
+                    SetPlaceholder(tbValueB, " ");
+                    SetPlaceholder(tbValueA, " ");
+                    break;
+            }
+        }
 
+        private void btnCalc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string str = tbValueA.Text;
+                var a = MyComplex.Parse(str);
+                str = tbValueB.Text;
+                var b = MyComplex.Parse(str);
+                //Определение оператора 
+                string op = (string)cbOperator.SelectedItem;
+                MyComplex res = new MyComplex();
+                switch (op)
+                {
+                    case "\t+":
+                        res = a + b;
+                        break;
+                    case "\t-":
+                        res = a - b;
+                        break;
+                    case "\t*":
+                        res = a * b;
+                        break;
+                    case "\t/":
+                        res = a / b;
+                        break;
+                    case "\t|a|":
+                        res.X = a.Abs();
+                        break;
+                    case "\t|b|":
+                        res.X = b.Abs();
+                        break;
+                    case "\tscalar":
+                        res.X = MyComplex.ScalarDot(a, b);
+                        break;
+                    default: break;
+                }
+                if (double.IsInfinity(res.X)||double.IsNaN(res.X)|| double.IsInfinity(res.Y)|| double.IsNaN(res.Y)) MessageBox.Show("Делить на ноль нельзя!", "Ошибка");
+                else tbResult.Text = res.ToString();
+            }
+            catch
+            {
+                tbResult.Text = "";
+                MessageBox.Show("Что-то пошло не так", "Ошибка");
+            }
+        }
+        #endregion
+        #region Panel 2
         public void DataGrid_GetData(List<string> data)
         {
             dataGridView1.Rows.Clear();
@@ -52,7 +129,7 @@ namespace MyComplexCalculator
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                // Skip the new empty row (if AllowUserToAddRows = true)
+                // Skip the new empty row 
                 if (!row.IsNewRow)
                 {
                     data.Add(row.Cells[0].Value?.ToString());
@@ -86,50 +163,6 @@ namespace MyComplexCalculator
             PanelMod2.Visible = false;
             PanelMod2.Enabled = false;
         }
-
-        private void btnCalc_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string str = tbValueA.Text;
-                MyComplex a = MyComplex.Parse(str);
-                str = tbValueB.Text;
-                MyComplex b = MyComplex.Parse(str);
-                //Определение оператора 
-                string op = (string)cbOperator.SelectedItem;
-                MyComplex res = new MyComplex();
-                switch (op)
-                {
-                    case "\t+":
-                        res = a + b;
-                        break;
-                    case "\t-":
-                        res = a - b;
-                        break;
-                    case "\t*":
-                        res = a * b;
-                        break;
-                    case "\t|a|":
-                        res.X = a.Abs();
-                        break;
-                    case "\t|b|":
-                        res.X = b.Abs();
-                        break;
-                    case "\tscalar":
-                        res.X = MyComplex.ScalarDot(a, b);
-                        break;
-                    default: break;
-                }
-                tbResult.Text = res.ToString();
-            }
-            catch
-            {
-                tbResult.Text = "";
-                MessageBox.Show("Что-то пошло не так", "Ошибка");
-            }
-        }
-
-
         private void button1_Click_2(object sender, EventArgs e)
         {
 
@@ -155,7 +188,7 @@ namespace MyComplexCalculator
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             if (!isDrawing)
-            {   
+            {
                 isDrawing = true;
                 hasLine = false;
                 start_point = e.Location;
@@ -169,7 +202,7 @@ namespace MyComplexCalculator
                 isDrawing = false;
                 hasLine = true;
                 end_point = e.Location;
-                
+
             }
             double x = end_point.X - start_point.X;
             double y = end_point.Y - start_point.Y;
@@ -177,8 +210,8 @@ namespace MyComplexCalculator
             vector = new MyComplex(x, y * -1);
             #region normalize
 
-            vector.X /= (pictureBox1.Width)/3;
-            vector.Y /= (pictureBox1.Height)/3;
+            vector.X /= (pictureBox1.Width) / 3;
+            vector.Y /= (pictureBox1.Height) / 3;
             vector.X = Math.Round(vector.X, 3);
             vector.Y = Math.Round(vector.Y, 3);
             #endregion
@@ -190,8 +223,8 @@ namespace MyComplexCalculator
         {
             if (isDrawing)
             {
-               
-                e.Graphics.DrawString("*", new Font("Arial", 16), Brushes.Red,start_point);
+
+                e.Graphics.DrawString("*", new Font("Arial", 16), Brushes.Red, start_point);
             }
 
             if (hasLine)
@@ -217,8 +250,8 @@ namespace MyComplexCalculator
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (e.RowIndex < 0|e.ColumnIndex<0) return;
-            
+            if (e.RowIndex < 0 | e.ColumnIndex < 0) return;
+
             var value = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
             if (value == null) return;
 
@@ -237,10 +270,10 @@ namespace MyComplexCalculator
             catch (Exception er)
             {
                 Debug.WriteLine($"\n{er}" +
-                    $"data = {data}\n"+
+                    $"data = {data}\n" +
                     $"signal = {a}\n");
             }
-            }
+        }
         #region countir
         private void BuildCountur()
         {
@@ -282,7 +315,7 @@ namespace MyComplexCalculator
         {
             double a = double.Parse(textBox2.Text);
             double b = double.Parse(textBox1.Text);
-            if ( b-1 > a) a++;
+            if (b - 1 > a) a++;
             textBox2.Text = a.ToString();
             BuildCountur();
         }
@@ -297,7 +330,10 @@ namespace MyComplexCalculator
             BuildCountur();
         }
         #endregion
+
         #endregion
+        #endregion
+      
     }
 }
 

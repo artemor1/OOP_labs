@@ -239,9 +239,10 @@
             this.PanelMod1.Controls.Add(this.tbValueB);
             this.PanelMod1.Controls.Add(this.tbValueA);
             this.PanelMod1.Controls.Add(this.btnCalc);
-            this.PanelMod1.Location = new System.Drawing.Point(651, 400);
+            this.PanelMod1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelMod1.Location = new System.Drawing.Point(0, 0);
             this.PanelMod1.Name = "PanelMod1";
-            this.PanelMod1.Size = new System.Drawing.Size(693, 414);
+            this.PanelMod1.Size = new System.Drawing.Size(800, 450);
             this.PanelMod1.TabIndex = 19;
             // 
             // button1
@@ -297,6 +298,7 @@
             "\t+",
             "\t-",
             "\t*",
+            "\t/",
             "\t|a|",
             "\t|b|",
             "\tscalar"});
@@ -304,6 +306,7 @@
             this.cbOperator.Name = "cbOperator";
             this.cbOperator.Size = new System.Drawing.Size(121, 21);
             this.cbOperator.TabIndex = 13;
+            this.cbOperator.SelectedIndexChanged += new System.EventHandler(this.cbOperator_SelectedIndexChanged);
             // 
             // tbResult
             // 

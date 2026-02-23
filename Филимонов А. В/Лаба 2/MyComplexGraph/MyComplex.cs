@@ -6,7 +6,7 @@ using System.Numerics;
 using System.Reflection;
 namespace nsMycomplex
 {
-    public class MyComplex
+    public class MyComplex 
     {
         #region Fields 
 
@@ -40,14 +40,14 @@ namespace nsMycomplex
             return string.Format($"{re} + {im} i");
         }
 
-       
+
 
         public PointF ToPointF()
         {
             return new PointF((float)X, (float)Y);
         }
 
-       
+
         //Получить противоположный вектор
 
         public void Reverse()
@@ -111,11 +111,21 @@ namespace nsMycomplex
         #region div
 
         //Деление на double
-
         public static MyComplex operator /(MyComplex a, double b)
         {
             return new MyComplex(a.X / b, a.Y / b);
         }
+        public static MyComplex operator /(MyComplex a, MyComplex b){
+        
+            double denominator = b.re * b.re + b.im * b.im;
+            
+                
+            double real = (a.re * a.re + a.im * a.im) / denominator;
+            double imag = (a.im * b.re - a.re * b.im) / denominator;
+
+            return new MyComplex(real, imag);
+        }
+
         #endregion
         #region other
         //Скалярное произведение
@@ -203,7 +213,7 @@ namespace nsMycomplex
                     $"string={s}\n" +
                     $"splitIndex={splitIndex}"
                     );
-                return new MyComplex(1,1); // Некорректный формат чисел
+                return new MyComplex(double.NaN,double.NaN); // Некорректный формат чисел
             }
 
         }
@@ -238,6 +248,32 @@ namespace nsMycomplex
 
         #region Methods 
 
+        public static MyComplexSignal Round(MyComplexSignal a, int digit)
+        {
+            foreach (var item in a.data)
+            {
+                item.X = Math.Round(item.X, digit);
+                item.Y = Math.Round(item.Y, digit);
+            }
+            return a;
+
+        }
+        public void Round(int digit)
+        {
+            foreach (var item in this.data)
+            {
+                item.X = Math.Round(item.X, digit);
+                item.Y = Math.Round(item.Y, digit);
+            }
+        }
+        public void Round()
+        {
+            foreach (var item in this.data)
+            {
+                item.X = Math.Round(item.X, 3);
+                item.Y = Math.Round(item.Y, 3);
+            }
+        }
         public double GetNorm()
         {
             double norm = 0;
@@ -260,6 +296,7 @@ namespace nsMycomplex
             {
                 data[i] = data[i] * coeff;
             }
+            this.Round();
             return 0;
         }
         public static MyComplexSignal Scale(MyComplexSignal a, double scale)
@@ -274,7 +311,7 @@ namespace nsMycomplex
             res.GetNorm();
             return res;
         }
-        //Rotate 
+   
         public static MyComplexSignal Rotate(MyComplexSignal a, double angle)
         {
 
@@ -286,18 +323,6 @@ namespace nsMycomplex
             }
             return res;
 
-            /*
-             var res = new mycomplexsignal();
-            int count = a.data.count;
-            mycomplex r = new mycomplex(math.cos(angle), math.sin(angle));
-            res.data = new list<mycomplex>(count);
-            for (int i = 0; i < count; i++)
-            {
-                res.data.add(a.data[i] * r);
-            }
-            res.getnorm();
-
-            return res;*/
         }
         public static MyComplexSignal Move(MyComplexSignal a, MyComplex shift)
         {
@@ -349,16 +374,6 @@ namespace nsMycomplex
             }
 
             return sum;
-
-            /*
-           var temp = MathAction(a, b,(x,y) => MyComplex.ScalarDot(x,y));
-           var sum = new MyComplex(0, 0);
-           foreach (var t in temp.data)
-           {
-               sum = sum + t;
-           }
-           return sum;
-           */
         }
 
         public static MyComplexSignal Mult(MyComplexSignal a, MyComplexSignal b)
@@ -420,11 +435,6 @@ namespace nsMycomplex
             }
             return res;
         }
-
-
-
-
-
         public static MyComplexSignal DFT(MyComplexSignal a)
         {
             int N = a.data.Count;
@@ -448,9 +458,7 @@ namespace nsMycomplex
 
                 result.data.Add(sum);
             }
-
-            result.GetNorm();
-            result.Normalize();
+            result.Round();
             return result;
         }
 
@@ -475,14 +483,13 @@ namespace nsMycomplex
 
                     sum = sum + a.data[k] * w;
                 }
-
-                sum = sum / N;   // нормировка
-
                 result.data.Add(sum);
             }
             result.GetNorm();
             result.Normalize();
+            result.Round();
             return result;
+
 
 
             #endregion

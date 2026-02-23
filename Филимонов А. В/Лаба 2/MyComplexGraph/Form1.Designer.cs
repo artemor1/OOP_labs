@@ -41,8 +41,6 @@
             this.scaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.upToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.downToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.drawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.getDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.furieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iDFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,8 +81,6 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItem,
-            this.drawToolStripMenuItem,
-            this.getDataToolStripMenuItem,
             this.furieToolStripMenuItem,
             this.normalizeToolStripMenuItem,
             this.saveToolStripMenuItem});
@@ -174,20 +170,6 @@
             this.downToolStripMenuItem1.Text = "down";
             this.downToolStripMenuItem1.Click += new System.EventHandler(this.downToolStripMenuItem1_Click);
             // 
-            // drawToolStripMenuItem
-            // 
-            this.drawToolStripMenuItem.Name = "drawToolStripMenuItem";
-            this.drawToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.drawToolStripMenuItem.Text = "draw";
-            this.drawToolStripMenuItem.Click += new System.EventHandler(this.drawToolStripMenuItem_Click);
-            // 
-            // getDataToolStripMenuItem
-            // 
-            this.getDataToolStripMenuItem.Name = "getDataToolStripMenuItem";
-            this.getDataToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.getDataToolStripMenuItem.Text = "get data";
-            this.getDataToolStripMenuItem.Click += new System.EventHandler(this.getDataToolStripMenuItem_Click);
-            // 
             // furieToolStripMenuItem
             // 
             this.furieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -200,14 +182,14 @@
             // dFTToolStripMenuItem
             // 
             this.dFTToolStripMenuItem.Name = "dFTToolStripMenuItem";
-            this.dFTToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.dFTToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dFTToolStripMenuItem.Text = "DFT";
             this.dFTToolStripMenuItem.Click += new System.EventHandler(this.dFTToolStripMenuItem_Click);
             // 
             // iDFTToolStripMenuItem
             // 
             this.iDFTToolStripMenuItem.Name = "iDFTToolStripMenuItem";
-            this.iDFTToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.iDFTToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.iDFTToolStripMenuItem.Text = "IDFT";
             this.iDFTToolStripMenuItem.Click += new System.EventHandler(this.iDFTToolStripMenuItem_Click);
             // 
@@ -250,7 +232,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox pbCanvas;
         private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem drawToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem upToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downToolStripMenuItem;
@@ -259,7 +240,6 @@
         private System.Windows.Forms.ToolStripMenuItem scaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem upToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem downToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem getDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem furieToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dFTToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem iDFTToolStripMenuItem;
