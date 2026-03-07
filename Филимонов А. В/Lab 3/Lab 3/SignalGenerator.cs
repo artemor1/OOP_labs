@@ -13,7 +13,7 @@ namespace Lab_3
         //Объявление экземпляра класса Random
         Random rnd = new Random();
         #region Fields
-        public int samples { get; set; } = 100; //Количество отсчетов
+        public int samples { get; set; } = 500; //Количество отсчетов
 
         //Количество периодов на заданное количество отсчетов
         public double pediodsCount { get; set; } = 1;
@@ -103,14 +103,14 @@ namespace Lab_3
         }
 
 
-        public double[] GenNoisedSin()
+        public double[] GenNoisedSin(double noiselvl=0.5)
         {
             double[] arr = new double[samples];
             var sin = GenSin();
             var noise = GenRandomSignal();
             for (int i = 0;i < samples; i++)
             {
-                arr[i] = sin[i] + noise[i]/10;
+                arr[i] = sin[i] + noise[i]*noiselvl;
             }
             return arr;
         }

@@ -11,8 +11,9 @@ namespace Lab_3
         public Form1()
         {
             InitializeComponent();
-            tbRank.Text = "1";
-            tbIterations.Text = "10";
+            tbWindow.Text = "2";
+            tbIterations.Text = "2";
+            tbNoiseLvl.Text = "0,5";
         }
 
         #region Variables
@@ -236,13 +237,13 @@ namespace Lab_3
 
         private void sVDDenoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            processedSignalData = SignalHandler.DeNoise(signalData,int.Parse(tbRank.Text),int.Parse(tbIterations.Text));
+            processedSignalData = SignalHandler.DeNoise(signalData,int.Parse(tbWindow.Text),int.Parse(tbIterations.Text));
             MyGraphics.DrawGraph(zedGraphControl3,processedSignalData, MyGraphics.GraphType.line);
         }
 
         private void genNoisedSinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            signalData = generator.GenNoisedSin();
+            signalData = generator.GenNoisedSin(double.Parse(tbNoiseLvl.Text));
             MyGraphics.DrawGraph(zedGraphControl1,signalData, MyGraphics.GraphType.line);
         }
     }

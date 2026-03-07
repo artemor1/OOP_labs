@@ -42,16 +42,23 @@
             this.randomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.genSinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.genNoisedSinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fourierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sVDDenoiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbNoiseLvl = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbIterations = new System.Windows.Forms.TextBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
@@ -63,13 +70,8 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.sVDDenoiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
-            this.genNoisedSinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbRank = new System.Windows.Forms.TextBox();
-            this.tbIterations = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tbWindow = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -158,7 +160,7 @@
             // showPropertiesToolStripMenuItem
             // 
             this.showPropertiesToolStripMenuItem.Name = "showPropertiesToolStripMenuItem";
-            this.showPropertiesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showPropertiesToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.showPropertiesToolStripMenuItem.Text = "ShowProperties";
             this.showPropertiesToolStripMenuItem.Click += new System.EventHandler(this.showPropertiesToolStripMenuItem_Click);
             // 
@@ -168,7 +170,7 @@
             this.randomToolStripMenuItem,
             this.toolStripMenuItem1});
             this.generateSignalToolStripMenuItem.Name = "generateSignalToolStripMenuItem";
-            this.generateSignalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generateSignalToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.generateSignalToolStripMenuItem.Text = "Generate Signal";
             // 
             // randomToolStripMenuItem
@@ -188,9 +190,16 @@
             // genSinToolStripMenuItem
             // 
             this.genSinToolStripMenuItem.Name = "genSinToolStripMenuItem";
-            this.genSinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.genSinToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.genSinToolStripMenuItem.Text = "GenSin";
             this.genSinToolStripMenuItem.Click += new System.EventHandler(this.genSinToolStripMenuItem_Click);
+            // 
+            // genNoisedSinToolStripMenuItem
+            // 
+            this.genNoisedSinToolStripMenuItem.Name = "genNoisedSinToolStripMenuItem";
+            this.genNoisedSinToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.genNoisedSinToolStripMenuItem.Text = "GenNoisedSin";
+            this.genNoisedSinToolStripMenuItem.Click += new System.EventHandler(this.genNoisedSinToolStripMenuItem_Click);
             // 
             // histogramToolStripMenuItem
             // 
@@ -222,6 +231,13 @@
             this.fourierToolStripMenuItem.Name = "fourierToolStripMenuItem";
             this.fourierToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.fourierToolStripMenuItem.Text = "Processing";
+            // 
+            // sVDDenoiseToolStripMenuItem
+            // 
+            this.sVDDenoiseToolStripMenuItem.Name = "sVDDenoiseToolStripMenuItem";
+            this.sVDDenoiseToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.sVDDenoiseToolStripMenuItem.Text = "SVD denoise";
+            this.sVDDenoiseToolStripMenuItem.Click += new System.EventHandler(this.sVDDenoiseToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -288,20 +304,69 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(546, 153);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Denoised Signal";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // zedGraphControl3
+            // 
+            this.zedGraphControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zedGraphControl3.Location = new System.Drawing.Point(3, 3);
+            this.zedGraphControl3.Name = "zedGraphControl3";
+            this.zedGraphControl3.ScrollGrace = 0D;
+            this.zedGraphControl3.ScrollMaxX = 0D;
+            this.zedGraphControl3.ScrollMaxY = 0D;
+            this.zedGraphControl3.ScrollMaxY2 = 0D;
+            this.zedGraphControl3.ScrollMinX = 0D;
+            this.zedGraphControl3.ScrollMinY = 0D;
+            this.zedGraphControl3.ScrollMinY2 = 0D;
+            this.zedGraphControl3.Size = new System.Drawing.Size(540, 147);
+            this.zedGraphControl3.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.tbWindow);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.tbNoiseLvl);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.tbIterations);
-            this.panel1.Controls.Add(this.tbRank);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(234, 179);
             this.panel1.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Уровень шума";
+            // 
+            // tbNoiseLvl
+            // 
+            this.tbNoiseLvl.Location = new System.Drawing.Point(14, 76);
+            this.tbNoiseLvl.Name = "tbNoiseLvl";
+            this.tbNoiseLvl.Size = new System.Drawing.Size(44, 20);
+            this.tbNoiseLvl.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(116, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Количество итераций";
+            // 
+            // tbIterations
+            // 
+            this.tbIterations.Location = new System.Drawing.Point(14, 32);
+            this.tbIterations.Name = "tbIterations";
+            this.tbIterations.Size = new System.Drawing.Size(44, 20);
+            this.tbIterations.TabIndex = 1;
             // 
             // tabControl2
             // 
@@ -427,66 +492,21 @@
             this.propertyGrid1.Size = new System.Drawing.Size(228, 187);
             this.propertyGrid1.TabIndex = 9;
             // 
-            // sVDDenoiseToolStripMenuItem
-            // 
-            this.sVDDenoiseToolStripMenuItem.Name = "sVDDenoiseToolStripMenuItem";
-            this.sVDDenoiseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sVDDenoiseToolStripMenuItem.Text = "SVD denoise";
-            this.sVDDenoiseToolStripMenuItem.Click += new System.EventHandler(this.sVDDenoiseToolStripMenuItem_Click);
-            // 
-            // zedGraphControl3
-            // 
-            this.zedGraphControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zedGraphControl3.Location = new System.Drawing.Point(3, 3);
-            this.zedGraphControl3.Name = "zedGraphControl3";
-            this.zedGraphControl3.ScrollGrace = 0D;
-            this.zedGraphControl3.ScrollMaxX = 0D;
-            this.zedGraphControl3.ScrollMaxY = 0D;
-            this.zedGraphControl3.ScrollMaxY2 = 0D;
-            this.zedGraphControl3.ScrollMinX = 0D;
-            this.zedGraphControl3.ScrollMinY = 0D;
-            this.zedGraphControl3.ScrollMinY2 = 0D;
-            this.zedGraphControl3.Size = new System.Drawing.Size(540, 147);
-            this.zedGraphControl3.TabIndex = 0;
-            // 
-            // genNoisedSinToolStripMenuItem
-            // 
-            this.genNoisedSinToolStripMenuItem.Name = "genNoisedSinToolStripMenuItem";
-            this.genNoisedSinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.genNoisedSinToolStripMenuItem.Text = "GenNoisedSin";
-            this.genNoisedSinToolStripMenuItem.Click += new System.EventHandler(this.genNoisedSinToolStripMenuItem_Click);
-            // 
-            // tbRank
-            // 
-            this.tbRank.Location = new System.Drawing.Point(14, 47);
-            this.tbRank.Name = "tbRank";
-            this.tbRank.Size = new System.Drawing.Size(44, 20);
-            this.tbRank.TabIndex = 0;
-            // 
-            // tbIterations
-            // 
-            this.tbIterations.Location = new System.Drawing.Point(14, 94);
-            this.tbIterations.Name = "tbIterations";
-            this.tbIterations.Size = new System.Drawing.Size(44, 20);
-            this.tbIterations.TabIndex = 1;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 31);
+            this.label1.Location = new System.Drawing.Point(133, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Ранг шумоподавления";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "N/Окно";
             // 
-            // label2
+            // tbWindow
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Количество итераций";
+            this.tbWindow.Location = new System.Drawing.Point(136, 32);
+            this.tbWindow.Name = "tbWindow";
+            this.tbWindow.Size = new System.Drawing.Size(44, 20);
+            this.tbWindow.TabIndex = 6;
             // 
             // Form1
             // 
@@ -556,9 +576,11 @@
         private ZedGraph.ZedGraphControl zedGraphControl3;
         private System.Windows.Forms.ToolStripMenuItem genNoisedSinToolStripMenuItem;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbIterations;
-        private System.Windows.Forms.TextBox tbRank;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbNoiseLvl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbWindow;
     }
 }
 

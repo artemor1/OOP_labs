@@ -3,6 +3,7 @@ using MathNet.Numerics.LinearAlgebra;
 using nsMycomplex;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,9 +36,9 @@ namespace Lab_3
         {
         }
 
-       private static Matrix<double> Hankel(double[] x)
+       private static Matrix<double> Hankel(double[] x,int window)
              {
-            int rows = x.Length / 2;
+        int rows = x.Length / window;
         int cols = x.Length - rows + 1;
 
         var H = Matrix<double>.Build.Dense(rows, cols);
@@ -74,26 +75,41 @@ namespace Lab_3
 
             return x;
         }
-        public static double[] DeNoise(double[] data, int rank = 3, int iterations = 1)
+
+
+
+
+
+        public static double[] DeNoise(double[] data, int winow, int iterations = 1)
         {
             double[] signal = (double[])data.Clone();
-
+            double maxDropCoef = 0.5;
             for (int it = 0; it < iterations; it++)
             {
-                var H = Hankel(signal);  // строим Hankel матрицу
+                var H = Hankel(signal,winow);  // строим Hankel матрицу
                 var svd = H.Svd();
                 int m = H.RowCount;
                 int n = H.ColumnCount;
                 var R = Matrix<double>.Build.Dense(m, n);
-
-                for (int i = 0; i < rank; i++)
+                int i = 0;
+                Debug.WriteLine($"S.Lenght = {svd.S.Count}\niteration = {it}\n");
+                do
                 {
+                  
                     var u = svd.U.Column(i).ToColumnMatrix();
                     var v = svd.VT.Row(i).ToColumnMatrix();
-                    double sigma = svd.S[i];
-                    R += sigma * u * v.Transpose();
+                    var s = svd.S;
+                    R += s[i] * u * v.Transpose();
+                    
+                    i++;
+                    
                 }
-
+                while (i < svd.S.Count && svd.S[i] > svd.S[i - 1] * maxDropCoef);
+                Debug.WriteLine($"max i = {i}");
+                for (int j = 0; j < svd.S.Count; j++)
+                {
+                    Debug.WriteLine($"s[{j}] = {svd.S[j]}\n");
+                }
                 // Диагональное усреднение: восстановление сигнала из матрицы
                 signal = HankelToArray(R);
             }
