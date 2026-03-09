@@ -42,12 +42,23 @@
             this.randomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.genSinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.amToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.phMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.phmToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.genNoisedSinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.randomNoiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalNoiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fourierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sVDDenoiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fFTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.correlationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aKFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aKFAcycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vKFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -55,14 +66,11 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbNoiseLvl = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbIterations = new System.Windows.Forms.TextBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.zedGraphControl4 = new ZedGraph.ZedGraphControl();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -70,8 +78,8 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbWindow = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -80,9 +88,11 @@
             this.panel1.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -160,7 +170,7 @@
             // showPropertiesToolStripMenuItem
             // 
             this.showPropertiesToolStripMenuItem.Name = "showPropertiesToolStripMenuItem";
-            this.showPropertiesToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.showPropertiesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.showPropertiesToolStripMenuItem.Text = "ShowProperties";
             this.showPropertiesToolStripMenuItem.Click += new System.EventHandler(this.showPropertiesToolStripMenuItem_Click);
             // 
@@ -170,8 +180,8 @@
             this.randomToolStripMenuItem,
             this.toolStripMenuItem1});
             this.generateSignalToolStripMenuItem.Name = "generateSignalToolStripMenuItem";
-            this.generateSignalToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.generateSignalToolStripMenuItem.Text = "Generate Signal";
+            this.generateSignalToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.generateSignalToolStripMenuItem.Text = "Generate Noise Signal";
             // 
             // randomToolStripMenuItem
             // 
@@ -189,17 +199,66 @@
             // 
             // genSinToolStripMenuItem
             // 
+            this.genSinToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sinToolStripMenuItem,
+            this.amToolStripMenuItem,
+            this.phMToolStripMenuItem,
+            this.phmToolStripMenuItem1});
             this.genSinToolStripMenuItem.Name = "genSinToolStripMenuItem";
-            this.genSinToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.genSinToolStripMenuItem.Text = "GenSin";
+            this.genSinToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.genSinToolStripMenuItem.Text = "Gen Signal";
             this.genSinToolStripMenuItem.Click += new System.EventHandler(this.genSinToolStripMenuItem_Click);
+            // 
+            // sinToolStripMenuItem
+            // 
+            this.sinToolStripMenuItem.Name = "sinToolStripMenuItem";
+            this.sinToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.sinToolStripMenuItem.Text = "Sin";
+            this.sinToolStripMenuItem.Click += new System.EventHandler(this.sinToolStripMenuItem_Click);
+            // 
+            // amToolStripMenuItem
+            // 
+            this.amToolStripMenuItem.Name = "amToolStripMenuItem";
+            this.amToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.amToolStripMenuItem.Text = "Am";
+            this.amToolStripMenuItem.Click += new System.EventHandler(this.amToolStripMenuItem_Click);
+            // 
+            // phMToolStripMenuItem
+            // 
+            this.phMToolStripMenuItem.Name = "phMToolStripMenuItem";
+            this.phMToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
+            this.phMToolStripMenuItem.Text = "Fm";
+            this.phMToolStripMenuItem.Click += new System.EventHandler(this.phMToolStripMenuItem_Click);
+            // 
+            // phmToolStripMenuItem1
+            // 
+            this.phmToolStripMenuItem1.Name = "phmToolStripMenuItem1";
+            this.phmToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
+            this.phmToolStripMenuItem1.Text = "Phm";
+            this.phmToolStripMenuItem1.Click += new System.EventHandler(this.phmToolStripMenuItem1_Click);
             // 
             // genNoisedSinToolStripMenuItem
             // 
+            this.genNoisedSinToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.randomNoiseToolStripMenuItem,
+            this.normalNoiseToolStripMenuItem});
             this.genNoisedSinToolStripMenuItem.Name = "genNoisedSinToolStripMenuItem";
-            this.genNoisedSinToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.genNoisedSinToolStripMenuItem.Text = "GenNoisedSin";
-            this.genNoisedSinToolStripMenuItem.Click += new System.EventHandler(this.genNoisedSinToolStripMenuItem_Click);
+            this.genNoisedSinToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.genNoisedSinToolStripMenuItem.Text = "Add Noise";
+            // 
+            // randomNoiseToolStripMenuItem
+            // 
+            this.randomNoiseToolStripMenuItem.Name = "randomNoiseToolStripMenuItem";
+            this.randomNoiseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.randomNoiseToolStripMenuItem.Text = "Random Noise";
+            this.randomNoiseToolStripMenuItem.Click += new System.EventHandler(this.randomNoiseToolStripMenuItem_Click);
+            // 
+            // normalNoiseToolStripMenuItem
+            // 
+            this.normalNoiseToolStripMenuItem.Name = "normalNoiseToolStripMenuItem";
+            this.normalNoiseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.normalNoiseToolStripMenuItem.Text = "Normal Noise";
+            this.normalNoiseToolStripMenuItem.Click += new System.EventHandler(this.normalNoiseToolStripMenuItem_Click);
             // 
             // histogramToolStripMenuItem
             // 
@@ -227,7 +286,9 @@
             // fourierToolStripMenuItem
             // 
             this.fourierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sVDDenoiseToolStripMenuItem});
+            this.sVDDenoiseToolStripMenuItem,
+            this.fFTToolStripMenuItem,
+            this.correlationToolStripMenuItem});
             this.fourierToolStripMenuItem.Name = "fourierToolStripMenuItem";
             this.fourierToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.fourierToolStripMenuItem.Text = "Processing";
@@ -235,9 +296,47 @@
             // sVDDenoiseToolStripMenuItem
             // 
             this.sVDDenoiseToolStripMenuItem.Name = "sVDDenoiseToolStripMenuItem";
-            this.sVDDenoiseToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.sVDDenoiseToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.sVDDenoiseToolStripMenuItem.Text = "SVD denoise";
             this.sVDDenoiseToolStripMenuItem.Click += new System.EventHandler(this.sVDDenoiseToolStripMenuItem_Click);
+            // 
+            // fFTToolStripMenuItem
+            // 
+            this.fFTToolStripMenuItem.Name = "fFTToolStripMenuItem";
+            this.fFTToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.fFTToolStripMenuItem.Text = "Furier Transform";
+            this.fFTToolStripMenuItem.Click += new System.EventHandler(this.fFTToolStripMenuItem_Click);
+            // 
+            // correlationToolStripMenuItem
+            // 
+            this.correlationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aKFToolStripMenuItem,
+            this.aKFAcycleToolStripMenuItem,
+            this.vKFToolStripMenuItem});
+            this.correlationToolStripMenuItem.Name = "correlationToolStripMenuItem";
+            this.correlationToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.correlationToolStripMenuItem.Text = "Correlation";
+            // 
+            // aKFToolStripMenuItem
+            // 
+            this.aKFToolStripMenuItem.Name = "aKFToolStripMenuItem";
+            this.aKFToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.aKFToolStripMenuItem.Text = "AKF";
+            this.aKFToolStripMenuItem.Click += new System.EventHandler(this.aKFToolStripMenuItem_Click);
+            // 
+            // aKFAcycleToolStripMenuItem
+            // 
+            this.aKFAcycleToolStripMenuItem.Name = "aKFAcycleToolStripMenuItem";
+            this.aKFAcycleToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.aKFAcycleToolStripMenuItem.Text = "AKF acycle";
+            this.aKFAcycleToolStripMenuItem.Click += new System.EventHandler(this.aKFAcycleToolStripMenuItem_Click);
+            // 
+            // vKFToolStripMenuItem
+            // 
+            this.vKFToolStripMenuItem.Name = "vKFToolStripMenuItem";
+            this.vKFToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.vKFToolStripMenuItem.Text = "VKF";
+            this.vKFToolStripMenuItem.Click += new System.EventHandler(this.vKFToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -304,7 +403,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(546, 153);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Denoised Signal";
+            this.tabPage2.Text = "Processed Signal";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // zedGraphControl3
@@ -324,49 +423,12 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.tbWindow);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.tbNoiseLvl);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.tbIterations);
+            this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(234, 179);
             this.panel1.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Уровень шума";
-            // 
-            // tbNoiseLvl
-            // 
-            this.tbNoiseLvl.Location = new System.Drawing.Point(14, 76);
-            this.tbNoiseLvl.Name = "tbNoiseLvl";
-            this.tbNoiseLvl.Size = new System.Drawing.Size(44, 20);
-            this.tbNoiseLvl.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Количество итераций";
-            // 
-            // tbIterations
-            // 
-            this.tbIterations.Location = new System.Drawing.Point(14, 32);
-            this.tbIterations.Name = "tbIterations";
-            this.tbIterations.Size = new System.Drawing.Size(44, 20);
-            this.tbIterations.TabIndex = 1;
             // 
             // tabControl2
             // 
@@ -407,13 +469,29 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.zedGraphControl4);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(546, 209);
             this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.Text = "Table";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // zedGraphControl4
+            // 
+            this.zedGraphControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zedGraphControl4.Location = new System.Drawing.Point(3, 3);
+            this.zedGraphControl4.Name = "zedGraphControl4";
+            this.zedGraphControl4.ScrollGrace = 0D;
+            this.zedGraphControl4.ScrollMaxX = 0D;
+            this.zedGraphControl4.ScrollMaxY = 0D;
+            this.zedGraphControl4.ScrollMaxY2 = 0D;
+            this.zedGraphControl4.ScrollMinX = 0D;
+            this.zedGraphControl4.ScrollMinY = 0D;
+            this.zedGraphControl4.ScrollMinY2 = 0D;
+            this.zedGraphControl4.Size = new System.Drawing.Size(540, 203);
+            this.zedGraphControl4.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -447,9 +525,9 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(113, 12);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(58, 17);
+            this.checkBox3.Size = new System.Drawing.Size(48, 17);
             this.checkBox3.TabIndex = 13;
-            this.checkBox3.Text = "Fourier";
+            this.checkBox3.Text = "SVD";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
@@ -492,21 +570,23 @@
             this.propertyGrid1.Size = new System.Drawing.Size(228, 187);
             this.propertyGrid1.TabIndex = 9;
             // 
-            // label1
+            // dataGridView1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(133, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "N/Окно";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1});
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(105, 179);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
-            // tbWindow
+            // Column1
             // 
-            this.tbWindow.Location = new System.Drawing.Point(136, 32);
-            this.tbWindow.Name = "tbWindow";
-            this.tbWindow.Size = new System.Drawing.Size(44, 20);
-            this.tbWindow.TabIndex = 6;
+            this.Column1.HeaderText = "Data";
+            this.Column1.Name = "Column1";
             // 
             // Form1
             // 
@@ -525,13 +605,14 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -575,12 +656,20 @@
         private System.Windows.Forms.ToolStripMenuItem sVDDenoiseToolStripMenuItem;
         private ZedGraph.ZedGraphControl zedGraphControl3;
         private System.Windows.Forms.ToolStripMenuItem genNoisedSinToolStripMenuItem;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbIterations;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbNoiseLvl;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbWindow;
+        private System.Windows.Forms.ToolStripMenuItem fFTToolStripMenuItem;
+        private ZedGraph.ZedGraphControl zedGraphControl4;
+        private System.Windows.Forms.ToolStripMenuItem randomNoiseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem normalNoiseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem correlationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aKFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aKFAcycleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vKFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem amToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem phMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem phmToolStripMenuItem1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }
 

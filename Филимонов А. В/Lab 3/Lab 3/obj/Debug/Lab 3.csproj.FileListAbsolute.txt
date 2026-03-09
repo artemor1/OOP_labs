@@ -11,15 +11,11 @@ C:\Users\Артём\source\repos\Lab 3\Lab 3\obj\Debug\Lab 3.pdb
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\Lab 3.exe.config
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\Lab 3.exe
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\Lab 3.pdb
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.csproj.AssemblyReference.cache
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.exe.config
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab_3.Form1.resources
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab_3.Properties.Resources.resources
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.csproj.GenerateResource.cache
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.csproj.CoreCompileInputs.cache
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.exe
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.pdb
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\MathNet.Numerics.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\System.ValueTuple.dll
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\ZedGraph.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\MathNet.Numerics.xml
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\System.ValueTuple.xml
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\ZedGraph.xml
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\de\ZedGraph.resources.dll
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\es\ZedGraph.resources.dll
@@ -34,8 +30,16 @@ C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\tr\ZedGraph.resources.dll
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\zh-cn\ZedGraph.resources.dll
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\zh-tw\ZedGraph.resources.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.csproj.AssemblyReference.cache
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab_3.Form1.resources
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab_3.Properties.Resources.resources
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.csproj.GenerateResource.cache
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.csproj.CoreCompileInputs.cache
 C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.csproj.Up2Date
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\MathNet.Numerics.dll
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\System.ValueTuple.dll
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\MathNet.Numerics.xml
-C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\System.ValueTuple.xml
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.exe
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.pdb
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\obj\Debug\Lab 3.exe.config
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\AForge.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\AForge.Math.dll
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\AForge.xml
+C:\Users\Артём\source\repos\artemor1\OOP_labs\Филимонов А. В\Lab 3\Lab 3\bin\Debug\AForge.Math.xml

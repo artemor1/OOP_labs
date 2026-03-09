@@ -1,46 +1,71 @@
-﻿using System;
+﻿using nsMycomplex;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using ZedGraph;
 
 namespace Lab_3
 {
     public class Generator
     {
+
         //Переислитель для выбора типа сигнала
         public enum SignalType
         {
-            sinus, random, normal
+            sinus, random, normal, AM, FM, PhM
         }
         //Объявление экземпляра класса Random
         Random rnd = new Random();
         #region Fields
-        public int samples { get; set; } = 500; //Количество отсчетов
-
-        //Количество периодов на заданное количество отсчетов
-        public double pediodsCount { get; set; } = 1;
-        public double ampl { get; set; } = 1; //Амплитуда
-        public double mean { get; set; } = 0; //Математическое ожидание
-        public double sigma { get; set; } = 1; //sigma
-                                               //Тип генерируемого сигнала
+        public double noiseLvl { get; set; } = 0.3; // величина шума относительно исходного сигнала
+        //Количество отсчетов
+        public int samples { get; set; } = 1024;
+        //Математическое ожидание
+        public double mean { get; set; } = 0;
+        //sigma
+        public double sigma { get; set; } = 1;
+        //Количество периодов на заданное количество отсчетов или частота
+        [Category("Гармонические колебания"), DisplayName("Частота сигнала"), Description("")]
+        public double freqSignal { get; set; } = 50;
+        //Амплитуда
+        [Category("Гармонические колебания"), DisplayName("Амплитуда сигнала"), Description("")]
+        public double ampl { get; set; } = 1;
+        //Модулированные сигналы
+        //[Category("Модуляция"), DisplayName("Амплитуда модулирующего сигнала"), Description("")]
+        //public double amplModulation { get; set; } = 1;
+        [Category("Модуляция"), DisplayName("Частота модулирующего сигнала"), Description("АМ")]
+        public double freqModulation { get; set; } = 5;
+        [Category("Модуляция"), DisplayName("Коэффициент модуляции"), Description("АМ")]
+        public double coeffModulation { get; set; } = 5;
+        [Category("Модуляция"), DisplayName("Скорость изменения частоты"), Description("ЧМ")]
+        public double freqSpeed { get; set; } = 0.001;
+        [Category("Модуляция"), DisplayName("Кол-во периодов на кодовый интервал"), Description("ФМ, АМ")]
+        public int periodsPerCodeInterval { get; set; } = 4;
+        [Category("Модуляция"), DisplayName("Кодовая последовательность"), Description("ФМ, АМ")]
+        public List<int> codeSequence { get; set; } = new List<int>();
+        //Тип генерируемого сигнала
         public SignalType signalType { get; set; } = SignalType.sinus;
         #endregion
-        #region Constructors
-        public Generator() { }//Конструктор по-умолчанию
-        #endregion
+
         #region Methods
-        /// <summary>
-        /// Функция генерирования сигн. в соотв. с установленным типом сигнала
-        /// </summary>
-        /// <returns></returns>
-        public double[] GenerateSignal()
+        //Метод GenerateSignal дополним
+        public double[] GenerateSignal(MyComplexSignal signal)
         {
             switch (signalType)
             {
                 case SignalType.sinus: return GenSin();
                 case SignalType.random: return GenRandomSignal();
                 case SignalType.normal: return GenNormalSignal();
+                case SignalType.AM: return GenAM();
+                case SignalType.FM: return GenFM();
+                case SignalType.PhM: return GenPhM(signal);
                 default: return null;
             }
         }
+
+
+      
         /// <summary>
         /// Функция генерирования синусоидального сигнала
         /// </summary>
@@ -48,7 +73,7 @@ namespace Lab_3
         public double[] GenSin()
         {
             double[] arr = new double[samples];
-            double coeff = Math.PI * 2 / samples * pediodsCount;
+            double coeff = Math.PI * 2 / samples * periodsPerCodeInterval;
             for (int i = 0; i < samples; i++)
             {
                 arr[i] = Math.Sin(coeff * i);
@@ -102,18 +127,102 @@ namespace Lab_3
 
         }
 
+        /// <summary>
+        /// Добавляет случайный шум к сигналу
+        /// </summary>
+        /// <param name="signal"></param>
+        /// <returns></returns>
+        public double[] AddRNoise(double[] signal)
+        {
+            var noise = GenRandomSignal();
 
-        public double[] GenNoisedSin(double noiselvl=0.5)
+            // compute mean
+            double mean = 0.0;
+            for (int i = 0; i < noise.Length; i++)
+                mean += noise[i];
+
+            mean /= noise.Length;
+
+            // subtract mean and add noise
+            for (int i = 0; i < signal.Length; i++)
+                signal[i] += (noise[i] - mean) * noiseLvl;
+
+            return signal;
+        }
+
+        public double[] AddNormNoise(double[] signal)
+        {
+            var Noise = GenNormalSignal();
+            for (int i = 0; i < signal.Length; i++)
+            {
+                signal[i] += (Noise[i] - mean )*noiseLvl;
+            }
+            return signal;
+        }
+
+        /// <summary>
+        /// Амплитудно-модулированный сигнал
+        /// </summary>
+        /// <returns></returns>
+        public double[] GenAM()
         {
             double[] arr = new double[samples];
-            var sin = GenSin();
-            var noise = GenRandomSignal();
-            for (int i = 0;i < samples; i++)
+            double freqStep = Math.PI * 2 / samples * freqSignal;
+            double freqMStep = Math.PI * 2 / samples * freqModulation;
+            for (int i = 0; i < samples; i++)
             {
-                arr[i] = sin[i] + noise[i]*noiselvl;
+                arr[i] = ampl * (1 + coeffModulation * Math.Cos(freqMStep * i)) *
+             Math.Cos(freqStep * i);
             }
             return arr;
         }
+
+        /// <summary>
+        /// Частотно-манипулированный сигнал
+        /// </summary>
+        /// <returns></returns>
+        public double[] GenFM()
+        {
+            double[] arr = new double[samples];
+            double freqStep = Math.PI * 2 / samples;
+            int itrvCount = (int)(freqSignal / periodsPerCodeInterval);
+            int ticksCount = samples / itrvCount;
+            double phase = 0;
+            double curFreq = 1;
+            for (int i = 0; i < samples; i++)
+            {
+                curFreq = ((i / ticksCount) & 1) == 1 ? freqSignal : freqModulation;
+                arr[i] = ampl * Math.Cos(curFreq * i);
+            }
+            return arr;
+        }
+
+
+
+        public double[] GenPhM(MyComplexSignal signal)
+        {  
+            double[] arr = new double[samples];
+            double freqStep = freqSignal * Math.PI * 2;
+            double phase;
+
+            for (int n = 0; n < signal.data.Count; n++)
+            {
+                for (int i = 0; i < samples; i++)
+                {
+                    phase = n * i;
+
+                    double realPart = (Math.Cos(freqStep * phase * periodsPerCodeInterval) * signal.data[n].re);
+                    double imPart = (Math.Sin(freqStep * phase * periodsPerCodeInterval) * signal.data[n].im);
+                    arr[(i * n) + i] = ampl * (realPart + imPart);
+                    Debug.WriteLine($"{arr[(i * n) + i]}");
+                }
+            }
+          //  Debug.WriteLine($"{arr.Length}");
+            return arr;
+        }
+
+
+
 
 
         #endregion

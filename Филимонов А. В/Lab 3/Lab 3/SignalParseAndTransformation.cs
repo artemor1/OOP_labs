@@ -10,33 +10,25 @@ using System.Threading.Tasks;
 
 namespace Lab_3
 {
-    internal class SignalHandler
+    internal class Denoiser
     {
-        #region fields
-       private MyComplexSignal SignalData = new MyComplexSignal();
-        private double[] TransformedSignal = new double[1];
+        #region Fields
         /// <summary>
-        /// Тип кодирования
+        /// Размер окна L Ганкелевой матрицы (Rows=N\L)
         /// </summary>
-        public enum EncodeType
-        {
-            Ampl,Freq,Phase
-        }
+      public  int window { get; set; } = 10;
         /// <summary>
-        ///  Длина кодового интервала в отсчётах 
+        /// Максимальная разница между полезными коефицентами
         /// </summary>
-        public double CodeLenght { get; set; }
+        public double maxDropCoef { get; set; } = 0.5;
 
+        public int iterations { get; set; } = 1;
         #endregion
 
         #region Methods
 
-        public SignalHandler() { }
-        public SignalHandler(double[] SignalData, double CodeLenght = 10 )
-        {
-        }
-
-       private static Matrix<double> Hankel(double[] x,int window)
+        public Denoiser() { }  
+       private Matrix<double> Hankel(double[] x)
              {
         int rows = x.Length / window;
         int cols = x.Length - rows + 1;
@@ -76,17 +68,12 @@ namespace Lab_3
             return x;
         }
 
-
-
-
-
-        public static double[] DeNoise(double[] data, int winow, int iterations = 1)
+        public double[] DeNoise(double[] data)
         {
             double[] signal = (double[])data.Clone();
-            double maxDropCoef = 0.5;
             for (int it = 0; it < iterations; it++)
             {
-                var H = Hankel(signal,winow);  // строим Hankel матрицу
+                var H = Hankel(signal);
                 var svd = H.Svd();
                 int m = H.RowCount;
                 int n = H.ColumnCount;
@@ -105,22 +92,17 @@ namespace Lab_3
                     
                 }
                 while (i < svd.S.Count && svd.S[i] > svd.S[i - 1] * maxDropCoef);
-                Debug.WriteLine($"max i = {i}");
+                Debug.WriteLine($"max i = {i-1}");
                 for (int j = 0; j < svd.S.Count; j++)
                 {
                     Debug.WriteLine($"s[{j}] = {svd.S[j]}\n");
                 }
-                // Диагональное усреднение: восстановление сигнала из матрицы
                 signal = HankelToArray(R);
             }
 
             return signal;
         }
 
-        //public void Parse(double[] data, Generator gen)
-        //{
-        //    double discredfreq = 1 / gen.pediodsCount;
-        //}
 
         #endregion
 

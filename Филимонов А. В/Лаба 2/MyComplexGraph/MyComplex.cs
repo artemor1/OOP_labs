@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Numerics;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
+using AForge.Math;
 namespace nsMycomplex
 {
     public class MyComplex 
@@ -489,10 +490,50 @@ namespace nsMycomplex
             result.Normalize();
             result.Round();
             return result;
+        }
 
+        public static Complex[] ToAForgeComplex(MyComplexSignal signal)
+        {
+            Complex[] res = new Complex[signal.data.Count];
+            for (int i = 0; i < signal.data.Count; i++)
+            {
+                res[i].Re = signal.data[i].X;
+                res[i].Im = signal.data[i].Y;
+            }
+            return res;
+        }
 
+        #endregion
 
+        #region Parse
+        public static MyComplexSignal ParseFromSignal (double[] signal, int freq, int sfreq,double T)
+            {
+              var res = new MyComplexSignal();
+              int sampleLenght = (int)Math.Round(sfreq * T);
+              int resLenght = signal.Length / sampleLenght;
+              double Re = 0;
+            double Im = 0;
+            Debug.WriteLine("Parse started\n");
+            for (int i = 0; i < resLenght; i++)
+
+            {
+                for (int j = 0; j < sampleLenght; j++)
+                {
+                    Re = 0;
+                    Im = 0;
+                    var chisl = freq * Math.PI * 2 * (i + j);
+                    Re += Math.Cos(chisl / sfreq) * signal[i + j];
+                    Im += Math.Sin(chisl / sfreq) * -1 * signal[i + j];
+                }
+                Debug.WriteLine($"Parsed {i} elements\n");
+                res.data.Add(new MyComplex(Re / (sampleLenght / 2), Im / (sampleLenght / 2)));
+            }
+
+          
+
+            return res;
+            }
             #endregion
         }
     }
-}
+

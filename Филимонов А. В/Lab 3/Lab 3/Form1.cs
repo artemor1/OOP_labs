@@ -4,16 +4,17 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using ZedGraph;
+using AForge;
+using nsMycomplex;
 namespace Lab_3
 {
     public partial class Form1 : Form
     {
+       
         public Form1()
         {
             InitializeComponent();
-            tbWindow.Text = "2";
-            tbIterations.Text = "2";
-            tbNoiseLvl.Text = "0,5";
+            dataGridView1.Rows.Add("1+0i");
         }
 
         #region Variables
@@ -21,8 +22,10 @@ namespace Lab_3
         Generator generator = new Generator();
         double[] signalData = new double[1];
         Histogram histogram = new Histogram();
-        int[] histogramData= new int[1];
+        int[] histogramData = new int[1];
         double[] processedSignalData = new double[1];
+        Denoiser denoiser = new Denoiser();
+        MyComplexSignal SignalToCode = new MyComplexSignal();
         #endregion
 
         #region Functions
@@ -63,11 +66,11 @@ namespace Lab_3
         //        }
         //        return res;
         //    }
-            //catch (Exception ex) //Отлов исключений 
-            //{
-            //    MessageBox.Show(ex.ToString()); //Вывод окна с текстом ошибки 
-            //    return null;
-            //}
+        //catch (Exception ex) //Отлов исключений 
+        //{
+        //    MessageBox.Show(ex.ToString()); //Вывод окна с текстом ошибки 
+        //    return null;
+        //}
         //}
         #endregion
 
@@ -136,14 +139,7 @@ namespace Lab_3
             LoadData();
         }
 
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    var res = GenerateArray(); //Привязка метода к событию кнопки 
-        //    if (res == null) return; //Сброс в случае неудачной генерации 
-        //    this.data = res; //Присвоение полю значения 
-        //    var str = DataToStirng(res);
-        //    ReplaceShownData(str); //Вывод данных на экран
-        //}
+       
 
         private void totxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -231,20 +227,101 @@ namespace Lab_3
             {
                 checkBox1.Checked = false;
                 checkBox2.Checked = false;
-                propertyGrid1.SelectedObject = null;
+                propertyGrid1.SelectedObject = denoiser;
+                Debug.WriteLine("cB3 switched");
             }
         }
 
         private void sVDDenoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            processedSignalData = SignalHandler.DeNoise(signalData,int.Parse(tbWindow.Text),int.Parse(tbIterations.Text));
+            processedSignalData = denoiser.DeNoise(signalData);
             MyGraphics.DrawGraph(zedGraphControl3,processedSignalData, MyGraphics.GraphType.line);
         }
 
-        private void genNoisedSinToolStripMenuItem_Click(object sender, EventArgs e)
+       
+
+        private void label1_Click(object sender, EventArgs e)
         {
-            signalData = generator.GenNoisedSin(double.Parse(tbNoiseLvl.Text));
-            MyGraphics.DrawGraph(zedGraphControl1,signalData, MyGraphics.GraphType.line);
+                    }
+
+        private void fFTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Process started\n");
+            var signal = FourierTransform.Double2Complex(signalData);
+            Debug.WriteLine("Signal parsed\n");
+            var sp = FourierTransform.FT(signal, -1);
+            Debug.WriteLine("fourierTransformed\n");
+            var dataToShow = FourierTransform.AmplSpectrum(sp);
+            Debug.WriteLine("ampl sepctrutm\n");
+            MyGraphics.DrawGraph(zedGraphControl2, dataToShow, MyGraphics.GraphType.stick);
+            Debug.WriteLine("Shown\n");
+
+        }
+
+        private void randomNoiseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            signalData = generator.AddRNoise(signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void normalNoiseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            signalData = generator.AddNormNoise(signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void aKFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processedSignalData=Correlation.Akf(signalData);
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+        }
+
+        private void aKFAcycleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processedSignalData = Correlation.Akf_acycle(signalData);
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+        }
+
+        private void vKFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processedSignalData = Correlation.VKF(signalData,denoiser.DeNoise(signalData));
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+        }
+
+        private void sinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            generator.signalType=Generator.SignalType.sinus;
+            signalData = generator.GenerateSignal(SignalToCode);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+
+        }
+
+        private void amToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            generator.signalType = Generator.SignalType.AM;
+            signalData = generator.GenerateSignal(SignalToCode);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void phMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            generator.signalType = Generator.SignalType.FM;
+            signalData = generator.GenerateSignal(SignalToCode);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+
+        }
+
+        private void phmToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            generator.signalType = Generator.SignalType.PhM;
+            signalData = generator.GenerateSignal(SignalToCode);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 | e.ColumnIndex < 0) return;
+            SignalToCode.data.Add(MyComplex.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()));
         }
     }
 }
