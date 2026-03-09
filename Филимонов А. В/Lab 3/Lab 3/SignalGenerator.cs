@@ -52,6 +52,7 @@ namespace Lab_3
         //Метод GenerateSignal дополним
         public double[] GenerateSignal(MyComplexSignal signal)
         {
+            Debug.WriteLine($"[Generator.GenerateSignal] type={signalType}, samples={samples}, ampl={ampl}, codeCount={signal?.data?.Count ?? 0}");
             switch (signalType)
             {
                 case SignalType.sinus: return GenSin();
@@ -72,6 +73,7 @@ namespace Lab_3
         /// <returns></returns> 
         public double[] GenSin()
         {
+            Debug.WriteLine($"[Generator.GenSin] samples={samples}, periodsPerCodeInterval={periodsPerCodeInterval}");
             double[] arr = new double[samples];
             double coeff = Math.PI * 2 / samples * periodsPerCodeInterval;
             for (int i = 0; i < samples; i++)
@@ -86,6 +88,7 @@ namespace Lab_3
         /// <returns></returns>
         public double[] GenRandomSignal()
         {
+            Debug.WriteLine($"[Generator.GenRandomSignal] samples={samples}, ampl={ampl}");
             double[] arr = new double[samples];
             for (int i = 0; i < samples; i++)
             {
@@ -118,6 +121,7 @@ namespace Lab_3
         /// <returns></returns>
         public double[] GenNormalSignal()
         {
+            Debug.WriteLine($"[Generator.GenNormalSignal] samples={samples}, mean={mean}, sigma={sigma}, ampl={ampl}");
             double[] arr = new double[samples];
             for (int i = 0; i < samples; i++)
             {
@@ -134,6 +138,7 @@ namespace Lab_3
         /// <returns></returns>
         public double[] AddRNoise(double[] signal)
         {
+            Debug.WriteLine($"[Generator.AddRNoise] inputLength={(signal == null ? 0 : signal.Length)}, noiseLvl={noiseLvl}");
             var noise = GenRandomSignal();
 
             // compute mean
@@ -152,6 +157,7 @@ namespace Lab_3
 
         public double[] AddNormNoise(double[] signal)
         {
+            Debug.WriteLine($"[Generator.AddNormNoise] inputLength={(signal == null ? 0 : signal.Length)}, noiseLvl={noiseLvl}");
             var Noise = GenNormalSignal();
             for (int i = 0; i < signal.Length; i++)
             {
@@ -166,6 +172,7 @@ namespace Lab_3
         /// <returns></returns>
         public double[] GenAM()
         {
+            Debug.WriteLine($"[Generator.GenAM] samples={samples}, freqSignal={freqSignal}, freqModulation={freqModulation}, coeffModulation={coeffModulation}");
             double[] arr = new double[samples];
             double freqStep = Math.PI * 2 / samples * freqSignal;
             double freqMStep = Math.PI * 2 / samples * freqModulation;
@@ -183,6 +190,7 @@ namespace Lab_3
         /// <returns></returns>
         public double[] GenFM()
         {
+            Debug.WriteLine($"[Generator.GenFM] samples={samples}, freqSignal={freqSignal}, freqModulation={freqModulation}, periodsPerCodeInterval={periodsPerCodeInterval}");
             double[] arr = new double[samples];
             double freqStep = Math.PI * 2 / samples;
             int itrvCount = (int)(freqSignal / periodsPerCodeInterval);
@@ -200,24 +208,47 @@ namespace Lab_3
 
 
         public double[] GenPhM(MyComplexSignal signal)
-        {  
+        {
+            #region Input diagnostics
+            Debug.WriteLine($"[Generator.GenPhM] Start. samples={samples}, signalCount={signal?.data?.Count ?? 0}, freqSignal={freqSignal}, periodsPerCodeInterval={periodsPerCodeInterval}, ampl={ampl}");
+            #endregion
+
+            if (signal == null || signal.data == null || signal.data.Count == 0)
+            {
+                Debug.WriteLine("[Generator.GenPhM] Signal code is empty. Return zero array.");
+                return new double[samples];
+            }
+
             double[] arr = new double[samples];
             double freqStep = freqSignal * Math.PI * 2;
             double phase;
 
             for (int n = 0; n < signal.data.Count; n++)
             {
+                Debug.WriteLine($"[Generator.GenPhM] Block n={n}, symbol={signal.data[n]}");
                 for (int i = 0; i < samples; i++)
                 {
                     phase = n * i;
+                    var idx = (i * n) + i;
+
+                    if (idx < 0 || idx >= arr.Length)
+                    {
+                        Debug.WriteLine($"[Generator.GenPhM] Index out of range. n={n}, i={i}, idx={idx}, arrLength={arr.Length}. Skip write.");
+                        continue;
+                    }
 
                     double realPart = (Math.Cos(freqStep * phase * periodsPerCodeInterval) * signal.data[n].re);
                     double imPart = (Math.Sin(freqStep * phase * periodsPerCodeInterval) * signal.data[n].im);
-                    arr[(i * n) + i] = ampl * (realPart + imPart);
-                    Debug.WriteLine($"{arr[(i * n) + i]}");
+                    arr[idx] = ampl * (realPart + imPart);
+
+                    if (i < 10 || i >= samples - 10)
+                    {
+                        Debug.WriteLine($"[Generator.GenPhM] n={n}, i={i}, idx={idx}, value={arr[idx]}");
+                    }
                 }
             }
-          //  Debug.WriteLine($"{arr.Length}");
+
+            Debug.WriteLine($"[Generator.GenPhM] Completed. outputLength={arr.Length}");
             return arr;
         }
 

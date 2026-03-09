@@ -30,6 +30,37 @@ namespace Lab_3
 
         #region Functions
 
+        #region Debug helpers
+        private void LogSignalState(string context, double[] source)
+        {
+            if (source == null)
+            {
+                Debug.WriteLine($"[{context}] signal is NULL");
+                return;
+            }
+
+            var preview = string.Empty;
+            var countToShow = Math.Min(3, source.Length);
+            for (int i = 0; i < countToShow; i++)
+            {
+                preview += $"[{i}]={source[i]:F4} ";
+            }
+
+            Debug.WriteLine($"[{context}] signal length={source.Length}. preview: {preview}");
+        }
+
+        private void LogHistogramState(string context, int[] source)
+        {
+            if (source == null)
+            {
+                Debug.WriteLine($"[{context}] histogram is NULL");
+                return;
+            }
+
+            Debug.WriteLine($"[{context}] histogram length={source.Length}");
+        }
+        #endregion
+
         #region Data display methods
         //void ReplaceShownData(string data)
         //{
@@ -90,35 +121,49 @@ namespace Lab_3
         #region Save/Load
         void SaveData(string format)
         {
-            #region debug
-            Debug.WriteLine("Saving data...");
-            #endregion
+            Debug.WriteLine($"[SaveData] Start. format={format}, dataCount={(data == null ? 0 : data.Count)}");
             var fd = new SaveFileDialog();
             if (format == "TXT" || format == "txt")
             {
                 fd.Filter = "Txt files|*.txt";
-                if (fd.ShowDialog() != DialogResult.OK) return; //Выход, если не OK 
+                if (fd.ShowDialog() != DialogResult.OK)
+                {
+                    Debug.WriteLine("[SaveData] TXT save canceled by user");
+                    return;
+                }
                 var d = File_IO_Methods.SaveDataToTxtFile(data, fd.FileName);
-                Debug.WriteLine($"Saved {d} lines to txt file");
+                Debug.WriteLine($"[SaveData] Saved {d} lines to txt file: {fd.FileName}");
             }
             else if (format == "BIN" || format == "bin")
             {
                 fd.Filter = "Bin files|*.bin";
-                if (fd.ShowDialog() != DialogResult.OK) return; //Выход, если не OK 
+                if (fd.ShowDialog() != DialogResult.OK)
+                {
+                    Debug.WriteLine("[SaveData] BIN save canceled by user");
+                    return;
+                }
                 var d = File_IO_Methods.SaveDataToBinFile(data, fd.FileName);
-                Debug.WriteLine($"Saved {d} lines to bin file");
+                Debug.WriteLine($"[SaveData] Saved {d} lines to bin file: {fd.FileName}");
             }
         }
         void LoadData()
         {
+            Debug.WriteLine("[LoadData] Start");
             var fd = new OpenFileDialog();
             fd.Filter = "Text and Bin files(*.txt;*.bin)|*.txt;*.bin";
-            if (fd.ShowDialog() != DialogResult.OK) return; //Выход, если не OK 
+            if (fd.ShowDialog() != DialogResult.OK)
+            {
+                Debug.WriteLine("[LoadData] File open canceled by user");
+                return;
+            }
+
+            Debug.WriteLine($"[LoadData] Selected file: {fd.FileName}");
             if (fd.FileName.Contains(".txt"))
             {
                 var d = File_IO_Methods.LoadDataFromTxtFile(fd.FileName);
                 if (d != null) data = d;
                 var s = DataToStirng(data);
+                Debug.WriteLine($"[LoadData] Loaded TXT lines={data?.Count ?? 0}. data string length={s.Length}");
 
             }
             else if (fd.FileName.Contains(".bin"))
@@ -126,6 +171,7 @@ namespace Lab_3
                 var d = File_IO_Methods.LoadDataFromBinFile(fd.FileName);
                 if (d != null) data = d;
                 var s = DataToStirng(data);
+                Debug.WriteLine($"[LoadData] Loaded BIN values={data?.Count ?? 0}. data string length={s.Length}");
                
             }
 
@@ -159,19 +205,32 @@ namespace Lab_3
 
         private void genSinToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine("[UI] genSinToolStripMenuItem_Click");
             signalData = generator.GenSin();
-           MyGraphics.DrawGraph(zedGraphControl1,signalData,MyGraphics.GraphType.line);
+            LogSignalState("GenSin", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1,signalData,MyGraphics.GraphType.line);
         }
 
 
         private void loadSignalFromFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine("[UI] loadSignalFromFileToolStripMenuItem_Click");
             var ofd = new OpenFileDialog();
             ofd.Filter = "Text files|*.txt";
-            if (ofd.ShowDialog() != DialogResult.OK) return;
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
+                Debug.WriteLine("[UI] load signal canceled by user");
+                return;
+            }
+            Debug.WriteLine($"[UI] signal file selected: {ofd.FileName}");
             var data = File_IO_Methods.LoadDataFromTxtFile(ofd.FileName);
-            if (data == null) return;
+            if (data == null)
+            {
+                Debug.WriteLine("[UI] Loaded signal is NULL");
+                return;
+            }
             signalData = data.ToArray();
+            LogSignalState("LoadSignalFromFile", signalData);
             MyGraphics.DrawGraph(zedGraphControl1,signalData,MyGraphics.GraphType.line);
 
         }
@@ -183,20 +242,26 @@ namespace Lab_3
 
         private void calcToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LogSignalState("CalcHistogram input", signalData);
             histogramData = histogram.CalcHistogram(signalData);
+            LogHistogramState("CalcHistogram output", histogramData);
             MyGraphics.DrawGraph(zedGraphControl2,histogramData, MyGraphics.GraphType.stick);
         }
 
         private void randomToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine("[UI] randomToolStripMenuItem_Click");
             signalData = generator.GenRandomSignal();
+            LogSignalState("GenRandomSignal", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
 
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Debug.WriteLine("[UI] toolStripMenuItem1_Click (normal signal)");
             signalData = generator.GenNormalSignal();
+            LogSignalState("GenNormalSignal", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
 
         }
@@ -234,7 +299,9 @@ namespace Lab_3
 
         private void sVDDenoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LogSignalState("SVDDeNoise input", signalData);
             processedSignalData = denoiser.DeNoise(signalData);
+            LogSignalState("SVDDeNoise output", processedSignalData);
             MyGraphics.DrawGraph(zedGraphControl3,processedSignalData, MyGraphics.GraphType.line);
         }
 
@@ -246,52 +313,67 @@ namespace Lab_3
 
         private void fFTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("Process started\n");
+            LogSignalState("FFT input", signalData);
+            Debug.WriteLine("[FFT] Process started");
             var signal = FourierTransform.Double2Complex(signalData);
-            Debug.WriteLine("Signal parsed\n");
+            Debug.WriteLine($"[FFT] Signal parsed. length={signal.Length}");
             var sp = FourierTransform.FT(signal, -1);
-            Debug.WriteLine("fourierTransformed\n");
+            Debug.WriteLine($"[FFT] Fourier transformed. length={sp.Length}");
             var dataToShow = FourierTransform.AmplSpectrum(sp);
-            Debug.WriteLine("ampl sepctrutm\n");
+            LogSignalState("FFT amplitude spectrum", dataToShow);
             MyGraphics.DrawGraph(zedGraphControl2, dataToShow, MyGraphics.GraphType.stick);
-            Debug.WriteLine("Shown\n");
+            Debug.WriteLine("[FFT] Spectrum shown");
 
         }
 
         private void randomNoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LogSignalState("AddRNoise input", signalData);
             signalData = generator.AddRNoise(signalData);
+            LogSignalState("AddRNoise output", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
         }
 
         private void normalNoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LogSignalState("AddNormNoise input", signalData);
             signalData = generator.AddNormNoise(signalData);
+            LogSignalState("AddNormNoise output", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
         }
 
         private void aKFToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LogSignalState("AKF input", signalData);
             processedSignalData=Correlation.Akf(signalData);
+            LogSignalState("AKF output", processedSignalData);
             MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
         }
 
         private void aKFAcycleToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LogSignalState("AKF acycle input", signalData);
             processedSignalData = Correlation.Akf_acycle(signalData);
+            LogSignalState("AKF acycle output", processedSignalData);
             MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
         }
 
         private void vKFToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            LogSignalState("VKF input", signalData);
             processedSignalData = Correlation.VKF(signalData,denoiser.DeNoise(signalData));
+            LogSignalState("VKF output", processedSignalData);
             MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
         }
+
+        #region Signal generation mode actions
 
         private void sinToolStripMenuItem_Click(object sender, EventArgs e)
         {
             generator.signalType=Generator.SignalType.sinus;
+            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
             signalData = generator.GenerateSignal(SignalToCode);
+            LogSignalState("Generate sinus", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
 
         }
@@ -299,14 +381,18 @@ namespace Lab_3
         private void amToolStripMenuItem_Click(object sender, EventArgs e)
         {
             generator.signalType = Generator.SignalType.AM;
+            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
             signalData = generator.GenerateSignal(SignalToCode);
+            LogSignalState("Generate AM", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
         }
 
         private void phMToolStripMenuItem_Click(object sender, EventArgs e)
         {
             generator.signalType = Generator.SignalType.FM;
+            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
             signalData = generator.GenerateSignal(SignalToCode);
+            LogSignalState("Generate FM", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
 
         }
@@ -314,15 +400,40 @@ namespace Lab_3
         private void phmToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             generator.signalType = Generator.SignalType.PhM;
+            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
             signalData = generator.GenerateSignal(SignalToCode);
+            LogSignalState("Generate PhM", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
         }
+        #endregion
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 | e.ColumnIndex < 0) return;
-            SignalToCode.data.Add(MyComplex.Parse(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString()));
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                Debug.WriteLine("[DataGrid] Ignored change event with negative indexes");
+                return;
+            }
+
+            var raw = dataGridView1.Rows[e.RowIndex].Cells[0].Value?.ToString();
+            Debug.WriteLine($"[DataGrid] Cell changed row={e.RowIndex}, col={e.ColumnIndex}, raw='{raw}', beforeCount={SignalToCode.data.Count}");
+
+            if (string.IsNullOrWhiteSpace(raw))
+            {
+                Debug.WriteLine("[DataGrid] Empty value. Skip parsing");
+                return;
+            }
+
+            try
+            {
+                var parsed = MyComplex.Parse(raw);
+                SignalToCode.data.Add(parsed);
+                Debug.WriteLine($"[DataGrid] Parsed and appended '{parsed}'. afterCount={SignalToCode.data.Count}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[DataGrid] Parse error for '{raw}'. {ex}");
+            }
         }
     }
 }
-

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace Lab_3
@@ -10,6 +11,7 @@ namespace Lab_3
         {
             try
             {
+                Debug.WriteLine($"[FileIO.SaveDataToTxtFile] path={path}, dataCount={(data == null ? 0 : data.Count)}");
                 var str = ""; // Контейнер для накопления текстовой информации 
                 foreach (var d in data)
                 {
@@ -31,6 +33,7 @@ namespace Lab_3
         {
             try
             {
+                Debug.WriteLine($"[FileIO.LoadDataFromTxtFile] path={path}");
                 var data = new List<double>(); //Создание контейнера для результата 
                 using (var sr = new StreamReader(path)) //Создание потока для чтения  
                 {
@@ -44,6 +47,7 @@ namespace Lab_3
                     }
 
                 }
+                Debug.WriteLine($"[FileIO.LoadDataFromTxtFile] loadedCount={data.Count}");
                 return data;
             }
             catch (Exception ex)
@@ -57,6 +61,7 @@ namespace Lab_3
         {
             try
             {
+                Debug.WriteLine($"[FileIO.SaveDataToBinFile] path={path}, dataCount={(data == null ? 0 : data.Count)}");
                 //Создание потока записи данных 
                 using (var sw = new BinaryWriter(File.Create(path)))
                 {
@@ -77,6 +82,7 @@ namespace Lab_3
         {
             try
             {
+                Debug.WriteLine($"[FileIO.LoadDataFromBinFile] path={path}");
                 //Создание контейнера для вывода результата 
                 var data = new List<double>();
                 //Создание потока для чтения данных 
@@ -93,6 +99,7 @@ namespace Lab_3
                         i++;
                     }
                 }
+                Debug.WriteLine($"[FileIO.LoadDataFromBinFile] loadedCount={data.Count}");
                 return data;
             }
             catch (Exception ex)
