@@ -30,8 +30,22 @@ namespace Lab_3
         public Denoiser() { }  
        private Matrix<double> Hankel(double[] x)
              {
+        Debug.WriteLine($"[Denoiser.Hankel] inputLength={x.Length}, window={window}");
+        if (window <= 0)
+        {
+            Debug.WriteLine("[Denoiser.Hankel] Invalid window <= 0");
+            throw new ArgumentException("window must be greater than 0");
+        }
+
         int rows = x.Length / window;
         int cols = x.Length - rows + 1;
+
+        Debug.WriteLine($"[Denoiser.Hankel] rows={rows}, cols={cols}");
+        if (rows <= 0 || cols <= 0)
+        {
+            Debug.WriteLine("[Denoiser.Hankel] Invalid matrix dimensions");
+            throw new ArgumentException("Invalid Hankel dimensions. Check window and signal length.");
+        }
 
         var H = Matrix<double>.Build.Dense(rows, cols);
 
@@ -70,6 +84,13 @@ namespace Lab_3
 
         public double[] DeNoise(double[] data)
         {
+            Debug.WriteLine($"[Denoiser.DeNoise] Start. dataLength={(data == null ? 0 : data.Length)}, window={window}, iterations={iterations}, maxDropCoef={maxDropCoef}");
+            if (data == null || data.Length == 0)
+            {
+                Debug.WriteLine("[Denoiser.DeNoise] Empty input signal");
+                return new double[0];
+            }
+
             double[] signal = (double[])data.Clone();
             for (int it = 0; it < iterations; it++)
             {
@@ -79,7 +100,13 @@ namespace Lab_3
                 int n = H.ColumnCount;
                 var R = Matrix<double>.Build.Dense(m, n);
                 int i = 0;
-                Debug.WriteLine($"S.Lenght = {svd.S.Count}\niteration = {it}\n");
+                Debug.WriteLine($"[Denoiser.DeNoise] iteration={it}, S.Length={svd.S.Count}, U={svd.U.RowCount}x{svd.U.ColumnCount}, VT={svd.VT.RowCount}x{svd.VT.ColumnCount}");
+                var sigPreviewCount = Math.Min(5, svd.S.Count);
+                for (int j = 0; j < sigPreviewCount; j++)
+                {
+                    Debug.WriteLine($"[Denoiser.DeNoise] S[{j}]={svd.S[j]}");
+                }
+
                 do
                 {
                   
@@ -87,19 +114,26 @@ namespace Lab_3
                     var v = svd.VT.Row(i).ToColumnMatrix();
                     var s = svd.S;
                     R += s[i] * u * v.Transpose();
+
+                    if (i > 0)
+                    {
+                        Debug.WriteLine($"[Denoiser.DeNoise] keep component i={i}. condition {svd.S[i]} > {svd.S[i - 1] * maxDropCoef}");
+                    }
                     
                     i++;
                     
                 }
                 while (i < svd.S.Count && svd.S[i] > svd.S[i - 1] * maxDropCoef);
-                Debug.WriteLine($"max i = {i-1}");
+                Debug.WriteLine($"[Denoiser.DeNoise] max kept index={i - 1}");
                 for (int j = 0; j < svd.S.Count; j++)
                 {
-                    Debug.WriteLine($"s[{j}] = {svd.S[j]}\n");
+                    Debug.WriteLine($"[Denoiser.DeNoise] s[{j}] = {svd.S[j]}");
                 }
                 signal = HankelToArray(R);
+                Debug.WriteLine($"[Denoiser.DeNoise] iteration={it} restoredLength={signal.Length}");
             }
 
+            Debug.WriteLine("[Denoiser.DeNoise] Completed");
             return signal;
         }
 
