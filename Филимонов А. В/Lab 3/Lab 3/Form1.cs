@@ -228,6 +228,191 @@ namespace Lab_3
 
         #endregion
 
+        #region UI action methods
+
+        #region Property actions
+        private void ShowGeneratorProperties()
+        {
+            Debug.WriteLine("[Action] ShowGeneratorProperties");
+            propertyGrid1.SelectedObject = generator;
+        }
+
+        private void ShowHistogramProperties()
+        {
+            Debug.WriteLine("[Action] ShowHistogramProperties");
+            propertyGrid1.SelectedObject = histogram;
+        }
+
+        private void ShowDenoiserProperties()
+        {
+            Debug.WriteLine("[Action] ShowDenoiserProperties");
+            propertyGrid1.SelectedObject = denoiser;
+        }
+        #endregion
+
+        #region Signal source actions
+        private void GenerateSinSignal()
+        {
+            Debug.WriteLine("[Action] GenerateSinSignal");
+            signalData = generator.GenSin();
+            LogSignalState("GenSin", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void GenerateRandomSignal()
+        {
+            Debug.WriteLine("[Action] GenerateRandomSignal");
+            signalData = generator.GenRandomSignal();
+            LogSignalState("GenRandomSignal", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void GenerateNormalSignal()
+        {
+            Debug.WriteLine("[Action] GenerateNormalSignal");
+            signalData = generator.GenNormalSignal();
+            LogSignalState("GenNormalSignal", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void LoadSignalFromFile()
+        {
+            Debug.WriteLine("[Action] LoadSignalFromFile");
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Text files|*.txt";
+            if (ofd.ShowDialog() != DialogResult.OK)
+            {
+                Debug.WriteLine("[Action] Load signal canceled by user");
+                return;
+            }
+
+            Debug.WriteLine($"[Action] Signal file selected: {ofd.FileName}");
+            var loadedData = File_IO_Methods.LoadDataFromTxtFile(ofd.FileName);
+            if (loadedData == null)
+            {
+                Debug.WriteLine("[Action] Loaded signal is NULL");
+                return;
+            }
+
+            signalData = loadedData.ToArray();
+            LogSignalState("LoadSignalFromFile", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+        #endregion
+
+        #region Processing actions
+        private void CalculateHistogram()
+        {
+            Debug.WriteLine("[Action] CalculateHistogram");
+            LogSignalState("CalcHistogram input", signalData);
+            histogramData = histogram.CalcHistogram(signalData);
+            LogHistogramState("CalcHistogram output", histogramData);
+            MyGraphics.DrawGraph(zedGraphControl2, histogramData, MyGraphics.GraphType.stick);
+        }
+
+        private void ApplySvdDenoise()
+        {
+            Debug.WriteLine("[Action] ApplySvdDenoise");
+            LogSignalState("SVDDeNoise input", signalData);
+            processedSignalData = denoiser.DeNoise(signalData);
+            LogSignalState("SVDDeNoise output", processedSignalData);
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+        }
+
+        private void ShowFftSpectrum()
+        {
+            Debug.WriteLine("[Action] ShowFftSpectrum");
+            LogSignalState("FFT input", signalData);
+            var signal = FourierTransform.Double2Complex(signalData);
+            Debug.WriteLine($"[FFT] Signal parsed. length={signal.Length}");
+            var sp = FourierTransform.FT(signal, -1);
+            Debug.WriteLine($"[FFT] Fourier transformed. length={sp.Length}");
+            var dataToShow = FourierTransform.AmplSpectrum(sp);
+            LogSignalState("FFT amplitude spectrum", dataToShow);
+            MyGraphics.DrawGraph(zedGraphControl2, dataToShow, MyGraphics.GraphType.stick);
+        }
+
+        private void AddRandomNoise()
+        {
+            Debug.WriteLine("[Action] AddRandomNoise");
+            LogSignalState("AddRNoise input", signalData);
+            signalData = generator.AddRNoise(signalData);
+            LogSignalState("AddRNoise output", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void AddNormalNoise()
+        {
+            Debug.WriteLine("[Action] AddNormalNoise");
+            LogSignalState("AddNormNoise input", signalData);
+            signalData = generator.AddNormNoise(signalData);
+            LogSignalState("AddNormNoise output", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void CalculateAkf()
+        {
+            Debug.WriteLine("[Action] CalculateAkf");
+            LogSignalState("AKF input", signalData);
+            processedSignalData = Correlation.Akf(signalData);
+            LogSignalState("AKF output", processedSignalData);
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+        }
+
+        private void CalculateAkfAcycle()
+        {
+            Debug.WriteLine("[Action] CalculateAkfAcycle");
+            LogSignalState("AKF acycle input", signalData);
+            processedSignalData = Correlation.Akf_acycle(signalData);
+            LogSignalState("AKF acycle output", processedSignalData);
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+        }
+
+        private void CalculateVkf()
+        {
+            Debug.WriteLine("[Action] CalculateVkf");
+            LogSignalState("VKF input", signalData);
+            processedSignalData = Correlation.VKF(signalData, denoiser.DeNoise(signalData));
+            LogSignalState("VKF output", processedSignalData);
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+        }
+        #endregion
+
+        #region Modulation actions
+        private void GenerateModulatedSignal(Generator.SignalType signalType, string context)
+        {
+            Debug.WriteLine($"[Action] GenerateModulatedSignal type={signalType}");
+            generator.signalType = signalType;
+            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
+            signalData = generator.GenerateSignal(SignalToCode);
+            LogSignalState(context, signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+        #endregion
+
+        #region Decode actions
+        private void ParseSignalByType()
+        {
+            Debug.WriteLine($"[Action] ParseSignalByType type={type}");
+            switch (type)
+            {
+                case 0:
+                    Debug.WriteLine("[Action] Parse AM is not implemented yet");
+                    break;
+                case 1:
+                    Debug.WriteLine("[Action] Parse FM is not implemented yet");
+                    break;
+                case 2:
+                    MyComplexSignal decoded = MyComplexSignal.ParseFromSignal(signalData, generator.carrierFrequency, generator.samplingFrequency, generator.codeIntervalLength);
+                    DataGrid_Replace(MyComplexSignal.ToString(decoded), dataGridView2);
+                    Debug.WriteLine("[Action] Parse PhM completed");
+                    break;
+            }
+        }
+        #endregion
+
+        #endregion
+
         #endregion
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -250,70 +435,38 @@ namespace Lab_3
 
         private void showPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            propertyGrid1.SelectedObject = generator;
+            ShowGeneratorProperties();
         }
 
         private void genSinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("[UI] genSinToolStripMenuItem_Click");
-            signalData = generator.GenSin();
-            LogSignalState("GenSin", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1,signalData,MyGraphics.GraphType.line);
+            GenerateSinSignal();
         }
 
 
         private void loadSignalFromFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("[UI] loadSignalFromFileToolStripMenuItem_Click");
-            var ofd = new OpenFileDialog();
-            ofd.Filter = "Text files|*.txt";
-            if (ofd.ShowDialog() != DialogResult.OK)
-            {
-                Debug.WriteLine("[UI] load signal canceled by user");
-                return;
-            }
-            Debug.WriteLine($"[UI] signal file selected: {ofd.FileName}");
-            var data = File_IO_Methods.LoadDataFromTxtFile(ofd.FileName);
-            if (data == null)
-            {
-                Debug.WriteLine("[UI] Loaded signal is NULL");
-                return;
-            }
-            signalData = data.ToArray();
-            LogSignalState("LoadSignalFromFile", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1,signalData,MyGraphics.GraphType.line);
-
+            LoadSignalFromFile();
         }
 
         private void showToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            propertyGrid1.SelectedObject = histogram;
+            ShowHistogramProperties();
         }
 
         private void calcToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogSignalState("CalcHistogram input", signalData);
-            histogramData = histogram.CalcHistogram(signalData);
-            LogHistogramState("CalcHistogram output", histogramData);
-            MyGraphics.DrawGraph(zedGraphControl2,histogramData, MyGraphics.GraphType.stick);
+            CalculateHistogram();
         }
 
         private void randomToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("[UI] randomToolStripMenuItem_Click");
-            signalData = generator.GenRandomSignal();
-            LogSignalState("GenRandomSignal", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
-
+            GenerateRandomSignal();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("[UI] toolStripMenuItem1_Click (normal signal)");
-            signalData = generator.GenNormalSignal();
-            LogSignalState("GenNormalSignal", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
-
+            GenerateNormalSignal();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -322,7 +475,7 @@ namespace Lab_3
             {
                 checkBox2.Checked = false;
                 checkBox3.Checked = false;
-                propertyGrid1.SelectedObject = generator;
+                ShowGeneratorProperties();
             }
         }
 
@@ -332,7 +485,7 @@ namespace Lab_3
             {
                 checkBox1.Checked = false;
                 checkBox3.Checked = false;
-                propertyGrid1.SelectedObject = histogram;
+                ShowHistogramProperties();
             }
         }
 
@@ -342,17 +495,14 @@ namespace Lab_3
             {
                 checkBox1.Checked = false;
                 checkBox2.Checked = false;
-                propertyGrid1.SelectedObject = denoiser;
+                ShowDenoiserProperties();
                 Debug.WriteLine("cB3 switched");
             }
         }
 
         private void sVDDenoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogSignalState("SVDDeNoise input", signalData);
-            processedSignalData = denoiser.DeNoise(signalData);
-            LogSignalState("SVDDeNoise output", processedSignalData);
-            MyGraphics.DrawGraph(zedGraphControl3,processedSignalData, MyGraphics.GraphType.line);
+            ApplySvdDenoise();
         }
 
        
@@ -363,97 +513,54 @@ namespace Lab_3
 
         private void fFTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogSignalState("FFT input", signalData);
-            Debug.WriteLine("[FFT] Process started");
-            var signal = FourierTransform.Double2Complex(signalData);
-            Debug.WriteLine($"[FFT] Signal parsed. length={signal.Length}");
-            var sp = FourierTransform.FT(signal, -1);
-            Debug.WriteLine($"[FFT] Fourier transformed. length={sp.Length}");
-            var dataToShow = FourierTransform.AmplSpectrum(sp);
-            LogSignalState("FFT amplitude spectrum", dataToShow);
-            MyGraphics.DrawGraph(zedGraphControl2, dataToShow, MyGraphics.GraphType.stick);
-            Debug.WriteLine("[FFT] Spectrum shown");
-
+            ShowFftSpectrum();
         }
 
         private void randomNoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogSignalState("AddRNoise input", signalData);
-            signalData = generator.AddRNoise(signalData);
-            LogSignalState("AddRNoise output", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+            AddRandomNoise();
         }
 
         private void normalNoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogSignalState("AddNormNoise input", signalData);
-            signalData = generator.AddNormNoise(signalData);
-            LogSignalState("AddNormNoise output", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+            AddNormalNoise();
         }
 
         private void aKFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogSignalState("AKF input", signalData);
-            processedSignalData=Correlation.Akf(signalData);
-            LogSignalState("AKF output", processedSignalData);
-            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+            CalculateAkf();
         }
 
         private void aKFAcycleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogSignalState("AKF acycle input", signalData);
-            processedSignalData = Correlation.Akf_acycle(signalData);
-            LogSignalState("AKF acycle output", processedSignalData);
-            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+            CalculateAkfAcycle();
         }
 
         private void vKFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogSignalState("VKF input", signalData);
-            processedSignalData = Correlation.VKF(signalData,denoiser.DeNoise(signalData));
-            LogSignalState("VKF output", processedSignalData);
-            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+            CalculateVkf();
         }
 
         #region Signal generation mode actions
 
         private void sinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            generator.signalType=Generator.SignalType.sinus;
-            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
-            signalData = generator.GenerateSignal(SignalToCode);
-            LogSignalState("Generate sinus", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
-
+            GenerateModulatedSignal(Generator.SignalType.sinus, "Generate sinus");
         }
 
         private void amToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            generator.signalType = Generator.SignalType.AM;
-            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
-            signalData = generator.GenerateSignal(SignalToCode);
-            LogSignalState("Generate AM", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+            GenerateModulatedSignal(Generator.SignalType.AM, "Generate AM");
         }
 
         private void phMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            generator.signalType = Generator.SignalType.FM;
-            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
-            signalData = generator.GenerateSignal(SignalToCode);
-            LogSignalState("Generate FM", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
-
+            GenerateModulatedSignal(Generator.SignalType.FM, "Generate FM");
         }
 
         private void phmToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            generator.signalType = Generator.SignalType.PhM;
-            Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
-            signalData = generator.GenerateSignal(SignalToCode);
-            LogSignalState("Generate PhM", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+            GenerateModulatedSignal(Generator.SignalType.PhM, "Generate PhM");
         }
         #endregion
 
@@ -495,27 +602,15 @@ namespace Lab_3
             {
                 case 0:
                     type = 0;
-                    generator.signalType = Generator.SignalType.AM;
-                    Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
-                    signalData = generator.GenerateSignal(SignalToCode);
-                    LogSignalState("Generate AM", signalData);
-                    MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+                    GenerateModulatedSignal(Generator.SignalType.AM, "Generate AM");
                     break;
                     case 1:
                     type = 1;
-                    generator.signalType = Generator.SignalType.FM;
-                    Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
-                    signalData = generator.GenerateSignal(SignalToCode);
-                    LogSignalState("Generate FM", signalData);
-                    MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+                    GenerateModulatedSignal(Generator.SignalType.FM, "Generate FM");
                     break;
                     case 2:
                     type = 2;
-                    generator.signalType = Generator.SignalType.PhM;
-                    Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
-                    signalData = generator.GenerateSignal(SignalToCode);
-                    LogSignalState("Generate PhM", signalData);
-                    MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+                    GenerateModulatedSignal(Generator.SignalType.PhM, "Generate PhM");
 
                     break;
 
@@ -526,19 +621,7 @@ namespace Lab_3
 
         private void bParse_Click(object sender, EventArgs e)
         {
-            switch (type) 
-            {
-                case 0:
-                    //  Parse  Am
-                    break;
-                case 1:
-                    // Parse Fm
-                    break;
-                case 2:
-                    MyComplexSignal decoded = MyComplexSignal.ParseFromSignal(signalData, generator.carrierFrequency, generator.samplingFrequency, generator.codeIntervalLength);
-                    DataGrid_Replace(MyComplexSignal.ToString(decoded), dataGridView2);
-                    break;
-            }
+            ParseSignalByType();
         }
     }
 }
