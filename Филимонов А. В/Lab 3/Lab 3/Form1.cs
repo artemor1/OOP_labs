@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AForge;
+using nsMycomplex;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using ZedGraph;
-using AForge;
-using nsMycomplex;
 namespace Lab_3
 {
     public partial class Form1 : Form
@@ -176,6 +177,55 @@ namespace Lab_3
             }
 
         }
+        #endregion
+
+        #region Data grid
+
+        #region Add Data
+        void DataGrid_Add<T>(IEnumerable<T> data, DataGridView grid)
+        {
+            if (data == null) return;
+            int startRow = grid.RowCount;
+
+            int i = 0;
+            foreach (var value in data)
+            {
+                grid.Rows.Add();
+                grid.Rows[grid.RowCount - 1].Cells[0].Value = value;
+                i++;
+            }
+        }
+
+        void DataGrid_Add<T>(T data, DataGridView grid)
+        {
+            if (data == null) return;
+            grid.Rows[grid.RowCount].Cells[0].Value = data;
+        }
+
+        #endregion
+
+        #region Replace Data
+
+        void DataGrid_Replace<T>(IEnumerable<T> data, DataGridView grid)
+        {
+            if (data == null) return;
+            int i = 0;
+            foreach (var value in data)
+            {
+                grid.Rows[i].Cells[0].Value = value;
+                i++;
+            }
+        }
+
+        void DataGrid_Replace<T>(T data, DataGridView grid)
+        {   if (data==null) return;
+            grid.Rows[0].Cells[0].Value = data;
+        }
+
+        #endregion
+
+
+
         #endregion
 
         #endregion
@@ -433,6 +483,61 @@ namespace Lab_3
             catch (Exception ex)
             {
                 Debug.WriteLine($"[DataGrid] Parse error for '{raw}'. {ex}");
+            }
+        }
+
+
+
+        int type = 0;
+        private void chB_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            switch (e.Index)
+            {
+                case 0:
+                    type = 0;
+                    generator.signalType = Generator.SignalType.AM;
+                    Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
+                    signalData = generator.GenerateSignal(SignalToCode);
+                    LogSignalState("Generate AM", signalData);
+                    MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+                    break;
+                    case 1:
+                    type = 1;
+                    generator.signalType = Generator.SignalType.FM;
+                    Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
+                    signalData = generator.GenerateSignal(SignalToCode);
+                    LogSignalState("Generate FM", signalData);
+                    MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+                    break;
+                    case 2:
+                    type = 2;
+                    generator.signalType = Generator.SignalType.PhM;
+                    Debug.WriteLine($"[Generator] Type={generator.signalType}, codeCount={SignalToCode.data.Count}");
+                    signalData = generator.GenerateSignal(SignalToCode);
+                    LogSignalState("Generate PhM", signalData);
+                    MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void bParse_Click(object sender, EventArgs e)
+        {
+            switch (type) 
+            {
+                case 0:
+                    //  Parse  Am
+                    break;
+                case 1:
+                    // Parse Fm
+                    break;
+                case 2:
+                    MyComplexSignal decoded = MyComplexSignal.ParseFromSignal(signalData, generator.carrierFrequency, generator.samplingFrequency, generator.codeIntervalLength);
+                    DataGrid_Replace(MyComplexSignal.ToString(decoded), dataGridView2);
+                    break;
             }
         }
     }

@@ -506,7 +506,7 @@ namespace nsMycomplex
         #endregion
 
         #region Parse
-        public static MyComplexSignal ParseFromSignal (double[] signal, int freq, int sfreq,double T)
+        public static MyComplexSignal ParseFromSignal (double[] signal, double freq, double sfreq,double T)
             {
               var res = new MyComplexSignal();
               int sampleLenght = (int)Math.Round(sfreq * T);
