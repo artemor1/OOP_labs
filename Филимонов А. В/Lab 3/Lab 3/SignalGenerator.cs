@@ -23,16 +23,16 @@ namespace Lab_3
         public double coeffModulation { get; set; } = 0.5;
 
         [Category("Параметры сигнала"), DisplayName("Частота дискретизации сигнала"), Description("")]
-        public double samplingFrequency { get; set; } = 1024;
+        public double samplingFrequency { get; set; } = 1000;
 
         [Category("Параметры сигнала"), DisplayName("Частота несущей"), Description("")]
-        public double carrierFrequency { get; set; } = 50;
+        public double carrierFrequency { get; set; } = 100;
 
-        [Category("Параметры сигнала"), DisplayName("Длина кодового интервала (в отсчетах)"), Description("")]
-        public int codeIntervalLength { get; set; } = 128;
+        [Category("Параметры сигнала"), DisplayName("Длина кодового интервала (в секундах)"), Description("")]
+        public double codeIntervalLength { get; set; } = 0.1;
 
         [Category("Параметры сигнала"), DisplayName("Исходный код"), Description("Значения, которые сигнал переносит по интервалам")]
-        public List<double> sourceCode { get; set; } = new List<double> { 1, -1, 1, -1 };
+        public MyComplexSignal sourceCode { get; set; } = new MyComplexSignal();
 
         public SignalType signalType { get; set; } = SignalType.sinus;
         #endregion
@@ -45,8 +45,8 @@ namespace Lab_3
                 case SignalType.sinus: return GenSin();
                 case SignalType.random: return GenRandomSignal();
                 case SignalType.normal: return GenNormalSignal();
-                case SignalType.AM: return GenAM();
-                case SignalType.FM: return GenFM();
+                //case SignalType.AM: return GenAM();
+                //case SignalType.FM: return GenFM();
                 case SignalType.PhM: return GenPhM(signal);
                 default: return null;
             }
@@ -54,8 +54,8 @@ namespace Lab_3
 
         private int GetSamplesCount()
         {
-            var intervals = Math.Max(1, sourceCode?.Count ?? 0);
-            return Math.Max(1, codeIntervalLength) * intervals;
+            var intervals = Math.Max(1, sourceCode?.data.Count ?? 0);
+            return Math.Max(1, (int)(codeIntervalLength) * intervals);
         }
 
         public double[] GenSin()
@@ -129,68 +129,79 @@ namespace Lab_3
             return signal;
         }
 
-        public double[] GenAM()
-        {
-            int samplesCount = GetSamplesCount();
-            double[] arr = new double[samplesCount];
-            double dt = 1.0 / Math.Max(samplingFrequency, double.Epsilon);
+        //public double[] GenAM()
+        //{
+        //    int samplesCount = GetSamplesCount();
+        //    double[] arr = new double[samplesCount];
+        //    double dt = 1.0 / Math.Max(samplingFrequency, double.Epsilon);
 
-            for (int i = 0; i < samplesCount; i++)
-            {
-                int codeIndex = Math.Min((sourceCode?.Count ?? 1) - 1, i / Math.Max(1, codeIntervalLength));
-                double symbol = (sourceCode != null && sourceCode.Count > 0) ? sourceCode[Math.Max(0, codeIndex)] : 1.0;
-                double t = i * dt;
-                double envelope = 1.0 + coeffModulation * symbol;
-                arr[i] = ampl * envelope * Math.Cos(2 * Math.PI * carrierFrequency * t);
-            }
+        //    for (int i = 0; i < samplesCount; i++)
+        //    {
+        //        int codeIndex = (int)Math.Min((sourceCode?.data.Count ?? 1) - 1, i / Math.Max(1, codeIntervalLength));
+        //        double symbol = (sourceCode != null && sourceCode.data.Count > 0) ? sourceCode.data[Math.Max(0, codeIndex)] : 1.0;
+        //        double t = i * dt;
+        //        double envelope = 1.0 + coeffModulation * symbol;
+        //        arr[i] = ampl * envelope * Math.Cos(2 * Math.PI * carrierFrequency * t);
+        //    }
 
-            return arr;
-        }
+        //    return arr;
+        //}
 
-        public double[] GenFM()
-        {
-            int samplesCount = GetSamplesCount();
-            double[] arr = new double[samplesCount];
-            double dt = 1.0 / Math.Max(samplingFrequency, double.Epsilon);
-            double phase = 0;
+        //public double[] GenFM()
+        //{
+        //    int samplesCount = GetSamplesCount();
+        //    double[] arr = new double[samplesCount];
+        //    double dt = 1.0 / Math.Max(samplingFrequency, double.Epsilon);
+        //    double phase = 0;
 
-            for (int i = 0; i < samplesCount; i++)
-            {
-                int codeIndex = Math.Min((sourceCode?.Count ?? 1) - 1, i / Math.Max(1, codeIntervalLength));
-                double symbol = (sourceCode != null && sourceCode.Count > 0) ? sourceCode[Math.Max(0, codeIndex)] : 0.0;
-                double instFreq = Math.Max(0, carrierFrequency + symbol);
-                phase += 2 * Math.PI * instFreq * dt;
-                arr[i] = ampl * Math.Cos(phase);
-            }
+        //    for (int i = 0; i < samplesCount; i++)
+        //    {
+        //        int codeIndex = (int)Math.Min((sourceCode?.Count ?? 1) - 1, i / Math.Max(1, codeIntervalLength));
+        //        double symbol = (sourceCode != null && sourceCode.Count > 0) ? sourceCode[Math.Max(0, codeIndex)] : 0.0;
+        //        double instFreq = Math.Max(0, carrierFrequency + symbol);
+        //        phase += 2 * Math.PI * instFreq * dt;
+        //        arr[i] = ampl * Math.Cos(phase);
+        //    }
 
-            return arr;
-        }
+        //    return arr;
+        //}
 
         public double[] GenPhM(MyComplexSignal signal)
         {
-            if ((sourceCode == null || sourceCode.Count == 0) && signal != null && signal.data != null)
+            if ((sourceCode == null || sourceCode.data.Count == 0) && signal != null && signal.data != null)
             {
-                sourceCode = new List<double>();
+                sourceCode = new MyComplexSignal();
                 for (int i = 0; i < signal.data.Count; i++)
                 {
-                    sourceCode.Add(signal.data[i].re);
+                    sourceCode.data.Add(signal.data[i]);
                 }
             }
 
             int samplesCount = GetSamplesCount();
-            double[] arr = new double[samplesCount];
-            double dt = 1.0 / Math.Max(samplingFrequency, double.Epsilon);
-
-            for (int i = 0; i < samplesCount; i++)
+           
+            double dt = 1.0 / samplingFrequency;
+            int TicksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
+            double[] arr = new double[sourceCode.data.Count * TicksPerInterval];
+            for (int i = 0; i < sourceCode.data.Count; i++)
             {
-                int codeIndex = Math.Min((sourceCode?.Count ?? 1) - 1, i / Math.Max(1, codeIntervalLength));
-                double symbol = (sourceCode != null && sourceCode.Count > 0) ? sourceCode[Math.Max(0, codeIndex)] : 1.0;
-                double phaseShift = symbol >= 0 ? 0 : Math.PI;
-                double t = i * dt;
-                arr[i] = ampl * Math.Cos(2 * Math.PI * carrierFrequency * t + phaseShift);
+                for (int j = 0; j < TicksPerInterval; j++)
+                {
+
+                    int t = i * TicksPerInterval + j;
+                    double argument = t * dt * 2 * Math.PI * carrierFrequency;
+                    double re = Math.Cos(argument) * signal.data[i].re;
+                    double im = Math.Sin(argument) * signal.data[i].im;
+                
+
+                   arr[t] = re + im;
+                    Debug.WriteLine($"[Generator.GenPhM] Signal[{t}={i}*{TicksPerInterval}+{j}] = {arr[t]} = re={re} + im = {im}");
+
+                }
+
+
             }
 
-            Debug.WriteLine($"[Generator.GenPhM] samples={samplesCount}, codeCount={sourceCode?.Count ?? 0}");
+            Debug.WriteLine($"[Generator.GenPhM] samples={samplesCount}, codeCount={sourceCode?.data.Count ?? 0}");
             return arr;
         }
         #endregion

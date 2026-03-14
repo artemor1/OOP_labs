@@ -509,27 +509,32 @@ namespace nsMycomplex
         public static MyComplexSignal ParseFromSignal (double[] signal, double freq, double sfreq,double T)
             {
               var res = new MyComplexSignal();
-              int sampleLenght = (int)Math.Round(sfreq * T);
-              int resLenght = signal.Length / sampleLenght;
+              double sampleLenght = Math.Round(sfreq * T);
+              double resLenght = Math.Round(signal.Length / sampleLenght);
               double Re = 0;
             double Im = 0;
-            Debug.WriteLine("Parse started\n");
+            Debug.WriteLine($"\n[Singal Parse] Phm Parse started with:\nsampleLenght = {sampleLenght}\nresLenght = {resLenght}\n");
             for (int i = 0; i < resLenght; i++)
 
             {
+                Re = 0;
+                Im = 0;
                 for (int j = 0; j < sampleLenght; j++)
                 {
-                    Re = 0;
-                    Im = 0;
-                    var chisl = freq * Math.PI * 2 * (i + j);
-                    Re += Math.Cos(chisl / sfreq) * signal[i + j];
-                    Im += Math.Sin(chisl / sfreq) * -1 * signal[i + j];
+               
+                    int t = (int)(i * sampleLenght + j);
+                    var chisl = freq * Math.PI * 2 * (t);
+                    Re += Math.Cos(chisl / sfreq) * signal[t];
+                    Im += Math.Sin(chisl / sfreq) * signal[t];
+
                 }
-                Debug.WriteLine($"Parsed {i} elements\n");
-                res.data.Add(new MyComplex(Re / (sampleLenght / 2), Im / (sampleLenght / 2)));
+                Re = Math.Round(Re / (sampleLenght / 2),3);
+                Im = Math.Round(Im / (sampleLenght / 2),3);
+                Debug.WriteLine($"[Signal Parse] Parsed {i+1} elements\nelement data:\nRe={Re}; Im={Im}\n");
+                res.data.Add(new MyComplex(Re,Im));
             }
 
-          
+
 
             return res;
             }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using ZedGraph;
@@ -15,7 +16,6 @@ namespace Lab_3
         public Form1()
         {
             InitializeComponent();
-            dataGridView1.Rows.Add("1+0i");
         }
 
         #region Variables
@@ -205,22 +205,23 @@ namespace Lab_3
         #endregion
 
         #region Replace Data
-
+      
         void DataGrid_Replace<T>(IEnumerable<T> data, DataGridView grid)
         {
+
+            Debug.WriteLine($"\n[GridAction] Start replace in {grid.Name} by {data.Count()} elements type:{data.GetType()}");
+
             if (data == null) return;
             int i = 0;
             foreach (var value in data)
-            {
+            {   
+                if (i > grid.Rows.Count - 1) grid.Rows.Add(data.Count() - i);
+
                 grid.Rows[i].Cells[0].Value = value;
                 i++;
             }
         }
 
-        void DataGrid_Replace<T>(T data, DataGridView grid)
-        {   if (data==null) return;
-            grid.Rows[0].Cells[0].Value = data;
-        }
 
         #endregion
 
@@ -403,8 +404,13 @@ namespace Lab_3
                     Debug.WriteLine("[Action] Parse FM is not implemented yet");
                     break;
                 case 2:
-                    MyComplexSignal decoded = MyComplexSignal.ParseFromSignal(signalData, generator.carrierFrequency, generator.samplingFrequency, generator.codeIntervalLength);
-                    DataGrid_Replace(MyComplexSignal.ToString(decoded), dataGridView2);
+                    var signalfreq = generator.carrierFrequency;
+                    var sreq = generator.samplingFrequency;
+                    var T = generator.codeIntervalLength;
+                    MyComplexSignal decoded = MyComplexSignal.ParseFromSignal(signalData,signalfreq,sreq,T);
+                    List<string> data = MyComplexSignal.ToString(decoded);
+                    DataGrid_Replace(data, dataGridView2);
+
                     Debug.WriteLine("[Action] Parse PhM completed");
                     break;
             }
@@ -563,9 +569,11 @@ namespace Lab_3
             GenerateModulatedSignal(Generator.SignalType.PhM, "Generate PhM");
         }
         #endregion
-
+        bool _internalChange = false;
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            if (_internalChange) return;
+
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
                 Debug.WriteLine("[DataGrid] Ignored change event with negative indexes");
@@ -584,7 +592,14 @@ namespace Lab_3
             try
             {
                 var parsed = MyComplex.Parse(raw);
-                SignalToCode.data.Add(parsed);
+                if (SignalToCode.data.Count > e.RowIndex)
+                {
+                    SignalToCode.data.Insert(e.RowIndex, parsed);
+                }
+                else SignalToCode.data.Add(parsed);
+                _internalChange = true;
+                DataGrid_Replace(SignalToCode.data, dataGridView1);
+                _internalChange = false;
                 Debug.WriteLine($"[DataGrid] Parsed and appended '{parsed}'. afterCount={SignalToCode.data.Count}");
             }
             catch (Exception ex)
