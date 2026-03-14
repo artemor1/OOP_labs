@@ -184,22 +184,20 @@ namespace Lab_3
         #region Add Data
         void DataGrid_Add<T>(IEnumerable<T> data, DataGridView grid)
         {
-            if (data == null) return;
-            int startRow = grid.RowCount;
+            if (data == null || grid == null) return;
 
-            int i = 0;
             foreach (var value in data)
             {
-                grid.Rows.Add();
-                grid.Rows[grid.RowCount - 1].Cells[0].Value = value;
-                i++;
+                DataGrid_Add(value, grid);
             }
         }
 
         void DataGrid_Add<T>(T data, DataGridView grid)
         {
-            if (data == null) return;
-            grid.Rows[grid.RowCount].Cells[0].Value = data;
+            if (data == null || grid == null) return;
+
+            var rowIndex = grid.Rows.Add();
+            grid.Rows[rowIndex].Cells[0].Value = data;
         }
 
         #endregion
@@ -208,17 +206,22 @@ namespace Lab_3
       
         void DataGrid_Replace<T>(IEnumerable<T> data, DataGridView grid)
         {
+            if (grid == null) return;
 
-            Debug.WriteLine($"\n[GridAction] Start replace in {grid.Name} by {data.Count()} elements type:{data.GetType()}");
+            if (data == null)
+            {
+                Debug.WriteLine($"\n[GridAction] Replace skipped for {grid.Name}: source is null");
+                grid.Rows.Clear();
+                return;
+            }
 
-            if (data == null) return;
-            int i = 0;
-            foreach (var value in data)
-            {   
-                if (i > grid.Rows.Count - 1) grid.Rows.Add(data.Count() - i);
+            var values = data.ToList();
+            Debug.WriteLine($"\n[GridAction] Start replace in {grid.Name} by {values.Count} elements type:{data.GetType()}");
 
-                grid.Rows[i].Cells[0].Value = value;
-                i++;
+            grid.Rows.Clear();
+            foreach (var value in values)
+            {
+                DataGrid_Add(value, grid);
             }
         }
 
@@ -594,13 +597,17 @@ namespace Lab_3
                 var parsed = MyComplex.Parse(raw);
                 if (SignalToCode.data.Count > e.RowIndex)
                 {
-                    SignalToCode.data.Insert(e.RowIndex, parsed);
+                    SignalToCode.data[e.RowIndex] = parsed;
                 }
-                else SignalToCode.data.Add(parsed);
+                else
+                {
+                    SignalToCode.data.Add(parsed);
+                }
+
                 _internalChange = true;
                 DataGrid_Replace(SignalToCode.data, dataGridView1);
                 _internalChange = false;
-                Debug.WriteLine($"[DataGrid] Parsed and appended '{parsed}'. afterCount={SignalToCode.data.Count}");
+                Debug.WriteLine($"[DataGrid] Parsed and stored '{parsed}'. afterCount={SignalToCode.data.Count}");
             }
             catch (Exception ex)
             {
