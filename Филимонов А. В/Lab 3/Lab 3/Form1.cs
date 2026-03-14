@@ -401,19 +401,25 @@ namespace Lab_3
             var signalfreq = generator.carrierFrequency;
             var sreq = generator.samplingFrequency;
             var T = generator.codeIntervalLength;
+            MyComplexSignal decoded = new MyComplexSignal();
+            List<string> data = new List<string>();
             Debug.WriteLine($"[Action] ParseSignalByType type={type}");
             switch (type)
             {
                 case 0:
-                    Debug.WriteLine("[Action] Parse AM is not implemented yet");
+                    decoded = MyComplexSignal.ParseFromAm(signal, sreq, T);
+                    data = MyComplexSignal.ToString(decoded);
+                    DataGrid_Replace(data, dataGridView2);
+
+                    Debug.WriteLine("[Action] Parse Am completed");
                     break;
                 case 1:
                     Debug.WriteLine("[Action] Parse FM is not implemented yet");
                     break;
                 case 2:
                  
-                    MyComplexSignal decoded = MyComplexSignal.ParseFromSignal(signal,signalfreq,sreq,T);
-                    List<string> data = MyComplexSignal.ToString(decoded);
+                    decoded = MyComplexSignal.ParseFromPhm(signal,signalfreq,sreq,T);
+                    data = MyComplexSignal.ToString(decoded);
                     DataGrid_Replace(data, dataGridView2);
 
                     Debug.WriteLine("[Action] Parse PhM completed");

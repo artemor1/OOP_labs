@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Lab_3
 {
@@ -31,8 +32,7 @@ namespace Lab_3
         [Category("Параметры сигнала"), DisplayName("Длина кодового интервала (в секундах)"), Description("")]
         public double codeIntervalLength { get; set; } = 0.1;
 
-        [Category("Параметры сигнала"), DisplayName("Исходный код"), Description("Значения, которые сигнал переносит по интервалам")]
-        public MyComplexSignal sourceCode { get; set; } = new MyComplexSignal();
+
 
         public SignalType signalType { get; set; } = SignalType.sinus;
         #endregion
@@ -45,21 +45,26 @@ namespace Lab_3
                 case SignalType.sinus: return GenSin();
                 case SignalType.random: return GenRandomSignal();
                 case SignalType.normal: return GenNormalSignal();
-                //case SignalType.AM: return GenAM();
+                case SignalType.AM: return GenAM(signal);
                 //case SignalType.FM: return GenFM();
                 case SignalType.PhM: return GenPhM(signal);
                 default: return null;
             }
         }
 
-        private int GetSamplesCount()
+        private int GetSamplesCount(MyComplexSignal signal)
         {
-            return (int)(samplingFrequency * codeIntervalLength*(Math.Max(1,sourceCode.data.Count)));
+            return (int)(samplingFrequency * codeIntervalLength*(Math.Max(1,signal.data.Count)));
         }
 
-        public double[] GenSin()
+        private int GetSamplesCount(int periods=1)
         {
-            int samplesCount = GetSamplesCount();
+            return (int)(samplingFrequency * codeIntervalLength*periods);
+        }
+
+        public double[] GenSin(int periods=1)
+        {
+            int samplesCount = GetSamplesCount(periods);
             double[] arr = new double[samplesCount];
             double dt = 1.0 / Math.Max(samplingFrequency, double.Epsilon);
 
@@ -72,9 +77,9 @@ namespace Lab_3
             return arr;
         }
 
-        public double[] GenRandomSignal()
+        public double[] GenRandomSignal(int periods =1)
         {
-            int samplesCount = GetSamplesCount();
+            int samplesCount = GetSamplesCount(periods);
             double[] arr = new double[samplesCount];
             for (int i = 0; i < samplesCount; i++)
             {
@@ -92,9 +97,9 @@ namespace Lab_3
             return Math.Cos(alpha) * coeff + mo;
         }
 
-        public double[] GenNormalSignal()
+        public double[] GenNormalSignal(int periods = 1)
         {
-            int samplesCount = GetSamplesCount();
+            int samplesCount = GetSamplesCount(periods);
             double[] arr = new double[samplesCount];
             for (int i = 0; i < samplesCount; i++)
             {
@@ -128,23 +133,33 @@ namespace Lab_3
             return signal;
         }
 
-        //public double[] GenAM()
-        //{
-        //    int samplesCount = GetSamplesCount();
-        //    double[] arr = new double[samplesCount];
-        //    double dt = 1.0 / Math.Max(samplingFrequency, double.Epsilon);
+        public double[] GenAM(MyComplexSignal signal)
+        {
+           
+            int samplesCount = GetSamplesCount(signal);
+            double[] arr = new double[samplesCount];
+            int TicksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
+            var carrier = GenSin();
+            for (int i = 0; i < signal.data.Count; i++)
+            {
+               
+                for (int j = 0; j < TicksPerInterval; j++)
+                {
 
-        //    for (int i = 0; i < samplesCount; i++)
-        //    {
-        //        int codeIndex = (int)Math.Min((sourceCode?.data.Count ?? 1) - 1, i / Math.Max(1, codeIntervalLength));
-        //        double symbol = (sourceCode != null && sourceCode.data.Count > 0) ? sourceCode.data[Math.Max(0, codeIndex)] : 1.0;
-        //        double t = i * dt;
-        //        double envelope = 1.0 + coeffModulation * symbol;
-        //        arr[i] = ampl * envelope * Math.Cos(2 * Math.PI * carrierFrequency * t);
-        //    }
+                    int t = i * TicksPerInterval + j;
 
-        //    return arr;
-        //}
+
+
+
+                    arr[t] = carrier[t%TicksPerInterval] * signal.data[i].X;
+                    Debug.WriteLine($"[Generator.GenAm] Signal[{t}={i}*{TicksPerInterval}+{j}] = {arr[t]}");
+
+                }
+
+            }
+            Debug.WriteLine($"[Generator.GenAm] samples={samplesCount}, codeCount={signal?.data.Count ?? 0}\n");
+            return arr;
+        }
 
         //public double[] GenFM()
         //{
@@ -167,21 +182,14 @@ namespace Lab_3
 
         public double[] GenPhM(MyComplexSignal signal)
         {
-            if ((sourceCode == null || sourceCode.data.Count == 0) && signal != null && signal.data != null)
-            {
-                sourceCode = new MyComplexSignal();
-                for (int i = 0; i < signal.data.Count; i++)
-                {
-                    sourceCode.data.Add(signal.data[i]);
-                }
-            }
+            
 
-            int samplesCount = GetSamplesCount();
+            int samplesCount = GetSamplesCount(signal);
            
             double dt = 1.0 / samplingFrequency;
             int TicksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
-            double[] arr = new double[sourceCode.data.Count * TicksPerInterval];
-            for (int i = 0; i < sourceCode.data.Count; i++)
+            double[] arr = new double[signal.data.Count * TicksPerInterval];
+            for (int i = 0; i < signal.data.Count; i++)
             {
                 for (int j = 0; j < TicksPerInterval; j++)
                 {
@@ -200,7 +208,7 @@ namespace Lab_3
 
             }
 
-            Debug.WriteLine($"[Generator.GenPhM] samples={samplesCount}, codeCount={sourceCode?.data.Count ?? 0}");
+            Debug.WriteLine($"[Generator.GenPhM] samples={samplesCount}, codeCount={signal?.data.Count ?? 0}");
             return arr;
         }
         #endregion
