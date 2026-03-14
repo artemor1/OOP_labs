@@ -396,7 +396,11 @@ namespace Lab_3
 
         #region Decode actions
         private void ParseSignalByType()
-        {
+        {   
+            var signal = ChProcessed.Checked ? processedSignalData : signalData;
+            var signalfreq = generator.carrierFrequency;
+            var sreq = generator.samplingFrequency;
+            var T = generator.codeIntervalLength;
             Debug.WriteLine($"[Action] ParseSignalByType type={type}");
             switch (type)
             {
@@ -407,10 +411,8 @@ namespace Lab_3
                     Debug.WriteLine("[Action] Parse FM is not implemented yet");
                     break;
                 case 2:
-                    var signalfreq = generator.carrierFrequency;
-                    var sreq = generator.samplingFrequency;
-                    var T = generator.codeIntervalLength;
-                    MyComplexSignal decoded = MyComplexSignal.ParseFromSignal(signalData,signalfreq,sreq,T);
+                 
+                    MyComplexSignal decoded = MyComplexSignal.ParseFromSignal(signal,signalfreq,sreq,T);
                     List<string> data = MyComplexSignal.ToString(decoded);
                     DataGrid_Replace(data, dataGridView2);
 
@@ -618,7 +620,7 @@ namespace Lab_3
 
 
         int type = 0;
-        private void chB_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void chBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             switch (e.Index)
             {
@@ -645,5 +647,7 @@ namespace Lab_3
         {
             ParseSignalByType();
         }
+
+      
     }
 }

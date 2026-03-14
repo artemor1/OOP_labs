@@ -54,8 +54,7 @@ namespace Lab_3
 
         private int GetSamplesCount()
         {
-            var intervals = Math.Max(1, sourceCode?.data.Count ?? 0);
-            return Math.Max(1, (int)(codeIntervalLength) * intervals);
+            return (int)(samplingFrequency * codeIntervalLength*(Math.Max(1,sourceCode.data.Count)));
         }
 
         public double[] GenSin()

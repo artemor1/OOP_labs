@@ -66,8 +66,16 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.ChProcessed = new System.Windows.Forms.CheckBox();
+            this.chBox = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.bParse = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
@@ -80,25 +88,24 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.chBox = new System.Windows.Forms.CheckedListBox();
-            this.bParse = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.panel4.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -218,28 +225,28 @@
             // sinToolStripMenuItem
             // 
             this.sinToolStripMenuItem.Name = "sinToolStripMenuItem";
-            this.sinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sinToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
             this.sinToolStripMenuItem.Text = "Sin";
             this.sinToolStripMenuItem.Click += new System.EventHandler(this.sinToolStripMenuItem_Click);
             // 
             // amToolStripMenuItem
             // 
             this.amToolStripMenuItem.Name = "amToolStripMenuItem";
-            this.amToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.amToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
             this.amToolStripMenuItem.Text = "Am";
             this.amToolStripMenuItem.Click += new System.EventHandler(this.amToolStripMenuItem_Click);
             // 
             // phMToolStripMenuItem
             // 
             this.phMToolStripMenuItem.Name = "phMToolStripMenuItem";
-            this.phMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.phMToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
             this.phMToolStripMenuItem.Text = "Fm";
             this.phMToolStripMenuItem.Click += new System.EventHandler(this.phMToolStripMenuItem_Click);
             // 
             // phmToolStripMenuItem1
             // 
             this.phmToolStripMenuItem1.Name = "phmToolStripMenuItem1";
-            this.phmToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.phmToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
             this.phmToolStripMenuItem1.Text = "Phm";
             this.phmToolStripMenuItem1.Click += new System.EventHandler(this.phmToolStripMenuItem1_Click);
             // 
@@ -431,16 +438,29 @@
             // 
             this.panel1.AutoSize = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.Controls.Add(this.bParse);
-            this.panel1.Controls.Add(this.chBox);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.dataGridView2);
-            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.tableLayoutPanel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(234, 179);
             this.panel1.TabIndex = 6;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.3289F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33889F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33222F));
+            this.tableLayoutPanel3.Controls.Add(this.dataGridView1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.dataGridView2, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.panel4, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(234, 179);
+            this.tableLayoutPanel3.TabIndex = 5;
             // 
             // dataGridView1
             // 
@@ -449,11 +469,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(80, 179);
+            this.dataGridView1.Size = new System.Drawing.Size(71, 173);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             // 
@@ -462,6 +482,82 @@
             this.Column1.HeaderText = "Data";
             this.Column1.Name = "Column1";
             this.Column1.Width = 55;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1});
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Location = new System.Drawing.Point(158, 3);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.Size = new System.Drawing.Size(73, 173);
+            this.dataGridView2.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Decoded Data";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 102;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.ChProcessed);
+            this.panel4.Controls.Add(this.chBox);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.bParse);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(80, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(72, 173);
+            this.panel4.TabIndex = 2;
+            // 
+            // ChProcessed
+            // 
+            this.ChProcessed.AutoSize = true;
+            this.ChProcessed.Location = new System.Drawing.Point(3, 107);
+            this.ChProcessed.Name = "ChProcessed";
+            this.ChProcessed.Size = new System.Drawing.Size(76, 17);
+            this.ChProcessed.TabIndex = 6;
+            this.ChProcessed.Text = "Processed";
+            this.ChProcessed.UseVisualStyleBackColor = true;
+            // 
+            // chBox
+            // 
+            this.chBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.chBox.FormattingEnabled = true;
+            this.chBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.chBox.Items.AddRange(new object[] {
+            "Am",
+            "Fm",
+            "Phm"});
+            this.chBox.Location = new System.Drawing.Point(6, 22);
+            this.chBox.Name = "chBox";
+            this.chBox.Size = new System.Drawing.Size(63, 49);
+            this.chBox.TabIndex = 5;
+            this.chBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chBox_ItemCheck);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Тип сигнала";
+            // 
+            // bParse
+            // 
+            this.bParse.Location = new System.Drawing.Point(3, 130);
+            this.bParse.Name = "bParse";
+            this.bParse.Size = new System.Drawing.Size(63, 23);
+            this.bParse.TabIndex = 4;
+            this.bParse.Text = "Parse";
+            this.bParse.UseVisualStyleBackColor = true;
+            this.bParse.Click += new System.EventHandler(this.bParse_Click);
             // 
             // tabControl2
             // 
@@ -603,60 +699,6 @@
             this.propertyGrid1.Size = new System.Drawing.Size(228, 187);
             this.propertyGrid1.TabIndex = 9;
             // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1});
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.dataGridView2.Location = new System.Drawing.Point(154, 0);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(80, 179);
-            this.dataGridView2.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Decoded Data";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 102;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(82, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Тип сигнала";
-            // 
-            // chBox
-            // 
-            this.chBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.chBox.FormattingEnabled = true;
-            this.chBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.chBox.Items.AddRange(new object[] {
-            "Am",
-            "Fm",
-            "Phm"});
-            this.chBox.Location = new System.Drawing.Point(85, 52);
-            this.chBox.Name = "chBox";
-            this.chBox.Size = new System.Drawing.Size(63, 49);
-            this.chBox.TabIndex = 3;
-            this.chBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chB_ItemCheck);
-            // 
-            // bParse
-            // 
-            this.bParse.Location = new System.Drawing.Point(85, 133);
-            this.bParse.Name = "bParse";
-            this.bParse.Size = new System.Drawing.Size(63, 23);
-            this.bParse.TabIndex = 4;
-            this.bParse.Text = "Parse";
-            this.bParse.UseVisualStyleBackColor = true;
-            this.bParse.Click += new System.EventHandler(this.bParse_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -675,8 +717,11 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
@@ -684,7 +729,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -746,7 +791,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bParse;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.CheckedListBox chBox;
+        private System.Windows.Forms.CheckBox ChProcessed;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 
