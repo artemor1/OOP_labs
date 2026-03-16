@@ -3,8 +3,16 @@ using System.Diagnostics;
 
 namespace Lab_3
 {
+    /// <summary>
+    /// Содержит методы расчёта АКФ/ВКФ для анализа сходства сигналов по сдвигу.
+    /// </summary>
     internal class Correlation
     {
+        /// <summary>
+        /// Вычисляет ациклическую автокорреляционную функцию (АКФ).
+        /// </summary>
+        /// <param name="s">Исходный сигнал.</param>
+        /// <returns>Массив значений АКФ по сдвигам.</returns>
         public static double[] Akf_acycle(double[] s)
         {
             Debug.WriteLine($"[Correlation.Akf_acycle] inputLength={(s == null ? 0 : s.Length)}");
@@ -17,12 +25,18 @@ namespace Lab_3
                 for (int i = 0; i < N; i++)
                 {
                     if ((i + k) > N - 1) continue;
-                    sum += s[i] * s[(i + k)];
+                    sum += s[i] * s[i + k];
                 }
                 res[k] = sum * coeff;
             }
             return res;
         }
+
+        /// <summary>
+        /// Вычисляет циклическую автокорреляционную функцию (АКФ).
+        /// </summary>
+        /// <param name="s">Исходный сигнал.</param>
+        /// <returns>Массив значений АКФ по сдвигам.</returns>
         public static double[] Akf(double[] s)
         {
             Debug.WriteLine($"[Correlation.Akf] inputLength={(s == null ? 0 : s.Length)}");
@@ -34,15 +48,23 @@ namespace Lab_3
                 var sum = 0.0;
                 for (int i = 0; i < N; i++)
                 {
+                    // Для циклической АКФ индекс замыкается по модулю длины сигнала.
                     sum += s[i] * s[(i + k) % N];
                 }
                 res[k] = sum * coeff;
             }
             return res;
         }
+
+        /// <summary>
+        /// Вычисляет взаимнокорреляционную функцию (ВКФ) двух сигналов одинаковой длины.
+        /// </summary>
+        /// <typeparam name="T">Числовой тип элементов массива.</typeparam>
+        /// <param name="signal">Первый сигнал.</param>
+        /// <param name="h">Второй сигнал.</param>
+        /// <returns>Массив значений ВКФ по сдвигам.</returns>
         public static double[] VKF<T>(T[] signal, T[] h)
         {
-            #region Input validation and diagnostics
             if (signal == null || h == null)
             {
                 Debug.WriteLine("[Correlation.VKF] signal or h is NULL. Return empty array.");
@@ -55,7 +77,6 @@ namespace Lab_3
             {
                 Debug.WriteLine("[Correlation.VKF] WARNING: signal and h lengths differ. Potential index issues.");
             }
-            #endregion
 
             var res = new double[N];
             var coeff = 1.0 / N;
@@ -75,8 +96,8 @@ namespace Lab_3
                         Debug.WriteLine($"[Correlation.VKF] sample k={k}, i={i}, signal={signal[i]}, h={h[(i + k) % N]}");
                     }
 
-                    sum += Convert.ToDouble(signal[i]) *
-                           Convert.ToDouble(h[(i + k) % N]);
+                    // Циклический сдвиг второго сигнала реализован через индекс по модулю N.
+                    sum += Convert.ToDouble(signal[i]) * Convert.ToDouble(h[(i + k) % N]);
                 }
                 res[k] = sum * coeff;
             }
@@ -90,7 +111,5 @@ namespace Lab_3
             Debug.WriteLine($"[Correlation.VKF] Completed. outputLength={res.Length}. preview: {preview}");
             return res;
         }
-
-
     }
 }

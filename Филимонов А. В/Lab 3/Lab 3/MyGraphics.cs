@@ -3,13 +3,26 @@ using ZedGraph;
 
 namespace Lab_3
 {
+    /// <summary>
+    /// Вспомогательный класс для отрисовки сигналов, спектров и гистограмм в <see cref="ZedGraphControl"/>.
+    /// </summary>
     internal class MyGraphics
     {
+        /// <summary>
+        /// Тип представления графика: линия или столбцы.
+        /// </summary>
         public enum GraphType
         {
-            line, stick
+            line,
+            stick
         }
 
+        /// <summary>
+        /// Отрисовывает график по массиву вещественных отсчётов.
+        /// </summary>
+        /// <param name="zgc">Контрол для вывода графика.</param>
+        /// <param name="source">Исходные данные сигнала/спектра.</param>
+        /// <param name="type">Тип визуализации.</param>
         public static void DrawGraph(ZedGraphControl zgc, double[] source, GraphType type)
         {
             Debug.WriteLine($"[MyGraphics.DrawGraph<double>] Start. sourceLength={(source == null ? 0 : source.Length)}, type={type}");
@@ -38,6 +51,7 @@ namespace Lab_3
                     Debug.WriteLine($"[MyGraphics.DrawGraph<double>] sample point i={i}, y={source[i]:F6}");
                 }
             }
+
             switch (type)
             {
                 case GraphType.line:
@@ -47,11 +61,18 @@ namespace Lab_3
                     zgc.GraphPane.AddBar("Spectrum", ppl, System.Drawing.Color.Green);
                     break;
             }
+
             zgc.AxisChange();
             zgc.Invalidate();
             Debug.WriteLine($"[MyGraphics.DrawGraph<double>] Completed. points={ppl.Count}, type={type}");
         }
 
+        /// <summary>
+        /// Отрисовывает график по целочисленному массиву (например, гистограмме).
+        /// </summary>
+        /// <param name="zgc">Контрол для вывода графика.</param>
+        /// <param name="source">Исходные целочисленные данные.</param>
+        /// <param name="type">Тип визуализации.</param>
         public static void DrawGraph(ZedGraphControl zgc, int[] source, GraphType type)
         {
             Debug.WriteLine($"[MyGraphics.DrawGraph<int>] Start. sourceLength={(source == null ? 0 : source.Length)}, type={type}");
@@ -80,6 +101,7 @@ namespace Lab_3
                     Debug.WriteLine($"[MyGraphics.DrawGraph<int>] sample point i={i}, y={source[i]}");
                 }
             }
+
             switch (type)
             {
                 case GraphType.line:
@@ -89,10 +111,10 @@ namespace Lab_3
                     zgc.GraphPane.AddBar("Spectrum", ppl, System.Drawing.Color.Green);
                     break;
             }
+
             zgc.AxisChange();
             zgc.Invalidate();
             Debug.WriteLine($"[MyGraphics.DrawGraph<int>] Completed. points={ppl.Count}, type={type}");
         }
     }
-
 }

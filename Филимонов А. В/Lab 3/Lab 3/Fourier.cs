@@ -4,8 +4,17 @@ using System.Diagnostics;
 
 namespace Lab_3
 {
+    /// <summary>
+    /// Предоставляет операции дискретного преобразования Фурье и расчёта амплитудного спектра.
+    /// Используется для частотного анализа сигналов и сравнения с реализацией FFT из AForge.
+    /// </summary>
     public class FourierTransform
     {
+        /// <summary>
+        /// Преобразует вещественный сигнал в комплексную форму для последующего Фурье-анализа.
+        /// </summary>
+        /// <param name="data">Вещественные отсчёты сигнала.</param>
+        /// <returns>Комплексный массив с нулевой мнимой частью.</returns>
         public static Complex[] Double2Complex(double[] data)
         {
             Debug.WriteLine($"[FourierTransform.Double2Complex] Start. dataLength={(data == null ? 0 : data.Length)}");
@@ -28,12 +37,13 @@ namespace Lab_3
             Debug.WriteLine($"[FourierTransform.Double2Complex] Completed. outputLength={res.Length}");
             return res;
         }
+
         /// <summary>
-        /// Функция вычисления дискретного преобразования Фурье
+        /// Вычисляет дискретное преобразование Фурье (ДПФ) для комплексного сигнала.
         /// </summary>
-        /// <param name="data">Входные данные</param>
-        /// <param name="dir"> Направление преобразования. Прямое -1, обратное 1</param>
-        /// <returns></returns>
+        /// <param name="data">Входные комплексные отсчёты.</param>
+        /// <param name="dir">Направление преобразования: прямое <c>-1</c>, обратное <c>1</c>.</param>
+        /// <returns>Результат ДПФ в комплексной форме.</returns>
         public static Complex[] FT(Complex[] data, int dir = -1)
         {
             Debug.WriteLine($"[FourierTransform.FT] Start. dataLength={(data == null ? 0 : data.Length)}, dir={dir}");
@@ -56,16 +66,14 @@ namespace Lab_3
             }
 
             var res = new Complex[N];
-            Complex sum = Complex.Zero;
-            double cos = 0, sin = 0;
             double cf = 2 * Math.PI / N;
             for (int i = 0; i < N; i++)
             {
-                sum = Complex.Zero;
+                Complex sum = Complex.Zero;
                 for (int j = 0; j < N; j++)
                 {
-                    cos = Math.Cos(cf * i * j);
-                    sin = Math.Sin(cf * i * j);
+                    double cos = Math.Cos(cf * i * j);
+                    double sin = Math.Sin(cf * i * j);
                     sum.Re += (data[j].Re * cos) - dir * (data[j].Im * sin);
                     sum.Im += (data[j].Im * cos) + dir * (data[j].Re * sin);
 
@@ -74,7 +82,8 @@ namespace Lab_3
                         Debug.WriteLine($"[FourierTransform.FT] sample i={i}, j={j}, cos={cos:F6}, sin={sin:F6}, partial=({sum.Re:F6}; {sum.Im:F6})");
                     }
                 }
-                //В случае обратного преобразования делить на N
+
+                // Для обратного преобразования применяется нормировка 1/N.
                 if (dir > 0) sum /= N;
                 res[i] = sum;
 
@@ -86,11 +95,12 @@ namespace Lab_3
             Debug.WriteLine($"[FourierTransform.FT] Completed. outputLength={res.Length}");
             return res;
         }
+
         /// <summary>
-        /// Функция вычисления амплитудного спектра
+        /// Вычисляет амплитудный спектр комплексного сигнала.
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="data">Комплексные спектральные отсчёты.</param>
+        /// <returns>Модуль каждого комплексного отсчёта спектра.</returns>
         public static double[] AmplSpectrum(Complex[] data)
         {
             Debug.WriteLine($"[FourierTransform.AmplSpectrum] Start. dataLength={(data == null ? 0 : data.Length)}");
@@ -113,12 +123,16 @@ namespace Lab_3
             Debug.WriteLine($"[FourierTransform.AmplSpectrum] Completed. outputLength={res.Length}");
             return res;
         }
+
         /// <summary>
-        /// Реализация функции БПФурье из библиотеки AForge.
-        /// Результат обратного преобразования базовой функции из AForge соответствует реальному результату прямого преобразования
+        /// Запускает быстрое преобразование Фурье (FFT) из библиотеки AForge.
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="dir">Направление преобразования. Прямое -1, обратное 1</param>
+        /// <param name="data">Массив комплексных отсчётов, изменяется на месте.</param>
+        /// <param name="dir">Направление преобразования: прямое <c>-1</c>, обратное <c>1</c>.</param>
+        /// <remarks>
+        /// В данной работе соглашение по направлениям в AForge инвертировано относительно локального API,
+        /// поэтому прямое преобразование (<c>-1</c>) вызывает <see cref="AForge.Math.FourierTransform.Direction.Backward"/>.
+        /// </remarks>
         public static void FFT(Complex[] data, int dir = -1)
         {
             Debug.WriteLine($"[FourierTransform.FFT] Start. dataLength={(data == null ? 0 : data.Length)}, dir={dir}");
@@ -147,5 +161,4 @@ namespace Lab_3
             Debug.WriteLine($"[FourierTransform.FFT] Completed. outputLength={data.Length}");
         }
     }
-
 }

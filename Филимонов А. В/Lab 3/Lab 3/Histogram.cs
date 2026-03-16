@@ -3,6 +3,10 @@ using System.Diagnostics;
 
 namespace Lab_3
 {
+    /// <summary>
+    /// Строит гистограмму значений сигнала по фиксированному числу интервалов.
+    /// Используется для оценки распределения отсчётов и визуализации плотности значений.
+    /// </summary>
     public class Histogram
     {
         #region Fields
@@ -13,10 +17,17 @@ namespace Lab_3
         public double min { get; set; } = 0;
         public int[] histArr = new int[1];
         #endregion
+
         #region Constructors
         public Histogram() { }
         #endregion
+
         #region Methods
+        /// <summary>
+        /// Вычисляет гистограмму для входного массива отсчётов сигнала.
+        /// </summary>
+        /// <param name="data">Массив отсчётов сигнала.</param>
+        /// <returns>Массив частот попадания в каждый интервал гистограммы.</returns>
         public int[] CalcHistogram(double[] data)
         {
             Debug.WriteLine($"[Histogram.CalcHistogram] Start. dataLength={(data == null ? 0 : data.Length)}, intervars={intervars}");
@@ -56,10 +67,11 @@ namespace Lab_3
 
             step = (max - min) / intervars;
             var res = new int[intervars];
-            int idx = 0;
             double coeff = step != 0 ? 1 / step : 0;
             for (int i = 0; i < data.Length; i++)
             {
+                // Преобразуем значение в индекс интервала по нормированному смещению от минимума.
+                int idx = (int)((d - min) * coeff);
                 double d = data[i];
                 idx = (int)((d - min) * coeff);
                 if (idx >= intervars) idx = intervars - 1;
@@ -72,11 +84,11 @@ namespace Lab_3
                 }
             }
 
+            histArr = res;
             this.histArr = res;
             Debug.WriteLine($"[Histogram.CalcHistogram] Completed. outputLength={res.Length}, min={min:F6}, max={max:F6}, step={step:F6}");
             return res;
         }
         #endregion
     }
-
 }
