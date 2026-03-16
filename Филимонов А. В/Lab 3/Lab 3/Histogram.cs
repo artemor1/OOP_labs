@@ -1,5 +1,9 @@
 ﻿namespace Lab_3
 {
+    /// <summary>
+    /// Строит гистограмму значений сигнала по фиксированному числу интервалов.
+    /// Используется для оценки распределения отсчётов и визуализации плотности значений.
+    /// </summary>
     public class Histogram
     {
         #region Fields
@@ -10,10 +14,17 @@
         public double min { get; set; } = 0;
         public int[] histArr = new int[1];
         #endregion
+
         #region Constructors
         public Histogram() { }
         #endregion
+
         #region Methods
+        /// <summary>
+        /// Вычисляет гистограмму для входного массива отсчётов сигнала.
+        /// </summary>
+        /// <param name="data">Массив отсчётов сигнала.</param>
+        /// <returns>Массив частот попадания в каждый интервал гистограммы.</returns>
         public int[] CalcHistogram(double[] data)
         {
             min = double.MaxValue;
@@ -23,20 +34,21 @@
                 if (data[i] > max) max = data[i];
                 if (data[i] < min) min = data[i];
             }
+
             step = (max - min) / intervars;
             var res = new int[intervars];
-            int idx = 0;
             double coeff = step != 0 ? 1 / step : 0;
             foreach (double d in data)
             {
-                idx = (int)((d - min) * coeff);
+                // Преобразуем значение в индекс интервала по нормированному смещению от минимума.
+                int idx = (int)((d - min) * coeff);
                 if (idx >= intervars) idx = intervars - 1;
                 res[idx]++;
             }
-            this.histArr = res;
+
+            histArr = res;
             return res;
         }
         #endregion
     }
-
 }

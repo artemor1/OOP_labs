@@ -5,11 +5,23 @@ using System.Diagnostics;
 
 namespace Lab_3
 {
+    /// <summary>
+    /// Генератор сигналов и модуляций (AM/FM/PhM), а также шумовых воздействий.
+    /// Используется для формирования тестовых реализаций перед расчётом спектров и корреляций.
+    /// </summary>
     public class Generator
     {
+        /// <summary>
+        /// Доступные типы формируемых сигналов.
+        /// </summary>
         public enum SignalType
         {
-            sinus, random, normal, AM, FM, PhM
+            sinus,
+            random,
+            normal,
+            AM,
+            FM,
+            PhM
         }
 
         private readonly Random rnd = new Random();
@@ -30,12 +42,15 @@ namespace Lab_3
         [Category("Параметры сигнала"), DisplayName("Длина кодового интервала"), Description("в секундах")]
         public double codeIntervalLength { get; set; } = 0.1;
 
-
-
         public SignalType signalType { get; set; } = SignalType.sinus;
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Генерирует сигнал в соответствии с выбранным <see cref="signalType"/>.
+        /// </summary>
+        /// <param name="signal">Кодовая последовательность для режимов модуляции.</param>
+        /// <returns>Массив отсчётов сигнала.</returns>
         public double[] GenerateSignal(MyComplexSignal signal)
         {
             switch (signalType)
@@ -52,7 +67,7 @@ namespace Lab_3
 
         private int GetSamplesCount(MyComplexSignal signal)
         {
-            return (int)(samplingFrequency * codeIntervalLength * (Math.Max(1, signal.data.Count)));
+            return (int)(samplingFrequency * codeIntervalLength * Math.Max(1, signal.data.Count));
         }
 
         private int GetSamplesCount(int periods = 1)
@@ -60,6 +75,11 @@ namespace Lab_3
             return (int)(samplingFrequency * codeIntervalLength * periods);
         }
 
+        /// <summary>
+        /// Генерирует гармонический сигнал несущей частоты.
+        /// </summary>
+        /// <param name="periods">Количество кодовых интервалов (периодов) в сигнале.</param>
+        /// <returns>Массив отсчётов синусоидального сигнала.</returns>
         public double[] GenSin(int periods = 1)
         {
             int samplesCount = GetSamplesCount(periods);
@@ -75,6 +95,11 @@ namespace Lab_3
             return arr;
         }
 
+        /// <summary>
+        /// Генерирует равномерный случайный сигнал.
+        /// </summary>
+        /// <param name="periods">Количество кодовых интервалов (периодов) в сигнале.</param>
+        /// <returns>Массив случайных отсчётов.</returns>
         public double[] GenRandomSignal(int periods = 1)
         {
             int samplesCount = GetSamplesCount(periods);
@@ -95,6 +120,11 @@ namespace Lab_3
             return Math.Cos(alpha) * coeff + mo;
         }
 
+        /// <summary>
+        /// Генерирует нормально распределённый случайный сигнал.
+        /// </summary>
+        /// <param name="periods">Количество кодовых интервалов (периодов) в сигнале.</param>
+        /// <returns>Массив нормально распределённых отсчётов.</returns>
         public double[] GenNormalSignal(int periods = 1)
         {
             int samplesCount = GetSamplesCount(periods);
@@ -106,6 +136,11 @@ namespace Lab_3
             return arr;
         }
 
+        /// <summary>
+        /// Добавляет к сигналу равномерный шум заданного уровня.
+        /// </summary>
+        /// <param name="signal">Исходный сигнал.</param>
+        /// <returns>Тот же массив с добавленным шумом.</returns>
         public double[] AddRNoise(double[] signal)
         {
             var noise = GenRandomSignal();
@@ -121,6 +156,11 @@ namespace Lab_3
             return signal;
         }
 
+        /// <summary>
+        /// Добавляет к сигналу нормальный шум заданного уровня.
+        /// </summary>
+        /// <param name="signal">Исходный сигнал.</param>
+        /// <returns>Тот же массив с добавленным шумом.</returns>
         public double[] AddNormNoise(double[] signal)
         {
             var noise = GenNormalSignal();
@@ -131,76 +171,81 @@ namespace Lab_3
             return signal;
         }
 
+        /// <summary>
+        /// Генерирует амплитудно-модулированный (AM) сигнал по комплексной кодовой последовательности.
+        /// </summary>
+        /// <param name="signal">Комплексный код, где амплитуда символа задаёт масштаб несущей.</param>
+        /// <returns>Массив отсчётов AM-сигнала.</returns>
         public double[] GenAM(MyComplexSignal signal)
         {
-
             int samplesCount = GetSamplesCount(signal);
             double[] arr = new double[samplesCount];
-            int TicksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
+            int ticksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
             var carrier = GenSin();
             for (int i = 0; i < signal.data.Count; i++)
             {
-
-                for (int j = 0; j < TicksPerInterval; j++)
+                for (int j = 0; j < ticksPerInterval; j++)
                 {
-
-                    int t = i * TicksPerInterval + j;
-                    arr[t] = carrier[t % TicksPerInterval] * signal.data[i].X;
-                    Debug.WriteLine($"[Generator.GenAm] Signal[{t}={i}*{TicksPerInterval}+{j}] = {arr[t]}");
-
+                    int t = i * ticksPerInterval + j;
+                    // Несущая повторяется в каждом кодовом интервале, масштабируется текущим символом.
+                    arr[t] = carrier[t % ticksPerInterval] * signal.data[i].X;
+                    Debug.WriteLine($"[Generator.GenAm] Signal[{t}={i}*{ticksPerInterval}+{j}] = {arr[t]}");
                 }
-
             }
+
             Debug.WriteLine($"[Generator.GenAm] samples={samplesCount}, codeCount={signal?.data.Count ?? 0}\n");
             return arr;
         }
 
+        /// <summary>
+        /// Генерирует частотно-модулированный (FM) сигнал по комплексной кодовой последовательности.
+        /// </summary>
+        /// <param name="signal">Комплексный код, действительная часть символа задаёт множитель частоты.</param>
+        /// <returns>Массив отсчётов FM-сигнала.</returns>
         public double[] GenFM(MyComplexSignal signal)
         {
             int samplesCount = GetSamplesCount(signal);
             double basefreq = carrierFrequency;
-            double changefreq = 0;
             double dt = 1.0 / samplingFrequency;
-            int TicksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
+            int ticksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
             double[] arr = new double[samplesCount];
-            double[] carrier = new double[samplesCount];
             for (int i = 0; i < signal.data.Count; i++)
             {
-                changefreq = basefreq * signal.data[i].re;
-                for (int j = 0; j < TicksPerInterval; j++)
+                double changefreq = basefreq * signal.data[i].re;
+                for (int j = 0; j < ticksPerInterval; j++)
                 {
-                    int t = i * TicksPerInterval + j;
-
+                    int t = i * ticksPerInterval + j;
+                    // Для каждого кодового символа используется собственная мгновенная частота.
                     arr[t] = ampl * Math.Sin(2 * Math.PI * changefreq * dt * t);
                 }
             }
             return arr;
         }
 
+        /// <summary>
+        /// Генерирует фазоманипулированный (PhM) сигнал по комплексной кодовой последовательности.
+        /// </summary>
+        /// <param name="signal">Комплексный код, задающий фазовое состояние символа.</param>
+        /// <returns>Массив отсчётов PhM-сигнала.</returns>
         public double[] GenPhM(MyComplexSignal signal)
         {
             int samplesCount = GetSamplesCount(signal);
-
             double dt = 1.0 / samplingFrequency;
-            int TicksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
+            int ticksPerInterval = (int)Math.Round(samplingFrequency * codeIntervalLength);
             double[] arr = new double[samplesCount];
             for (int i = 0; i < signal.data.Count; i++)
             {
-                for (int j = 0; j < TicksPerInterval; j++)
+                for (int j = 0; j < ticksPerInterval; j++)
                 {
-
-                    int t = i * TicksPerInterval + j;
+                    int t = i * ticksPerInterval + j;
                     double argument = t * dt * 2 * Math.PI * carrierFrequency;
+                    // Проекция комплексного символа на cos/sin формирует фазоманипулированный отсчёт.
                     double re = Math.Cos(argument) * signal.data[i].re;
                     double im = Math.Sin(argument) * signal.data[i].im;
 
-
                     arr[t] = re + im;
-                    Debug.WriteLine($"[Generator.GenPhM] Signal[{t}={i}*{TicksPerInterval}+{j}] = {arr[t]} = re={re} + im = {im}");
-
+                    Debug.WriteLine($"[Generator.GenPhM] Signal[{t}={i}*{ticksPerInterval}+{j}] = {arr[t]} = re={re} + im = {im}");
                 }
-
-
             }
 
             Debug.WriteLine($"[Generator.GenPhM] samples={samplesCount}, codeCount={signal?.data.Count ?? 0}");
