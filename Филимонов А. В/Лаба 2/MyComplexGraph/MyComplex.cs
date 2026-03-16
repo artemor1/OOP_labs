@@ -1,13 +1,11 @@
-﻿using System;
+﻿using AForge.Math;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using AForge.Math;
 namespace nsMycomplex
 {
-    public class MyComplex 
+    public class MyComplex
     {
         #region Fields 
 
@@ -116,11 +114,12 @@ namespace nsMycomplex
         {
             return new MyComplex(a.X / b, a.Y / b);
         }
-        public static MyComplex operator /(MyComplex a, MyComplex b){
-        
+        public static MyComplex operator /(MyComplex a, MyComplex b)
+        {
+
             double denominator = b.re * b.re + b.im * b.im;
-            
-                
+
+
             double real = (a.re * a.re + a.im * a.im) / denominator;
             double imag = (a.im * b.re - a.re * b.im) / denominator;
 
@@ -164,7 +163,7 @@ namespace nsMycomplex
 
         //Метод для парсинга строки в комплексное число
         public static MyComplex Parse(string s)
-        {   
+        {
             // Удаляем пробелы из строки
             s = s.Replace(" ", "");
             s = s.Replace('.', ','); // Заменяем точку на запятую для корректного парсинга чисел с плавающей точкой
@@ -214,7 +213,7 @@ namespace nsMycomplex
                     $"string={s}\n" +
                     $"splitIndex={splitIndex}"
                     );
-                return new MyComplex(double.NaN,double.NaN); // Некорректный формат чисел
+                return new MyComplex(double.NaN, double.NaN); // Некорректный формат чисел
             }
 
         }
@@ -536,7 +535,7 @@ namespace nsMycomplex
             return res;
         }
 
-        public static MyComplexSignal ParseFromAm(double[] signal,double sfreq, double T)
+        public static MyComplexSignal ParseFromAm(double[] signal, double sfreq, double T)
         {
 
             var res = new MyComplexSignal();
@@ -550,13 +549,14 @@ namespace nsMycomplex
 
             {
                 Re = 0;
+                sum = 0;
                 for (int j = 0; j < sampleLenght; j++)
                 {
                     int t = (int)(i * sampleLenght + j);
-                    sum+=Math.Abs(signal[t]);
+                    sum += Math.Abs(signal[t]);
                 }
-                avg = sum / sampleLenght;
-                Re = Math.Round(avg*Math.PI, 3);
+                avg = sum / (sampleLenght);
+                Re = Math.Round(avg * Math.PI / 2, 3);
                 Debug.WriteLine($"[Signal Parse] Parsed {i + 1} elements\nelement data:\nRe={Re};\n");
                 res.data.Add(new MyComplex(Re, 0));
 

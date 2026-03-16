@@ -1,11 +1,5 @@
 ﻿using AForge.Math;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static AForge.Math.FourierTransform;
-using AForge.Math;
 
 namespace Lab_3
 {
@@ -13,11 +7,11 @@ namespace Lab_3
     {
         public static Complex[] Double2Complex(double[] data)
         {
-            Complex[] res=new Complex[data.Length];
+            Complex[] res = new Complex[data.Length];
             for (int i = 0; i < data.Length; i++)
             {
                 res[i].Im = 0;
-                res[i].Re=data[i];
+                res[i].Re = data[i];
             }
             return res;
         }

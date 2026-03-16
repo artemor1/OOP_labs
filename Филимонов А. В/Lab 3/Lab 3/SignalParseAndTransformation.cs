@@ -1,12 +1,6 @@
-﻿using MathNet.Numerics;
-using MathNet.Numerics.LinearAlgebra;
-using nsMycomplex;
+﻿using MathNet.Numerics.LinearAlgebra;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab_3
 {
@@ -16,7 +10,7 @@ namespace Lab_3
         /// <summary>
         /// Размер окна L Ганкелевой матрицы (Rows=N\L)
         /// </summary>
-      public  int window { get; set; } = 10;
+        public int window { get; set; } = 10;
         /// <summary>
         /// Максимальная разница между полезными коефицентами
         /// </summary>
@@ -27,34 +21,34 @@ namespace Lab_3
 
         #region Methods
 
-        public Denoiser() { }  
-       private Matrix<double> Hankel(double[] x)
-             {
-        Debug.WriteLine($"[Denoiser.Hankel] inputLength={x.Length}, window={window}");
-        if (window <= 0)
+        public Denoiser() { }
+        private Matrix<double> Hankel(double[] x)
         {
-            Debug.WriteLine("[Denoiser.Hankel] Invalid window <= 0");
-            throw new ArgumentException("window must be greater than 0");
+            Debug.WriteLine($"[Denoiser.Hankel] inputLength={x.Length}, window={window}");
+            if (window <= 0)
+            {
+                Debug.WriteLine("[Denoiser.Hankel] Invalid window <= 0");
+                throw new ArgumentException("window must be greater than 0");
+            }
+
+            int rows = x.Length / window;
+            int cols = x.Length - rows + 1;
+
+            Debug.WriteLine($"[Denoiser.Hankel] rows={rows}, cols={cols}");
+            if (rows <= 0 || cols <= 0)
+            {
+                Debug.WriteLine("[Denoiser.Hankel] Invalid matrix dimensions");
+                throw new ArgumentException("Invalid Hankel dimensions. Check window and signal length.");
+            }
+
+            var H = Matrix<double>.Build.Dense(rows, cols);
+
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    H[i, j] = x[i + j];
+
+            return H;
         }
-
-        int rows = x.Length / window;
-        int cols = x.Length - rows + 1;
-
-        Debug.WriteLine($"[Denoiser.Hankel] rows={rows}, cols={cols}");
-        if (rows <= 0 || cols <= 0)
-        {
-            Debug.WriteLine("[Denoiser.Hankel] Invalid matrix dimensions");
-            throw new ArgumentException("Invalid Hankel dimensions. Check window and signal length.");
-        }
-
-        var H = Matrix<double>.Build.Dense(rows, cols);
-
-        for (int i = 0; i < rows; i++)
-            for (int j = 0; j < cols; j++)
-                H[i, j] = x[i + j];
-
-        return H;
-          }
 
         private static double[] HankelToArray(Matrix<double> H)
         {
@@ -109,7 +103,7 @@ namespace Lab_3
 
                 do
                 {
-                  
+
                     var u = svd.U.Column(i).ToColumnMatrix();
                     var v = svd.VT.Row(i).ToColumnMatrix();
                     var s = svd.S;
@@ -119,9 +113,9 @@ namespace Lab_3
                     {
                         Debug.WriteLine($"[Denoiser.DeNoise] keep component i={i}. condition {svd.S[i]} > {svd.S[i - 1] * maxDropCoef}");
                     }
-                    
+
                     i++;
-                    
+
                 }
                 while (i < svd.S.Count && svd.S[i] > svd.S[i - 1] * maxDropCoef);
                 Debug.WriteLine($"[Denoiser.DeNoise] max kept index={i - 1}");

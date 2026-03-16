@@ -1,18 +1,14 @@
-﻿using AForge;
-using nsMycomplex;
+﻿using nsMycomplex;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Windows.Forms;
-using ZedGraph;
 namespace Lab_3
 {
     public partial class Form1 : Form
     {
-       
+
         public Form1()
         {
             InitializeComponent();
@@ -173,7 +169,7 @@ namespace Lab_3
                 if (d != null) data = d;
                 var s = DataToStirng(data);
                 Debug.WriteLine($"[LoadData] Loaded BIN values={data?.Count ?? 0}. data string length={s.Length}");
-               
+
             }
 
         }
@@ -203,7 +199,7 @@ namespace Lab_3
         #endregion
 
         #region Replace Data
-      
+
         void DataGrid_Replace<T>(IEnumerable<T> data, DataGridView grid)
         {
             if (grid == null) return;
@@ -396,7 +392,7 @@ namespace Lab_3
 
         #region Decode actions
         private void ParseSignalByType()
-        {   
+        {
             var signal = ChProcessed.Checked ? processedSignalData : signalData;
             var signalfreq = generator.carrierFrequency;
             var sreq = generator.samplingFrequency;
@@ -417,8 +413,8 @@ namespace Lab_3
                     Debug.WriteLine("[Action] Parse FM is not implemented yet");
                     break;
                 case 2:
-                 
-                    decoded = MyComplexSignal.ParseFromPhm(signal,signalfreq,sreq,T);
+
+                    decoded = MyComplexSignal.ParseFromPhm(signal, signalfreq, sreq, T);
                     data = MyComplexSignal.ToString(decoded);
                     DataGrid_Replace(data, dataGridView2);
 
@@ -434,20 +430,36 @@ namespace Lab_3
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+
             LoadData();
+            DataGrid_Replace(data, dataGridView1);
+
         }
 
-       
+
 
         private void totxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            data = new List<double>(signalData.Length);
+            foreach (var item in signalData)
+            {
+                data.Add(item);
+            }
             SaveData("txt");
+            data.Clear();
         }
 
 
         private void tobinToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            data = new List<double>(signalData.Length);
+            foreach (var item in signalData)
+            {
+                data.Add(item);
+            }
             SaveData("bin");
+            data.Clear();
         }
 
         private void showPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -488,7 +500,7 @@ namespace Lab_3
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked) 
+            if (checkBox1.Checked)
             {
                 checkBox2.Checked = false;
                 checkBox3.Checked = false;
@@ -522,11 +534,11 @@ namespace Lab_3
             ApplySvdDenoise();
         }
 
-       
+
 
         private void label1_Click(object sender, EventArgs e)
         {
-                    }
+        }
 
         private void fFTToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -634,11 +646,11 @@ namespace Lab_3
                     type = 0;
                     GenerateModulatedSignal(Generator.SignalType.AM, "Generate AM");
                     break;
-                    case 1:
+                case 1:
                     type = 1;
                     GenerateModulatedSignal(Generator.SignalType.FM, "Generate FM");
                     break;
-                    case 2:
+                case 2:
                     type = 2;
                     GenerateModulatedSignal(Generator.SignalType.PhM, "Generate PhM");
 
@@ -654,6 +666,6 @@ namespace Lab_3
             ParseSignalByType();
         }
 
-      
+
     }
 }
