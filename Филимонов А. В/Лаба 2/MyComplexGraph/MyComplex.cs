@@ -566,6 +566,13 @@ namespace nsMycomplex
             return res;
         }
 
+        //public static MyComplexSignal ParseFromFm(double[] signal,double sfreq,double T)
+        //{
+        //     var res = new MyComplexSignal();
+
+
+        //}
+
         #endregion
     }
 }

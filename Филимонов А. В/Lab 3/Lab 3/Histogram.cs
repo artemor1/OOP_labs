@@ -71,8 +71,8 @@ namespace Lab_3
             for (int i = 0; i < data.Length; i++)
             {
                 // Преобразуем значение в индекс интервала по нормированному смещению от минимума.
-                int idx = (int)((d - min) * coeff);
                 double d = data[i];
+                int idx = (int)((d - min) * coeff);
                 idx = (int)((d - min) * coeff);
                 if (idx >= intervars) idx = intervars - 1;
                 if (idx < 0) idx = 0;
