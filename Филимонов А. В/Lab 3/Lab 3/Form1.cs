@@ -15,14 +15,14 @@ namespace Lab_3
         }
 
         #region Variables
-        List<double> data;
-        Generator generator = new Generator();
-        double[] signalData = new double[1];
-        Histogram histogram = new Histogram();
-        int[] histogramData = new int[1];
-        double[] processedSignalData = new double[1];
-        Denoiser denoiser = new Denoiser();
-        MyComplexSignal SignalToCode = new MyComplexSignal();
+       public List<double> data;
+        public Generator generator = new Generator();
+        public double[] signalData = new double[1];
+       public Histogram histogram = new Histogram();
+        public int[] histogramData = new int[1];
+       public double[] processedSignalData = new double[1];
+             Denoiser denoiser = new Denoiser();
+     public MyComplexSignal SignalToCode = new MyComplexSignal();
         #endregion
 
         #region Functions
@@ -666,6 +666,6 @@ namespace Lab_3
             ParseSignalByType();
         }
 
-
+    
     }
 }

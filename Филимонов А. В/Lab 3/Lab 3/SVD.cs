@@ -55,7 +55,7 @@ namespace Lab_3
             int rows = H.RowCount;
             int cols = H.ColumnCount;
 
-            int N = rows + cols - 1; // длина восстановленного сигнала
+            int N = rows + cols - 1;   // длина восстановленного сигнала
             double[] x = new double[N];
             int[] counts = new int[N]; // количество элементов на каждой диагонали
 
