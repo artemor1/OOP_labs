@@ -1,15 +1,15 @@
 {
   "Version": 1,
   "ProjectMap": {
-    "0540ba3a-91b7-4623-9f5a-fe087be80f24": {
-      "ProjectGuid": "0540ba3a-91b7-4623-9f5a-fe087be80f24",
-      "DisplayName": "Lab 3",
-      "ColorIndex": 0
-    },
     "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Прочие файлы",
       "ColorIndex": -1
+    },
+    "33fe2ea8-7255-4ce6-83cd-71a57e57aa89": {
+      "ProjectGuid": "33fe2ea8-7255-4ce6-83cd-71a57e57aa89",
+      "DisplayName": "UnitTestMyComples",
+      "ColorIndex": 0
     }
   },
   "NextColorIndex": 1

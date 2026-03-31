@@ -15,7 +15,10 @@ namespace Lab_3
         /// Максимальная разница между полезными коефицентами
         /// </summary>
         public double maxDropCoef { get; set; } = 0.5;
-
+        /// <summary>
+        /// Максимальный ранг восстановленной матрицы
+        /// </summary>
+        public int maxRank { get; set; } = 100;
         public int iterations { get; set; } = 1;
         #endregion
 
@@ -96,11 +99,7 @@ namespace Lab_3
                 int i = 0;
                 Debug.WriteLine($"[Denoiser.DeNoise] iteration={it}, S.Length={svd.S.Count}, U={svd.U.RowCount}x{svd.U.ColumnCount}, VT={svd.VT.RowCount}x{svd.VT.ColumnCount}");
                 var sigPreviewCount = Math.Min(5, svd.S.Count);
-                for (int j = 0; j < sigPreviewCount; j++)
-                {
-                    Debug.WriteLine($"[Denoiser.DeNoise] S[{j}]={svd.S[j]}");
-                }
-
+             
                 do
                 {
 
@@ -117,14 +116,17 @@ namespace Lab_3
                     i++;
 
                 }
-                while (i < svd.S.Count && svd.S[i] > svd.S[i - 1] * maxDropCoef);
+                while (i < svd.S.Count && svd.S[i] > svd.S[i - 1] * maxDropCoef && i < maxRank); ;
                 Debug.WriteLine($"[Denoiser.DeNoise] max kept index={i - 1}");
-                for (int j = 0; j < svd.S.Count; j++)
-                {
-                    Debug.WriteLine($"[Denoiser.DeNoise] s[{j}] = {svd.S[j]}");
-                }
+ 
                 signal = HankelToArray(R);
                 Debug.WriteLine($"[Denoiser.DeNoise] iteration={it} restoredLength={signal.Length}");
+
+                for (int j = 0; j < i+5; j++)
+                {
+                    Debug.WriteLine($"[Denoiser.DeNoise] S[{j}]={svd.S[j]}");
+                }
+
             }
 
             Debug.WriteLine("[Denoiser.DeNoise] Completed");
