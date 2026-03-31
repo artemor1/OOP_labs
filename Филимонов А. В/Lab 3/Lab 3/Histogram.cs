@@ -70,9 +70,9 @@ namespace Lab_3
             double coeff = step != 0 ? 1 / step : 0;
             for (int i = 0; i < data.Length; i++)
             {
+                double d = data[i];
                 // Преобразуем значение в индекс интервала по нормированному смещению от минимума.
                 int idx = (int)((d - min) * coeff);
-                double d = data[i];
                 idx = (int)((d - min) * coeff);
                 if (idx >= intervars) idx = intervars - 1;
                 if (idx < 0) idx = 0;
