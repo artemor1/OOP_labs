@@ -122,7 +122,7 @@ namespace Lab_3
                 signal = HankelToArray(R);
                 Debug.WriteLine($"[Denoiser.DeNoise] iteration={it} restoredLength={signal.Length}");
 
-                for (int j = 0; j < i+5; j++)
+                for (int j = 0; j < i+4 && j<svd.S.Count-1; j++)
                 {
                     Debug.WriteLine($"[Denoiser.DeNoise] S[{j}]={svd.S[j]}");
                 }
