@@ -317,6 +317,22 @@ namespace Lab_3
             processedSignalData = denoiser.DeNoise(signalData);
             LogSignalState("SVDDeNoise output", processedSignalData);
             MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+
+
+            //выводим получившиеся матрицы разложения
+
+            var H = denoiser.Hankel(signalData);
+            var svd = H.Svd();
+            GridHelper.PutMatrixInGrid(dgvPreProcU, svd.U);
+            DataGrid_Replace(svd.S, dgvPreProcS);
+            GridHelper.PutMatrixInGrid(dgvPreProcVT, svd.VT);
+
+            var Hp = denoiser.Hankel(processedSignalData);
+            var svdP = H.Svd();
+            GridHelper.PutMatrixInGrid(dgvPostProcU, svdP.U);
+            DataGrid_Replace(svdP.S, dgvPostProcS);
+            GridHelper.PutMatrixInGrid(dgvPostProcVT, svdP.VT);
+
         }
 
         private void ShowFftSpectrum()

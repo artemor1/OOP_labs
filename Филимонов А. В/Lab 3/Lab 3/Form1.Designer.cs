@@ -78,9 +78,6 @@
             this.bParse = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.zedGraphControl4 = new ZedGraph.ZedGraphControl();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -89,6 +86,20 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvPostProcU = new System.Windows.Forms.DataGridView();
+            this.dgvPostProcS = new System.Windows.Forms.DataGridView();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvPostProcVT = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvPreProcS = new System.Windows.Forms.DataGridView();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvPreProcVT = new System.Windows.Forms.DataGridView();
+            this.dgvPreProcU = new System.Windows.Forms.DataGridView();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -101,11 +112,20 @@
             this.panel4.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcU)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcVT)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcVT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcU)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -563,6 +583,7 @@
             // 
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(243, 188);
             this.tabControl2.Name = "tabControl2";
@@ -580,47 +601,6 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Histogram";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // zedGraphControl2
-            // 
-            this.zedGraphControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zedGraphControl2.Location = new System.Drawing.Point(3, 3);
-            this.zedGraphControl2.Name = "zedGraphControl2";
-            this.zedGraphControl2.ScrollGrace = 0D;
-            this.zedGraphControl2.ScrollMaxX = 0D;
-            this.zedGraphControl2.ScrollMaxY = 0D;
-            this.zedGraphControl2.ScrollMaxY2 = 0D;
-            this.zedGraphControl2.ScrollMinX = 0D;
-            this.zedGraphControl2.ScrollMinY = 0D;
-            this.zedGraphControl2.ScrollMinY2 = 0D;
-            this.zedGraphControl2.Size = new System.Drawing.Size(540, 203);
-            this.zedGraphControl2.TabIndex = 0;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.zedGraphControl4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(546, 209);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Table";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // zedGraphControl4
-            // 
-            this.zedGraphControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zedGraphControl4.Location = new System.Drawing.Point(3, 3);
-            this.zedGraphControl4.Name = "zedGraphControl4";
-            this.zedGraphControl4.ScrollGrace = 0D;
-            this.zedGraphControl4.ScrollMaxX = 0D;
-            this.zedGraphControl4.ScrollMaxY = 0D;
-            this.zedGraphControl4.ScrollMaxY2 = 0D;
-            this.zedGraphControl4.ScrollMinX = 0D;
-            this.zedGraphControl4.ScrollMinY = 0D;
-            this.zedGraphControl4.ScrollMinY2 = 0D;
-            this.zedGraphControl4.Size = new System.Drawing.Size(540, 203);
-            this.zedGraphControl4.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -699,6 +679,166 @@
             this.propertyGrid1.Size = new System.Drawing.Size(228, 187);
             this.propertyGrid1.TabIndex = 9;
             // 
+            // zedGraphControl2
+            // 
+            this.zedGraphControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.zedGraphControl2.Location = new System.Drawing.Point(3, 3);
+            this.zedGraphControl2.Name = "zedGraphControl2";
+            this.zedGraphControl2.ScrollGrace = 0D;
+            this.zedGraphControl2.ScrollMaxX = 0D;
+            this.zedGraphControl2.ScrollMaxY = 0D;
+            this.zedGraphControl2.ScrollMaxY2 = 0D;
+            this.zedGraphControl2.ScrollMinX = 0D;
+            this.zedGraphControl2.ScrollMinY = 0D;
+            this.zedGraphControl2.ScrollMinY2 = 0D;
+            this.zedGraphControl2.Size = new System.Drawing.Size(540, 203);
+            this.zedGraphControl2.TabIndex = 0;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.tableLayoutPanel6);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(546, 209);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "PostProcMatrix";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcU, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcS, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcVT, 2, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(540, 203);
+            this.tableLayoutPanel6.TabIndex = 2;
+            // 
+            // dgvPostProcU
+            // 
+            this.dgvPostProcU.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPostProcU.ColumnHeadersVisible = false;
+            this.dgvPostProcU.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPostProcU.Location = new System.Drawing.Point(3, 3);
+            this.dgvPostProcU.Name = "dgvPostProcU";
+            this.dgvPostProcU.RowHeadersVisible = false;
+            this.dgvPostProcU.Size = new System.Drawing.Size(174, 197);
+            this.dgvPostProcU.TabIndex = 0;
+            // 
+            // dgvPostProcS
+            // 
+            this.dgvPostProcS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPostProcS.ColumnHeadersVisible = false;
+            this.dgvPostProcS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column4});
+            this.dgvPostProcS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPostProcS.Location = new System.Drawing.Point(183, 3);
+            this.dgvPostProcS.Name = "dgvPostProcS";
+            this.dgvPostProcS.RowHeadersVisible = false;
+            this.dgvPostProcS.Size = new System.Drawing.Size(174, 197);
+            this.dgvPostProcS.TabIndex = 1;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Column4";
+            this.Column4.Name = "Column4";
+            // 
+            // dgvPostProcVT
+            // 
+            this.dgvPostProcVT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPostProcVT.ColumnHeadersVisible = false;
+            this.dgvPostProcVT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPostProcVT.Location = new System.Drawing.Point(363, 3);
+            this.dgvPostProcVT.Name = "dgvPostProcVT";
+            this.dgvPostProcVT.RowHeadersVisible = false;
+            this.dgvPostProcVT.Size = new System.Drawing.Size(174, 197);
+            this.dgvPostProcVT.TabIndex = 2;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.tableLayoutPanel5);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(546, 209);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "PreProcMatrix";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel5.Controls.Add(this.dgvPreProcS, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.dgvPreProcVT, 2, 0);
+            this.tableLayoutPanel5.Controls.Add(this.dgvPreProcU, 0, 0);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(540, 203);
+            this.tableLayoutPanel5.TabIndex = 1;
+            // 
+            // dgvPreProcS
+            // 
+            this.dgvPreProcS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPreProcS.ColumnHeadersVisible = false;
+            this.dgvPreProcS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column3});
+            this.dgvPreProcS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPreProcS.Location = new System.Drawing.Point(183, 3);
+            this.dgvPreProcS.Name = "dgvPreProcS";
+            this.dgvPreProcS.RowHeadersVisible = false;
+            this.dgvPreProcS.Size = new System.Drawing.Size(174, 197);
+            this.dgvPreProcS.TabIndex = 1;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Column3";
+            this.Column3.Name = "Column3";
+            // 
+            // dgvPreProcVT
+            // 
+            this.dgvPreProcVT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPreProcVT.ColumnHeadersVisible = false;
+            this.dgvPreProcVT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPreProcVT.Location = new System.Drawing.Point(363, 3);
+            this.dgvPreProcVT.Name = "dgvPreProcVT";
+            this.dgvPreProcVT.RowHeadersVisible = false;
+            this.dgvPreProcVT.Size = new System.Drawing.Size(174, 197);
+            this.dgvPreProcVT.TabIndex = 2;
+            // 
+            // dgvPreProcU
+            // 
+            this.dgvPreProcU.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dgvPreProcU.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPreProcU.ColumnHeadersVisible = false;
+            this.dgvPreProcU.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column2});
+            this.dgvPreProcU.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPreProcU.EnableHeadersVisualStyles = false;
+            this.dgvPreProcU.Location = new System.Drawing.Point(3, 3);
+            this.dgvPreProcU.Name = "dgvPreProcU";
+            this.dgvPreProcU.RowHeadersVisible = false;
+            this.dgvPreProcU.Size = new System.Drawing.Size(174, 197);
+            this.dgvPreProcU.TabIndex = 0;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Column2";
+            this.Column2.Name = "Column2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -724,12 +864,21 @@
             this.panel4.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcU)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcVT)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcVT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcU)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -746,7 +895,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.ToolStripMenuItem generatorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showPropertiesToolStripMenuItem;
@@ -760,7 +908,6 @@
         private System.Windows.Forms.ToolStripMenuItem histogramToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calcToolStripMenuItem;
-        private ZedGraph.ZedGraphControl zedGraphControl2;
         private System.Windows.Forms.ToolStripMenuItem randomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.Panel panel2;
@@ -774,7 +921,6 @@
         private ZedGraph.ZedGraphControl zedGraphControl3;
         private System.Windows.Forms.ToolStripMenuItem genNoisedSinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fFTToolStripMenuItem;
-        private ZedGraph.ZedGraphControl zedGraphControl4;
         private System.Windows.Forms.ToolStripMenuItem randomNoiseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem normalNoiseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem correlationToolStripMenuItem;
@@ -796,6 +942,20 @@
         private System.Windows.Forms.CheckedListBox chBox;
         private System.Windows.Forms.CheckBox ChProcessed;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private ZedGraph.ZedGraphControl zedGraphControl2;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.DataGridView dgvPreProcS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridView dgvPreProcVT;
+        private System.Windows.Forms.DataGridView dgvPreProcU;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.DataGridView dgvPostProcU;
+        private System.Windows.Forms.DataGridView dgvPostProcS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridView dgvPostProcVT;
     }
 }
 

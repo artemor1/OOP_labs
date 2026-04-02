@@ -25,7 +25,7 @@ namespace Lab_3
         #region Methods
 
         public Denoiser() { }
-        private Matrix<double> Hankel(double[] x)
+        public Matrix<double> Hankel(double[] x)
         {
             Debug.WriteLine($"[Denoiser.Hankel] inputLength={x.Length}, window={window}");
             if (window <= 0)
@@ -47,9 +47,12 @@ namespace Lab_3
             var H = Matrix<double>.Build.Dense(rows, cols);
 
             for (int i = 0; i < rows; i++)
+            {
                 for (int j = 0; j < cols; j++)
+                {
                     H[i, j] = x[i + j];
-
+                }
+            }
             return H;
         }
 
@@ -93,7 +96,8 @@ namespace Lab_3
             {
                 var H = Hankel(signal);
                 var svd = H.Svd();
-                int m = H.RowCount;
+          
+                 int m = H.RowCount;
                 int n = H.ColumnCount;
                 var R = Matrix<double>.Build.Dense(m, n);
                 int i = 0;

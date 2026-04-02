@@ -76,6 +76,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Fourier.cs" />
+    <Compile Include="GridHelper.cs" />
     <Compile Include="Histogram.cs" />
     <Compile Include="MLS.cs" />
     <Compile Include="MyGraphics.cs" />
