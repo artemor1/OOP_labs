@@ -1,6 +1,9 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Factorization;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Lab_3
 {
@@ -8,7 +11,7 @@ namespace Lab_3
     {
         #region Fields
         /// <summary>
-        /// Размер окна L Ганкелевой матрицы (Rows=N\L)
+        /// Размер окна L Ганкелевой матрицы (Rows=L)
         /// </summary>
         public int window { get; set; } = 10;
         /// <summary>
@@ -23,6 +26,68 @@ namespace Lab_3
         #endregion
 
         #region Methods
+        #region OptWindow
+        public static int FindOptimalWindowLength(double[] signal)
+        {
+            if (signal == null || signal.Length < 2)
+                throw new ArgumentException("Signal is too short.");
+
+            int nOpt = -1;
+            int N = signal.Length;
+            double bestP = double.NegativeInfinity;
+            int[] candidateWindows = { 2, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100,150,200,250,300,450,500 };
+
+            foreach (int n in candidateWindows)
+            {
+                if (n <= 1 || n >= signal.Length)
+                    continue;
+
+                double p = ComputeFrcmForWindow(signal,n);
+
+                if (p > bestP)
+                {
+                    bestP = p;
+                    nOpt = n;
+                }
+            }
+
+            if (nOpt == -1)
+                throw new ArgumentException("No valid window length found.");
+            else
+            {
+                Debug.WriteLine($"[Denoiser.OptWindow] Optimal window is {nOpt}");
+            }
+
+            return nOpt;
+        }
+
+        public static double ComputeFrcmForWindow(double[] signal, int n)
+        {
+            int m = signal.Length - n + 1;
+            Matrix<double> hankel = Hankel(signal, m, n);
+
+            double[] singularValues = ComputeSingularValues(hankel);
+
+            double mean = singularValues.Average();
+
+            double sum = 0.0;
+            for (int i = 0; i < singularValues.Length; i++)
+            {
+                double d = singularValues[i] - mean;
+                sum += Math.Pow(d, 4);
+            }
+
+            return Math.Pow(sum / singularValues.Length, 0.25);
+        }
+
+     
+        private static double[] ComputeSingularValues(Matrix<double> matrix)
+        {
+            var Svd = matrix.Svd();
+            return Svd.S.ToArray();
+        }
+
+        #endregion
 
         public Denoiser() { }
         public Matrix<double> Hankel(double[] x)
@@ -34,9 +99,31 @@ namespace Lab_3
                 throw new ArgumentException("window must be greater than 0");
             }
 
-            int rows = x.Length / window;
-            int cols = x.Length - rows + 1;
+             int  rows = window;
+             int cols = x.Length - rows + 1;
 
+            Debug.WriteLine($"[Denoiser.Hankel] rows={rows}, cols={cols}");
+            if (rows <= 0 || cols <= 0)
+            {
+                Debug.WriteLine("[Denoiser.Hankel] Invalid matrix dimensions");
+                throw new ArgumentException("Invalid Hankel dimensions. Check window and signal length.");
+            }
+
+            var H = Matrix<double>.Build.Dense(rows, cols);
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    H[i, j] = x[i + j];
+                }
+            }
+            return H;
+        }
+
+        public static Matrix<double> Hankel(double[] x, int rows , int cols)
+        {
+            Debug.WriteLine($"[Denoiser.Hankel] inputLength={x.Length}");
             Debug.WriteLine($"[Denoiser.Hankel] rows={rows}, cols={cols}");
             if (rows <= 0 || cols <= 0)
             {
@@ -94,10 +181,12 @@ namespace Lab_3
             double[] signal = (double[])data.Clone();
             for (int it = 0; it < iterations; it++)
             {
-                var H = Hankel(signal);
+
+               // window = FindOptimalWindowLength(data);
+                var H = Hankel(data);
                 var svd = H.Svd();
-          
-                 int m = H.RowCount;
+                
+                int m = H.RowCount;
                 int n = H.ColumnCount;
                 var R = Matrix<double>.Build.Dense(m, n);
                 int i = 0;

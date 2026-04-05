@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MathNet.Numerics.LinearAlgebra;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Lab_3
 {
@@ -21,11 +22,17 @@ namespace Lab_3
             int rows = matrix.RowCount;
             int cols = matrix.ColumnCount;
 
-            for (int j = 0; j < cols; j++)
+            try
             {
-                grid.Columns.Add($"C{j}", $"C{j}");
+                for (int j = 0; j < cols; j++)
+                {
+                    grid.Columns.Add($"C{j}", $"C{j}");
+                }
             }
-
+            catch
+            {
+                Debug.WriteLine($"[Data Grid] Couldn't put matrix into grid ");
+            }
             for (int i = 0; i < rows; i++)
             {
                 object[] row = new object[cols];
