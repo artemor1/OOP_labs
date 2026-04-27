@@ -1,0 +1,23 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Local dotnet CLI state
+.dotnet/
+
+# Build outputs
+**/bin/
+**/obj/
+
+# IDE/index/cache noise
+*.cache
+*.db-shm
+*.db-wal
+*.vsidx
+
+# Common test/result artifacts
+TestResults/
+
