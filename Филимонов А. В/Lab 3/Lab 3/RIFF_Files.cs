@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Lab_3
 {
@@ -54,6 +55,7 @@ namespace Lab_3
         {
             public static FmtChunk ReadFmtChunk(BinaryReader stream)
             {
+                Debug.WriteLine("[WaveReader.ReadFmtChunk] Start reading fmt chunk");
                 var chunk = new FmtChunk();
                 chunk.chunkId = "fmt ";
                 chunk.dataSize = stream.ReadUInt32();
@@ -69,19 +71,23 @@ namespace Lab_3
                     if ((chunk.extraFormatBytes & 1) == 1) chunk.numberOfChannels++;
                     chunk.extraBytes = stream.ReadBytes(chunk.extraFormatBytes);
                 }
+                Debug.WriteLine($"[WaveReader.ReadFmtChunk] Completed. sampleRate={chunk.sampleRate}, channels={chunk.numberOfChannels}, bits={chunk.bitsPerSample}");
                 return chunk;
             }
             public static dataChunk ReadDataChunk(BinaryReader stream, string id)
             {
+                Debug.WriteLine($"[WaveReader.ReadDataChunk] Start chunkId={id}");
                 var chunk = new dataChunk();
                 chunk.chunkId = id;
                 chunk.dataSize = stream.ReadUInt32();
                 chunk.dataOffset = stream.BaseStream.Position;
                 stream.BaseStream.Position += chunk.dataSize;
+                Debug.WriteLine($"[WaveReader.ReadDataChunk] Completed chunkId={id}, dataSize={chunk.dataSize}, dataOffset={chunk.dataOffset}");
                 return chunk;
             }
             public static Wave ReadWaveFile(string path)
             {
+                Debug.WriteLine($"[WaveReader.ReadWaveFile] Start path={path}");
                 var br = new BinaryReader(File.Open(path, FileMode.Open));
                 var res = new Wave();
                 try
@@ -131,6 +137,7 @@ namespace Lab_3
                         if (fmtChunk.bitsPerSample == 8)
                             res.channels = ReadChanels<byte>(buf, fmtChunk);
                         else res.channels = ReadChanels<short>(buf, fmtChunk);
+                        Debug.WriteLine($"[WaveReader.ReadWaveFile] Completed path={path}, bits={fmtChunk.bitsPerSample}, channels={fmtChunk.numberOfChannels}");
                         return res;
                     }
                 }
@@ -142,6 +149,7 @@ namespace Lab_3
             }
             private static List<T[]> ReadChanels<T>(byte[] buf, FmtChunk fmt)
             {
+                Debug.WriteLine($"[WaveReader.ReadChanels] Start type={typeof(T).Name}, byteCount={buf.Length}, channels={fmt.numberOfChannels}");
                 List<T[]> res = new List<T[]>();
                 var samples_total = buf.Length / fmt.bitsPerSample * 8;
                 T[] arr = new T[samples_total];
@@ -166,11 +174,13 @@ namespace Lab_3
                         k++;
                     }
                 }
+                Debug.WriteLine($"[WaveReader.ReadChanels] Completed. outputChannels={res.Count}, samplesPerChannel={(res.Count > 0 ? res[0].Length : 0)}");
                 return res;
 
             }
             public static int WriteWaveFile<T>(string path, FmtChunk fmt, List<T[]> channels)
             {
+                Debug.WriteLine($"[WaveReader.WriteWaveFile] Start path={path}, channelCount={(channels == null ? 0 : channels.Count)}");
                 var bw = new BinaryWriter(File.Create(path));
                 try
                 {
@@ -245,6 +255,7 @@ namespace Lab_3
                         bw.Write(dataSize);//UInt32 dataSize
                         bw.Write(buf);
                     }
+                    Debug.WriteLine($"[WaveReader.WriteWaveFile] Completed path={path}, dataSize={dataSize}, channels={channelCount}");
                     return 0;
                 }
                 catch (Exception ex)
@@ -257,6 +268,33 @@ namespace Lab_3
                     bw.Close();
                 }
             }
+
+            public static double[] LoadSignalData(string path)
+            {
+                Debug.WriteLine($"[WaveReader.LoadSignalData] Start path={path}");
+                var wav = ReadWaveFile(path);
+                var type = wav.channels.GetType();
+
+                if (type.Equals(typeof(List<byte[]>)))
+                {
+                    var dat = wav.channels as List<byte[]>;
+                    var result = Array.ConvertAll(dat[0], target => Convert.ToDouble(target));
+                    Debug.WriteLine($"[WaveReader.LoadSignalData] Completed byte-based load. length={result.Length}");
+                    return result;
+                }
+
+                if (type.Equals(typeof(List<short[]>)))
+                {
+                    var dat = wav.channels as List<short[]>;
+                    var result = Array.ConvertAll(dat[0], target => Convert.ToDouble(target));
+                    Debug.WriteLine($"[WaveReader.LoadSignalData] Completed short-based load. length={result.Length}");
+                    return result;
+                }
+
+                Debug.WriteLine($"[WaveReader.LoadSignalData] Unsupported channel storage type={type}");
+                return null;
+            }
+
             private void loadSignalFromFileToolStripMenuItem_Click(object sender, EventArgs e)
             {
                 var f1 = new Form1();
@@ -274,22 +312,7 @@ namespace Lab_3
                         f1.signalData = data.ToArray();
                         break;
                     case ".wav":
-                        var wav = RIFF_Files.WaveReader.ReadWaveFile(ofd.FileName);
-                        var type = wav.channels.GetType();
-                        if (type.Equals(typeof(List<byte[]>)))
-                        {
-                            var dat = wav.channels as List<byte[]>;
-                            f1.signalData = Array.ConvertAll<byte, double>(dat[0],
-                    new Converter<byte, double>(
-                              (target) => Convert.ToDouble(target)));
-                        }
-                        if (type.Equals(typeof(List<short[]>)))
-                        {
-                            var dat = wav.channels as List<short[]>;
-                            f1.signalData = Array.ConvertAll<short, double>(dat[0],
-                    new Converter<short, double>(
-                              (target) => Convert.ToDouble(target)));
-                        }
+                        f1.signalData = RIFF_Files.WaveReader.LoadSignalData(ofd.FileName);
                         break;
                     default: break;
                 }

@@ -279,7 +279,7 @@ namespace Lab_3
         {
             Debug.WriteLine("[Action] LoadSignalFromFile");
             var ofd = new OpenFileDialog();
-            ofd.Filter = "Text files|*.txt";
+            ofd.Filter = "Signal files|*.txt;*.wav|Text files|*.txt|Wave files|*.wav";
             if (ofd.ShowDialog() != DialogResult.OK)
             {
                 Debug.WriteLine("[Action] Load signal canceled by user");
@@ -287,14 +287,35 @@ namespace Lab_3
             }
 
             Debug.WriteLine($"[Action] Signal file selected: {ofd.FileName}");
-            var loadedData = File_IO_Methods.LoadDataFromTxtFile(ofd.FileName);
-            if (loadedData == null)
+            var extension = System.IO.Path.GetExtension(ofd.FileName)?.ToLowerInvariant();
+            Debug.WriteLine($"[Action] Signal file extension: {extension}");
+
+            double[] loadedSignal = null;
+            switch (extension)
+            {
+                case ".txt":
+                    var loadedData = File_IO_Methods.LoadDataFromTxtFile(ofd.FileName);
+                    if (loadedData != null)
+                    {
+                        loadedSignal = loadedData.ToArray();
+                    }
+                    break;
+                case ".wav":
+                    loadedSignal = RIFF_Files.WaveReader.LoadSignalData(ofd.FileName);
+                    break;
+                default:
+                    Debug.WriteLine($"[Action] Unsupported signal extension: {extension}");
+                    MessageBox.Show("Поддерживаются только файлы .txt и .wav");
+                    return;
+            }
+
+            if (loadedSignal == null)
             {
                 Debug.WriteLine("[Action] Loaded signal is NULL");
                 return;
             }
 
-            signalData = loadedData.ToArray();
+            signalData = loadedSignal;
             LogSignalState("LoadSignalFromFile", signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
         }
@@ -328,10 +349,12 @@ namespace Lab_3
             GridHelper.PutMatrixInGrid(dgvPreProcVT, svd.VT);
 
             var Hp = denoiser.Hankel(processedSignalData);
-            var svdP = H.Svd();
+            var svdP = Hp.Svd();
             GridHelper.PutMatrixInGrid(dgvPostProcU, svdP.U);
             DataGrid_Replace(svdP.S, dgvPostProcS);
             GridHelper.PutMatrixInGrid(dgvPostProcVT, svdP.VT);
+
+            Debug.WriteLine($"[Action] ApplySvdDenoise matrices ready. pre={H.RowCount}x{H.ColumnCount}, post={Hp.RowCount}x{Hp.ColumnCount}");
 
         }
 
@@ -415,7 +438,7 @@ namespace Lab_3
             var T = generator.codeIntervalLength;
             MyComplexSignal decoded = new MyComplexSignal();
             List<string> data = new List<string>();
-            Debug.WriteLine($"[Action] ParseSignalByType type={type}");
+            Debug.WriteLine($"[Action] ParseSignalByType type={type}, source={(ChProcessed.Checked ? "processed" : "raw")}, signalLength={(signal == null ? 0 : signal.Length)}, carrier={signalfreq}, sampling={sreq}, interval={T}");
             switch (type)
             {
                 case 0:
@@ -435,6 +458,9 @@ namespace Lab_3
                     DataGrid_Replace(data, dataGridView2);
 
                     Debug.WriteLine("[Action] Parse PhM completed");
+                    break;
+                default:
+                    Debug.WriteLine($"[Action] Unsupported parse type={type}");
                     break;
             }
         }
@@ -485,7 +511,7 @@ namespace Lab_3
 
         private void genSinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GenerateSinSignal();
+            Debug.WriteLine("[UI] Parent menu 'Gen Signal' clicked. Waiting for submenu selection.");
         }
 
 
@@ -642,12 +668,15 @@ namespace Lab_3
 
                 _internalChange = true;
                 DataGrid_Replace(SignalToCode.data, dataGridView1);
-                _internalChange = false;
                 Debug.WriteLine($"[DataGrid] Parsed and stored '{parsed}'. afterCount={SignalToCode.data.Count}");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[DataGrid] Parse error for '{raw}'. {ex}");
+            }
+            finally
+            {
+                _internalChange = false;
             }
         }
 
@@ -656,6 +685,7 @@ namespace Lab_3
         int type = 0;
         private void chBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            Debug.WriteLine($"[UI] chBox_ItemCheck index={e.Index}, current={e.CurrentValue}, new={e.NewValue}");
             switch (e.Index)
             {
                 case 0:

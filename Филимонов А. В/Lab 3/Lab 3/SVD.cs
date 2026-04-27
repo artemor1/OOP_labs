@@ -183,7 +183,8 @@ namespace Lab_3
             {
 
                // window = FindOptimalWindowLength(data);
-                var H = Hankel(data);
+                Debug.WriteLine($"[Denoiser.DeNoise] iteration={it} inputLength={signal.Length}");
+                var H = Hankel(signal);
                 var svd = H.Svd();
                 
                 int m = H.RowCount;

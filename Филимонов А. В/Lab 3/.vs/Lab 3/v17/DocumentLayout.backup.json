@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\lab 3\\svd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:lab 3\\svd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\lab 3\\lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplexgraph\\mycomplex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -57,11 +57,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\Lab 3\\Form1.cs",
               "RelativeDocumentMoniker": "Lab 3\\Form1.cs",
@@ -74,7 +74,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\Lab 3\\Form1.cs",
               "RelativeDocumentMoniker": "Lab 3\\Form1.cs",
@@ -88,13 +88,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "SVD.cs",
               "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\Lab 3\\SVD.cs",
               "RelativeDocumentMoniker": "Lab 3\\SVD.cs",
-              "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\Lab 3\\SVD.cs*",
-              "RelativeToolTip": "Lab 3\\SVD.cs*",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAEwLgAAAARAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\Lab 3\\SVD.cs",
+              "RelativeToolTip": "Lab 3\\SVD.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAIAwwLgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-01T22:32:06.798Z",
               "IsPinned": true,
@@ -102,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "SignalGenerator.cs",
               "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\Lab 3\\SignalGenerator.cs",
               "RelativeDocumentMoniker": "Lab 3\\SignalGenerator.cs",
@@ -191,7 +191,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "GridHelper.cs",
               "DocumentMoniker": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\Lab 3\\GridHelper.cs",
               "RelativeDocumentMoniker": "Lab 3\\GridHelper.cs",

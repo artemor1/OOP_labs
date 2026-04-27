@@ -14,6 +14,21 @@ namespace Lab_3
     {
         public static void PutMatrixInGrid(DataGridView grid, Matrix<double> matrix)
         {
+            if (grid == null)
+            {
+                Debug.WriteLine("[GridHelper.PutMatrixInGrid] grid is NULL. Skip.");
+                return;
+            }
+
+            if (matrix == null)
+            {
+                Debug.WriteLine($"[GridHelper.PutMatrixInGrid] matrix is NULL for grid {grid.Name}. Clear grid.");
+                grid.Columns.Clear();
+                grid.Rows.Clear();
+                return;
+            }
+
+            Debug.WriteLine($"[GridHelper.PutMatrixInGrid] Start grid={grid.Name}, rows={matrix.RowCount}, cols={matrix.ColumnCount}");
             grid.SuspendLayout();
 
             grid.Columns.Clear();
@@ -50,6 +65,7 @@ namespace Lab_3
             grid.AllowUserToAddRows = false;
 
             grid.ResumeLayout();
+            Debug.WriteLine($"[GridHelper.PutMatrixInGrid] Completed grid={grid.Name}");
         }
     }
 }
