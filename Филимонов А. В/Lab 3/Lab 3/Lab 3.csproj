@@ -78,13 +78,18 @@
     <Compile Include="Fourier.cs" />
     <Compile Include="GridHelper.cs" />
     <Compile Include="Histogram.cs" />
+    <Compile Include="MatchedFilter.cs" />
     <Compile Include="MLS.cs" />
     <Compile Include="MyGraphics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RIFF_Files.cs" />
     <Compile Include="SignalGenerator.cs" />
+    <Compile Include="SignalStatistics.cs" />
+    <Compile Include="Spectrum.cs" />
     <Compile Include="SVD.cs" />
+    <Compile Include="VariantSignalGenerator.cs" />
+    <Compile Include="WindowFunction.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

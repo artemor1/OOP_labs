@@ -125,6 +125,35 @@ namespace Lab_3
         }
 
         /// <summary>
+        /// Вычисляет амплитудный спектр для вещественного сигнала.
+        /// </summary>
+        public static double[] AmplSpectrum(double[] data)
+        {
+            Debug.WriteLine($"[FourierTransform.AmplSpectrum<double>] Start. dataLength={(data == null ? 0 : data.Length)}");
+            if (data == null)
+            {
+                return new double[0];
+            }
+
+            int N = data.Length;
+            var res = new double[N];
+            var cdata = new Complex[N];
+            for (int i = 0; i < N; i++)
+            {
+                cdata[i] = new Complex(data[i], 0);
+            }
+
+            AForge.Math.FourierTransform.FFT(cdata, AForge.Math.FourierTransform.Direction.Backward);
+            for (int i = 0; i < N; i++)
+            {
+                res[i] = Math.Sqrt(cdata[i].Re * cdata[i].Re + cdata[i].Im * cdata[i].Im);
+            }
+
+            Debug.WriteLine($"[FourierTransform.AmplSpectrum<double>] Completed. outputLength={res.Length}");
+            return res;
+        }
+
+        /// <summary>
         /// Запускает быстрое преобразование Фурье (FFT) из библиотеки AForge.
         /// </summary>
         /// <param name="data">Массив комплексных отсчётов, изменяется на месте.</param>

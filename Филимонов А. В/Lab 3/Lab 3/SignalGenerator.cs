@@ -27,20 +27,68 @@ namespace Lab_3
         private readonly Random rnd = new Random();
 
         #region Fields
+        public int samples { get; set; } = 1024;
         public double noiseLvl { get; set; } = 0.3;
         public double mean { get; set; } = 0;
         public double sigma { get; set; } = 1;
         public double ampl { get; set; } = 1;
         public double coeffModulation { get; set; } = 0.5;
+        public double freqModulation { get; set; } = 5;
+        public double freqSpeed { get; set; } = 0.001;
+
+        private int freqSampling = 1000;
+        private double duration = 1;
+        private double freqSignal = 100;
 
         [Category("Параметры сигнала"), DisplayName("Частота дискретизации сигнала"), Description("В герцах")]
-        public double samplingFrequency { get; set; } = 1000;
+        public double samplingFrequency
+        {
+            get { return freqSampling; }
+            set
+            {
+                freqSampling = (int)Math.Max(1, Math.Round(value));
+                samples = (int)(freqSampling * duration);
+            }
+        }
 
         [Category("Параметры сигнала"), DisplayName("Частота несущей"), Description("В герцах")]
-        public double carrierFrequency { get; set; } = 100;
+        public double carrierFrequency
+        {
+            get { return freqSignal; }
+            set { freqSignal = value; }
+        }
 
         [Category("Параметры сигнала"), DisplayName("Длина кодового интервала"), Description("в секундах")]
         public double codeIntervalLength { get; set; } = 0.1;
+
+        [Category("Гармонические колебания"), DisplayName("Частота дискретизации"), Description("")]
+        public int FreqSampling
+        {
+            get { return freqSampling; }
+            set
+            {
+                freqSampling = Math.Max(1, value);
+                samples = (int)(freqSampling * duration);
+            }
+        }
+
+        [Category("Гармонические колебания"), DisplayName("Длительность сигнала"), Description("")]
+        public double Duration
+        {
+            get { return duration; }
+            set
+            {
+                duration = Math.Max(value, 1.0 / Math.Max(freqSampling, 1));
+                samples = (int)(duration * freqSampling);
+            }
+        }
+
+        [Category("Гармонические колебания"), DisplayName("Частота сигнала"), Description("")]
+        public double freqSignalProperty
+        {
+            get { return freqSignal; }
+            set { freqSignal = value; }
+        }
 
         public SignalType signalType { get; set; } = SignalType.sinus;
         #endregion
@@ -82,16 +130,16 @@ namespace Lab_3
         /// <returns>Массив отсчётов синусоидального сигнала.</returns>
         public double[] GenSin(int periods = 1)
         {
-            int samplesCount = GetSamplesCount(periods);
+            int samplesCount = periods == 1 ? Math.Max(samples, 1) : GetSamplesCount(periods);
             double[] arr = new double[samplesCount];
-            double dt = 1.0 / Math.Max(samplingFrequency, double.Epsilon);
+            double coeff = Math.PI * 2 / Math.Max(freqSampling, 1) * freqSignal;
 
             for (int i = 0; i < samplesCount; i++)
             {
-                double t = i * dt;
-                arr[i] = ampl * Math.Sin(2 * Math.PI * carrierFrequency * t);
+                arr[i] = ampl * Math.Sin(coeff * i);
             }
 
+            Debug.WriteLine($"[Generator.GenSin] samples={samplesCount}, freqSampling={freqSampling}, freqSignal={freqSignal}");
             return arr;
         }
 

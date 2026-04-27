@@ -634,6 +634,7 @@ namespace Lab_3
             GenerateModulatedSignal(Generator.SignalType.PhM, "Generate PhM");
         }
         #endregion
+
         bool _internalChange = false;
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {

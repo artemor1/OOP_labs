@@ -21,3 +21,6 @@
 # Common test/result artifacts
 TestResults/
 
+# Local analysis artifacts
+.docx_extracted.txt
+lab3_full.txt
