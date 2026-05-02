@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using ZedGraph;
 
+using System;
 namespace Lab_3
 {
     /// <summary>

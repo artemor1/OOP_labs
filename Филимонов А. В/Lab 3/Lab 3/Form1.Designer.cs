@@ -78,6 +78,20 @@
             this.bParse = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvPreProcS = new System.Windows.Forms.DataGridView();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvPreProcVT = new System.Windows.Forms.DataGridView();
+            this.dgvPreProcU = new System.Windows.Forms.DataGridView();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvPostProcU = new System.Windows.Forms.DataGridView();
+            this.dgvPostProcS = new System.Windows.Forms.DataGridView();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvPostProcVT = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -86,20 +100,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvPostProcU = new System.Windows.Forms.DataGridView();
-            this.dgvPostProcS = new System.Windows.Forms.DataGridView();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvPostProcVT = new System.Windows.Forms.DataGridView();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvPreProcS = new System.Windows.Forms.DataGridView();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvPreProcVT = new System.Windows.Forms.DataGridView();
-            this.dgvPreProcU = new System.Windows.Forms.DataGridView();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbStat = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -112,20 +113,20 @@
             this.panel4.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            this.tabPage5.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcU)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcVT)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcVT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcU)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcU)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcVT)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -602,83 +603,6 @@
             this.tabPage3.Text = "Histogram";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.panel3, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 188);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.29787F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.70213F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(234, 235);
-            this.tableLayoutPanel2.TabIndex = 9;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.checkBox3);
-            this.panel2.Controls.Add(this.checkBox2);
-            this.panel2.Controls.Add(this.checkBox1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(228, 36);
-            this.panel2.TabIndex = 9;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(113, 12);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(48, 17);
-            this.checkBox3.TabIndex = 13;
-            this.checkBox3.Text = "SVD";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(61, 12);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(44, 17);
-            this.checkBox2.TabIndex = 12;
-            this.checkBox2.Text = "Hist";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 12);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(46, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Gen";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.propertyGrid1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 45);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(228, 187);
-            this.panel3.TabIndex = 10;
-            // 
-            // propertyGrid1
-            // 
-            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-            this.propertyGrid1.Name = "propertyGrid1";
-            this.propertyGrid1.Size = new System.Drawing.Size(228, 187);
-            this.propertyGrid1.TabIndex = 9;
-            // 
             // zedGraphControl2
             // 
             this.zedGraphControl2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -693,74 +617,6 @@
             this.zedGraphControl2.ScrollMinY2 = 0D;
             this.zedGraphControl2.Size = new System.Drawing.Size(540, 203);
             this.zedGraphControl2.TabIndex = 0;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.tableLayoutPanel6);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(546, 209);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "PostProcMatrix";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 3;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcU, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcS, 1, 0);
-            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcVT, 2, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 1;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(540, 203);
-            this.tableLayoutPanel6.TabIndex = 2;
-            // 
-            // dgvPostProcU
-            // 
-            this.dgvPostProcU.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPostProcU.ColumnHeadersVisible = false;
-            this.dgvPostProcU.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPostProcU.Location = new System.Drawing.Point(3, 3);
-            this.dgvPostProcU.Name = "dgvPostProcU";
-            this.dgvPostProcU.RowHeadersVisible = false;
-            this.dgvPostProcU.Size = new System.Drawing.Size(174, 197);
-            this.dgvPostProcU.TabIndex = 0;
-            // 
-            // dgvPostProcS
-            // 
-            this.dgvPostProcS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPostProcS.ColumnHeadersVisible = false;
-            this.dgvPostProcS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column4});
-            this.dgvPostProcS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPostProcS.Location = new System.Drawing.Point(183, 3);
-            this.dgvPostProcS.Name = "dgvPostProcS";
-            this.dgvPostProcS.RowHeadersVisible = false;
-            this.dgvPostProcS.Size = new System.Drawing.Size(174, 197);
-            this.dgvPostProcS.TabIndex = 1;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.Name = "Column4";
-            // 
-            // dgvPostProcVT
-            // 
-            this.dgvPostProcVT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPostProcVT.ColumnHeadersVisible = false;
-            this.dgvPostProcVT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPostProcVT.Location = new System.Drawing.Point(363, 3);
-            this.dgvPostProcVT.Name = "dgvPostProcVT";
-            this.dgvPostProcVT.RowHeadersVisible = false;
-            this.dgvPostProcVT.Size = new System.Drawing.Size(174, 197);
-            this.dgvPostProcVT.TabIndex = 2;
             // 
             // tabPage4
             // 
@@ -839,6 +695,163 @@
             this.Column2.HeaderText = "Column2";
             this.Column2.Name = "Column2";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.tableLayoutPanel6);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(546, 209);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "PostProcMatrix";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcU, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcS, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.dgvPostProcVT, 2, 0);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(540, 203);
+            this.tableLayoutPanel6.TabIndex = 2;
+            // 
+            // dgvPostProcU
+            // 
+            this.dgvPostProcU.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPostProcU.ColumnHeadersVisible = false;
+            this.dgvPostProcU.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPostProcU.Location = new System.Drawing.Point(3, 3);
+            this.dgvPostProcU.Name = "dgvPostProcU";
+            this.dgvPostProcU.RowHeadersVisible = false;
+            this.dgvPostProcU.Size = new System.Drawing.Size(174, 197);
+            this.dgvPostProcU.TabIndex = 0;
+            // 
+            // dgvPostProcS
+            // 
+            this.dgvPostProcS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPostProcS.ColumnHeadersVisible = false;
+            this.dgvPostProcS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column4});
+            this.dgvPostProcS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPostProcS.Location = new System.Drawing.Point(183, 3);
+            this.dgvPostProcS.Name = "dgvPostProcS";
+            this.dgvPostProcS.RowHeadersVisible = false;
+            this.dgvPostProcS.Size = new System.Drawing.Size(174, 197);
+            this.dgvPostProcS.TabIndex = 1;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Column4";
+            this.Column4.Name = "Column4";
+            // 
+            // dgvPostProcVT
+            // 
+            this.dgvPostProcVT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPostProcVT.ColumnHeadersVisible = false;
+            this.dgvPostProcVT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPostProcVT.Location = new System.Drawing.Point(363, 3);
+            this.dgvPostProcVT.Name = "dgvPostProcVT";
+            this.dgvPostProcVT.RowHeadersVisible = false;
+            this.dgvPostProcVT.Size = new System.Drawing.Size(174, 197);
+            this.dgvPostProcVT.TabIndex = 2;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel3, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 188);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.29787F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.70213F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(234, 235);
+            this.tableLayoutPanel2.TabIndex = 9;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.cbStat);
+            this.panel2.Controls.Add(this.checkBox3);
+            this.panel2.Controls.Add(this.checkBox2);
+            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(228, 36);
+            this.panel2.TabIndex = 9;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(113, 12);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(48, 17);
+            this.checkBox3.TabIndex = 13;
+            this.checkBox3.Text = "SVD";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(61, 12);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(44, 17);
+            this.checkBox2.TabIndex = 12;
+            this.checkBox2.Text = "Hist";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(9, 12);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(46, 17);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "Gen";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.propertyGrid1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(3, 45);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(228, 187);
+            this.panel3.TabIndex = 10;
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.Size = new System.Drawing.Size(228, 187);
+            this.propertyGrid1.TabIndex = 9;
+            // 
+            // cbStat
+            // 
+            this.cbStat.AutoSize = true;
+            this.cbStat.Location = new System.Drawing.Point(167, 12);
+            this.cbStat.Name = "cbStat";
+            this.cbStat.Size = new System.Drawing.Size(50, 17);
+            this.cbStat.TabIndex = 14;
+            this.cbStat.Text = "Stats";
+            this.cbStat.UseVisualStyleBackColor = true;
+            this.cbStat.CheckedChanged += new System.EventHandler(this.cbStat_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -864,21 +877,21 @@
             this.panel4.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            this.tabPage5.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcU)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcS)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcVT)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcVT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPreProcU)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcU)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPostProcVT)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -956,6 +969,7 @@
         private System.Windows.Forms.DataGridView dgvPostProcS;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridView dgvPostProcVT;
+        private System.Windows.Forms.CheckBox cbStat;
     }
 }
 

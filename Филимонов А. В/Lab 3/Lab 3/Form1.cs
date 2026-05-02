@@ -23,6 +23,7 @@ namespace Lab_3
        public double[] processedSignalData = new double[1];
              Denoiser denoiser = new Denoiser();
      public MyComplexSignal SignalToCode = new MyComplexSignal();
+        public SignalStatisticsResult stat = new SignalStatisticsResult();
         #endregion
 
         #region Functions
@@ -248,6 +249,25 @@ namespace Lab_3
             Debug.WriteLine("[Action] ShowDenoiserProperties");
             propertyGrid1.SelectedObject = denoiser;
         }
+
+        private void ShowStatisticProperties() {    
+            Debug.WriteLine("[Action] ShowStatisticProperties");
+            if (tabControl1.SelectedTab == tabPage1)
+            {
+                stat = SignalStatistics.Calculate(signalData);
+            }
+            else if (tabControl1.SelectedTab == tabPage2)
+            {
+                stat = SignalStatistics.Calculate(processedSignalData);
+            }
+            propertyGrid1.SelectedObject = stat; 
+        }
+
+        private void ShowNoProperties()
+        {
+            Debug.WriteLine("[Action] ShowNoProperties");
+            propertyGrid1.SelectedObject = null;
+        }
         #endregion
 
         #region Signal source actions
@@ -466,6 +486,11 @@ namespace Lab_3
         }
         #endregion
 
+        #region Tabs actions
+        //TODO: Get a func that would change signal source based on whic tab are active
+
+        #endregion
+
         #endregion
 
         #endregion
@@ -540,14 +565,17 @@ namespace Lab_3
             GenerateNormalSignal();
         }
 
+        #region Property checkboxes
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
             {
                 checkBox2.Checked = false;
+                cbStat.Checked = false;
                 checkBox3.Checked = false;
                 ShowGeneratorProperties();
             }
+            else ShowNoProperties();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -555,9 +583,11 @@ namespace Lab_3
             if (checkBox2.Checked)
             {
                 checkBox1.Checked = false;
+                cbStat.Checked = false;
                 checkBox3.Checked = false;
                 ShowHistogramProperties();
             }
+            else ShowNoProperties();
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -566,11 +596,26 @@ namespace Lab_3
             {
                 checkBox1.Checked = false;
                 checkBox2.Checked = false;
+                cbStat.Checked = false;
                 ShowDenoiserProperties();
                 Debug.WriteLine("cB3 switched");
             }
+            else ShowNoProperties();
         }
 
+        private void cbStat_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbStat.Checked)
+            {
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+                ShowStatisticProperties();
+            }
+   
+            else ShowNoProperties();
+        }
+#endregion
         private void sVDDenoiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ApplySvdDenoise();
@@ -713,6 +758,6 @@ namespace Lab_3
             ParseSignalByType();
         }
 
-    
+       
     }
 }
