@@ -442,6 +442,34 @@ namespace Lab_3
             LogSignalState("VKF output", processedSignalData);
             MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
         }
+
+        private void GenerateMlsSequence()
+        {
+            Debug.WriteLine("[Action] GenerateMlsSequence");
+            var polinom = new[] { 1, 0, 1, 1 };
+            var mls = MLS.MakeMSequence(polinom);
+            signalData = mls.Select(x => (double)x).ToArray();
+            LogSignalState("MLS output", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+        }
+
+        private void ApplyMatchedFiltering()
+        {
+            Debug.WriteLine("[Action] ApplyMatchedFiltering");
+            var polinom = new[] { 1, 0, 1, 1 };
+            var seq = MLS.MakeMSequence(polinom);
+            var testSignal = Filtering.GenTestSignal(polinom, new List<int> { 10, 35, 65 });
+            var filtered = Filtering.MatchedFilter(testSignal, seq);
+
+            signalData = testSignal.Select(x => (double)x).ToArray();
+            processedSignalData = filtered;
+
+            LogSignalState("MatchedFilter source signal", signalData);
+            LogSignalState("MatchedFilter output", processedSignalData);
+
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+        }
         #endregion
 
         #region Modulation actions
@@ -543,7 +571,7 @@ namespace Lab_3
 
         private void genSinToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("[UI] Parent menu 'Gen Signal' clicked. Waiting for submenu selection.");
+            GenerateSinSignal();
         }
 
 
@@ -662,6 +690,16 @@ namespace Lab_3
         private void vKFToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CalculateVkf();
+        }
+
+        private void mLSSequenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GenerateMlsSequence();
+        }
+
+        private void matchedFilterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplyMatchedFiltering();
         }
 
         #region Signal generation mode actions
