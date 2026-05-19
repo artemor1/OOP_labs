@@ -3,6 +3,10 @@ using System.Diagnostics;
 
 namespace Lab_3
 {
+    /*
+    * Выполнил Филимонов Артём РСК-21
+    */
+
     internal class MLS
     {
         public static int[] MakeMSequence(int[] polinom)

@@ -6,6 +6,13 @@ using System.Linq;
 using System.Windows.Forms;
 namespace Lab_3
 {
+
+    /*
+     * Выполнил Филимонов Артём РСК-21
+     * 
+     */
+
+
     public partial class Form1 : Form
     {
 
@@ -758,6 +765,10 @@ namespace Lab_3
             ParseSignalByType();
         }
 
-       
+
+        /*
+        * Выполнил Филимонов Артём РСК-21
+        */
+
     }
 }
