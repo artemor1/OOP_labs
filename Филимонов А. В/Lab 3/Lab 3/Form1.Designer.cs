@@ -59,6 +59,8 @@
             this.aKFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aKFAcycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vKFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mLSSequenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matchedFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -322,7 +324,9 @@
             this.fourierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sVDDenoiseToolStripMenuItem,
             this.fFTToolStripMenuItem,
-            this.correlationToolStripMenuItem});
+            this.correlationToolStripMenuItem,
+            this.mLSSequenceToolStripMenuItem,
+            this.matchedFilterToolStripMenuItem});
             this.fourierToolStripMenuItem.Name = "fourierToolStripMenuItem";
             this.fourierToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.fourierToolStripMenuItem.Text = "Processing";
@@ -371,6 +375,20 @@
             this.vKFToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.vKFToolStripMenuItem.Text = "VKF";
             this.vKFToolStripMenuItem.Click += new System.EventHandler(this.vKFToolStripMenuItem_Click);
+            // 
+            // mLSSequenceToolStripMenuItem
+            // 
+            this.mLSSequenceToolStripMenuItem.Name = "mLSSequenceToolStripMenuItem";
+            this.mLSSequenceToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.mLSSequenceToolStripMenuItem.Text = "MLS Sequence";
+            this.mLSSequenceToolStripMenuItem.Click += new System.EventHandler(this.mLSSequenceToolStripMenuItem_Click);
+            // 
+            // matchedFilterToolStripMenuItem
+            // 
+            this.matchedFilterToolStripMenuItem.Name = "matchedFilterToolStripMenuItem";
+            this.matchedFilterToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.matchedFilterToolStripMenuItem.Text = "Matched Filter";
+            this.matchedFilterToolStripMenuItem.Click += new System.EventHandler(this.matchedFilterToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -569,6 +587,7 @@
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Тип сигнала";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // bParse
             // 
@@ -940,6 +959,8 @@
         private System.Windows.Forms.ToolStripMenuItem aKFToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aKFAcycleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vKFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mLSSequenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem matchedFilterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem amToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem phMToolStripMenuItem;
@@ -972,4 +993,3 @@
         private System.Windows.Forms.CheckBox cbStat;
     }
 }
-
