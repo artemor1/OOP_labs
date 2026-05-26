@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Diagnostics;
 
 namespace Lab_3
@@ -294,31 +293,6 @@ namespace Lab_3
                 Debug.WriteLine($"[WaveReader.LoadSignalData] Unsupported channel storage type={type}");
                 return null;
             }
-
-            private void loadSignalFromFileToolStripMenuItem_Click(object sender, EventArgs e)
-            {
-                var f1 = new Form1();
-                var ofd = new OpenFileDialog();
-                ofd.Filter = "Text files|*.txt|Wave files|*.wav";
-                if (ofd.ShowDialog() != DialogResult.OK) return;
-
-                string ext = System.IO.Path.GetExtension(ofd.FileName);
-                switch (ext)
-                {
-                    case ".txt":
-                        var data =
-                   File_IO_Methods.LoadDataFromTxtFile(ofd.FileName);
-                        if (data == null) return;
-                        f1.signalData = data.ToArray();
-                        break;
-                    case ".wav":
-                        f1.signalData = RIFF_Files.WaveReader.LoadSignalData(ofd.FileName);
-                        break;
-                    default: break;
-                }
-            }
-
-
         }
 
 

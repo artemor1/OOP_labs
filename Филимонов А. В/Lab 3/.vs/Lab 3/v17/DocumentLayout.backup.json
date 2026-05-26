@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\lab 3\\lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -15,7 +15,7 @@
       "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:Lab 3\\SVD.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\lab 3\\lab 3\\signalgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\lab 3\\signalgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:lab 3\\signalgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -95,8 +95,7 @@
               "ViewState": "AgIAAPYAAAAAAAAAAAAtwAUBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-05T18:00:15.281Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -109,8 +108,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAOoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-01T22:32:06.798Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -136,8 +134,7 @@
               "ViewState": "AgIAAIcAAAAAAAAAAAD4v5YAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-07T01:59:52.495Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -296,8 +293,7 @@
               "RelativeToolTip": "Lab 3\\Form1.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T16:37:54.142Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T16:37:54.142Z"
             }
           ]
         }
