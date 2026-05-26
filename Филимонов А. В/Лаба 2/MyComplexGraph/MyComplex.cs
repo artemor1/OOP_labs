@@ -7,6 +7,10 @@ namespace nsMycomplex
 {
     public class MyComplex
     {
+        /*
+        * Выполнил Филимонов Артём РСК-21
+        */
+
         #region Fields 
 
         public double re = 0; //Real 

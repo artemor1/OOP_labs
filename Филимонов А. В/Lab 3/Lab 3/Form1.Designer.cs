@@ -59,6 +59,8 @@
             this.aKFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aKFAcycleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vKFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mLSSequenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matchedFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -72,6 +74,7 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.ChProcessed = new System.Windows.Forms.CheckBox();
             this.chBox = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -94,13 +97,13 @@
             this.dgvPostProcVT = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cbStat = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.cbStat = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -322,7 +325,9 @@
             this.fourierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sVDDenoiseToolStripMenuItem,
             this.fFTToolStripMenuItem,
-            this.correlationToolStripMenuItem});
+            this.correlationToolStripMenuItem,
+            this.mLSSequenceToolStripMenuItem,
+            this.matchedFilterToolStripMenuItem});
             this.fourierToolStripMenuItem.Name = "fourierToolStripMenuItem";
             this.fourierToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.fourierToolStripMenuItem.Text = "Processing";
@@ -330,14 +335,14 @@
             // sVDDenoiseToolStripMenuItem
             // 
             this.sVDDenoiseToolStripMenuItem.Name = "sVDDenoiseToolStripMenuItem";
-            this.sVDDenoiseToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.sVDDenoiseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sVDDenoiseToolStripMenuItem.Text = "SVD denoise";
             this.sVDDenoiseToolStripMenuItem.Click += new System.EventHandler(this.sVDDenoiseToolStripMenuItem_Click);
             // 
             // fFTToolStripMenuItem
             // 
             this.fFTToolStripMenuItem.Name = "fFTToolStripMenuItem";
-            this.fFTToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.fFTToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.fFTToolStripMenuItem.Text = "Furier Transform";
             this.fFTToolStripMenuItem.Click += new System.EventHandler(this.fFTToolStripMenuItem_Click);
             // 
@@ -348,7 +353,7 @@
             this.aKFAcycleToolStripMenuItem,
             this.vKFToolStripMenuItem});
             this.correlationToolStripMenuItem.Name = "correlationToolStripMenuItem";
-            this.correlationToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.correlationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.correlationToolStripMenuItem.Text = "Correlation";
             // 
             // aKFToolStripMenuItem
@@ -371,6 +376,20 @@
             this.vKFToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.vKFToolStripMenuItem.Text = "VKF";
             this.vKFToolStripMenuItem.Click += new System.EventHandler(this.vKFToolStripMenuItem_Click);
+            // 
+            // mLSSequenceToolStripMenuItem
+            // 
+            this.mLSSequenceToolStripMenuItem.Name = "mLSSequenceToolStripMenuItem";
+            this.mLSSequenceToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.mLSSequenceToolStripMenuItem.Text = "MLS Sequence";
+            this.mLSSequenceToolStripMenuItem.Click += new System.EventHandler(this.mLSSequenceToolStripMenuItem_Click);
+            // 
+            // matchedFilterToolStripMenuItem
+            // 
+            this.matchedFilterToolStripMenuItem.Name = "matchedFilterToolStripMenuItem";
+            this.matchedFilterToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.matchedFilterToolStripMenuItem.Text = "Matched Filter";
+            this.matchedFilterToolStripMenuItem.Click += new System.EventHandler(this.matchedFilterToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -526,6 +545,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.progressBar1);
             this.panel4.Controls.Add(this.ChProcessed);
             this.panel4.Controls.Add(this.chBox);
             this.panel4.Controls.Add(this.label1);
@@ -535,6 +555,13 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(72, 173);
             this.panel4.TabIndex = 2;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(2, 77);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(67, 24);
+            this.progressBar1.TabIndex = 6;
             // 
             // ChProcessed
             // 
@@ -569,6 +596,7 @@
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Тип сигнала";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // bParse
             // 
@@ -791,6 +819,17 @@
             this.panel2.Size = new System.Drawing.Size(228, 36);
             this.panel2.TabIndex = 9;
             // 
+            // cbStat
+            // 
+            this.cbStat.AutoSize = true;
+            this.cbStat.Location = new System.Drawing.Point(167, 12);
+            this.cbStat.Name = "cbStat";
+            this.cbStat.Size = new System.Drawing.Size(50, 17);
+            this.cbStat.TabIndex = 14;
+            this.cbStat.Text = "Stats";
+            this.cbStat.UseVisualStyleBackColor = true;
+            this.cbStat.CheckedChanged += new System.EventHandler(this.cbStat_CheckedChanged);
+            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
@@ -840,17 +879,6 @@
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.Size = new System.Drawing.Size(228, 187);
             this.propertyGrid1.TabIndex = 9;
-            // 
-            // cbStat
-            // 
-            this.cbStat.AutoSize = true;
-            this.cbStat.Location = new System.Drawing.Point(167, 12);
-            this.cbStat.Name = "cbStat";
-            this.cbStat.Size = new System.Drawing.Size(50, 17);
-            this.cbStat.TabIndex = 14;
-            this.cbStat.Text = "Stats";
-            this.cbStat.UseVisualStyleBackColor = true;
-            this.cbStat.CheckedChanged += new System.EventHandler(this.cbStat_CheckedChanged);
             // 
             // Form1
             // 
@@ -940,6 +968,8 @@
         private System.Windows.Forms.ToolStripMenuItem aKFToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aKFAcycleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vKFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mLSSequenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem matchedFilterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem amToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem phMToolStripMenuItem;
@@ -970,6 +1000,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridView dgvPostProcVT;
         private System.Windows.Forms.CheckBox cbStat;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
-

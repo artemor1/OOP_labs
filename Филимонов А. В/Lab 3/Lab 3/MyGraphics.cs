@@ -4,6 +4,10 @@ using ZedGraph;
 using System;
 namespace Lab_3
 {
+    /*
+    * Выполнил Филимонов Артём РСК-21
+    */
+
     /// <summary>
     /// Вспомогательный класс для отрисовки сигналов, спектров и гистограмм в <see cref="ZedGraphControl"/>.
     /// </summary>

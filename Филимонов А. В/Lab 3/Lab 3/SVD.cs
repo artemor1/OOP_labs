@@ -25,6 +25,10 @@ namespace Lab_3
         public int iterations { get; set; } = 1;
         #endregion
 
+        /*
+        * Выполнил Филимонов Артём РСК-21
+        */
+
         #region Methods
         #region OptWindow
         public static int FindOptimalWindowLength(double[] signal)
