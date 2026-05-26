@@ -19,6 +19,7 @@ namespace Lab_3
         public Form1()
         {
             InitializeComponent();
+            ConfigureAdditionalMenus();
         }
 
         #region Variables
@@ -238,6 +239,37 @@ namespace Lab_3
 
         #region UI action methods
 
+        private void ConfigureAdditionalMenus()
+        {
+            var variantMenu = new ToolStripMenuItem("Variant signals (1-8)");
+            foreach (var variant in VariantSignalGenerator.GetVariants().Take(8))
+            {
+                var variantItem = new ToolStripMenuItem($"Variant {variant.Variant}");
+                variantItem.ToolTipText = variant.Description;
+                int variantNumber = variant.Variant;
+                variantItem.Click += (sender, e) => GenerateVariantSignal(variantNumber);
+                variantMenu.DropDownItems.Add(variantItem);
+            }
+
+            generatorToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+            generatorToolStripMenuItem.DropDownItems.Add(variantMenu);
+
+            var matchedFilterItem = new ToolStripMenuItem("Matched filter demo");
+            matchedFilterItem.Click += (sender, e) => RunMatchedFilterDemo();
+
+            var windowedSpectrumMenu = new ToolStripMenuItem("Windowed spectrum");
+            var hammingItem = new ToolStripMenuItem("Hamming");
+            hammingItem.Click += (sender, e) => ShowWindowedSpectrum(false);
+            var blackmanParallelItem = new ToolStripMenuItem("Blackman parallel");
+            blackmanParallelItem.Click += (sender, e) => ShowWindowedSpectrum(true);
+            windowedSpectrumMenu.DropDownItems.Add(hammingItem);
+            windowedSpectrumMenu.DropDownItems.Add(blackmanParallelItem);
+
+            fourierToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+            fourierToolStripMenuItem.DropDownItems.Add(matchedFilterItem);
+            fourierToolStripMenuItem.DropDownItems.Add(windowedSpectrumMenu);
+        }
+
         #region Property actions
         private void ShowGeneratorProperties()
         {
@@ -278,14 +310,6 @@ namespace Lab_3
         #endregion
 
         #region Signal source actions
-        private void GenerateSinSignal()
-        {
-            Debug.WriteLine("[Action] GenerateSinSignal");
-            signalData = generator.GenSin();
-            LogSignalState("GenSin", signalData);
-            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
-        }
-
         private void GenerateRandomSignal()
         {
             Debug.WriteLine("[Action] GenerateRandomSignal");
@@ -482,6 +506,14 @@ namespace Lab_3
             LogSignalState(context, signalData);
             MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
         }
+
+        private void GenerateVariantSignal(int variant)
+        {
+            Debug.WriteLine($"[Action] GenerateVariantSignal variant={variant}");
+            signalData = VariantSignalGenerator.Generate(variant, generator.FreqSampling, generator.Duration);
+            LogSignalState($"Variant {variant}", signalData);
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line, generator.FreqSampling);
+        }
         #endregion
 
         #region Decode actions
@@ -524,6 +556,67 @@ namespace Lab_3
         #region Tabs actions
         //TODO: Get a func that would change signal source based on whic tab are active
 
+        #endregion
+
+        #region Additional processing actions
+        private void RunMatchedFilterDemo()
+        {
+            Debug.WriteLine("[Action] RunMatchedFilterDemo");
+            int[] polynomial = { 1, 0, 0, 1 };
+            var expectedShifts = new List<int> { 8, 24, 40 };
+
+            var testSignal = Filtering.GenTestSignal(polynomial, expectedShifts);
+            var referenceSequence = MLS.MakeMSequence(polynomial);
+            var filtered = Filtering.MatchedFilter(testSignal, referenceSequence);
+            var threshold = filtered.Length == 0 ? 0 : filtered.Max() * 0.6;
+            var foundShifts = Filtering.FindMax(filtered, threshold);
+
+            signalData = Array.ConvertAll(testSignal, Convert.ToDouble);
+            processedSignalData = filtered;
+
+            LogSignalState("Matched filter test signal", signalData);
+            LogSignalState("Matched filter response", processedSignalData);
+
+            MyGraphics.DrawGraph(zedGraphControl1, signalData, MyGraphics.GraphType.line);
+            MyGraphics.DrawGraph(zedGraphControl3, processedSignalData, MyGraphics.GraphType.line);
+            DataGrid_Replace(foundShifts.Select(shift => shift.ToString()), dataGridView2);
+
+            MessageBox.Show(
+                $"Matched filter demo completed.\nExpected shifts: {string.Join(", ", expectedShifts)}\nDetected shifts: {string.Join(", ", foundShifts)}",
+                "Matched filter");
+        }
+
+        private void ShowWindowedSpectrum(bool useParallel)
+        {
+            var source = signalData;
+            if (source == null || source.Length < 8)
+            {
+                MessageBox.Show("Generate or load a signal first.");
+                return;
+            }
+
+            int windowSize = Math.Min(256, source.Length);
+            int intersection = 2;
+            double[] window;
+            double[] result;
+
+            if (useParallel)
+            {
+                window = WindowFunction.GenBlackmanWindow(windowSize);
+                result = Spectrum.CalculateSpectrumWindowParallel(source, window, intersection, null).GetAwaiter().GetResult();
+                Debug.WriteLine("[Action] ShowWindowedSpectrum parallel Blackman");
+            }
+            else
+            {
+                window = WindowFunction.GenHammingWindow(windowSize);
+                result = Spectrum.CalculateSpectrumWindow(source, window, intersection, null).GetAwaiter().GetResult();
+                Debug.WriteLine("[Action] ShowWindowedSpectrum Hamming");
+            }
+
+            processedSignalData = result;
+            LogSignalState("Windowed spectrum", processedSignalData);
+            MyGraphics.DrawGraph(zedGraphControl2, processedSignalData, MyGraphics.GraphType.stick, generator.FreqSampling);
+        }
         #endregion
 
         #endregion
