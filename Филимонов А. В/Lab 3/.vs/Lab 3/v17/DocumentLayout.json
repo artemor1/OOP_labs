@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\MyComplex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\\u043B\u0430\u0431\u0430 2\\mycomplexgraph\\mycomplex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\Lab 3\\Form1.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -14,7 +14,7 @@
       "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:Lab 3\\Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|c:\\users\\\u0430\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\oop_labs\\\u0444\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0430. \u0432\\lab 3\\lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\Lab 3\\lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0540BA3A-91B7-4623-9F5A-FE087BE80F24}|Lab 3\\Lab 3.csproj|solutionrelative:lab 3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -117,8 +117,7 @@
               "RelativeToolTip": "Lab 3\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-05T18:45:06.193Z",
-              "IsPinned": true,
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -131,8 +130,7 @@
               "ViewState": "AgIAAI8CAAAAAAAAAADwv5YCAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-05T18:00:15.281Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -171,8 +169,7 @@
               "ViewState": "AgIAAGkAAAAAAAAAAAAawIgAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-07T01:59:52.495Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -182,7 +179,7 @@
               "RelativeDocumentMoniker": "..\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\MyComplex.cs",
               "ToolTip": "C:\\Users\\\u0410\u0440\u0442\u0451\u043C\\source\\repos\\artemor1\\OOP_labs\\\u0424\u0438\u043B\u0438\u043C\u043E\u043D\u043E\u0432 \u0410. \u0412\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\MyComplex.cs",
               "RelativeToolTip": "..\\\u041B\u0430\u0431\u0430 2\\MyComplexGraph\\MyComplex.cs",
-              "ViewState": "AgIAACUCAAAAAAAAAAAQwC8CAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAA8CAAAAAAAAAAAmwC8CAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-06T20:07:05.637Z",
               "IsPinned": true,
@@ -296,8 +293,7 @@
               "RelativeToolTip": "Lab 3\\Form1.Designer.cs",
               "ViewState": "AgIAAOkAAAAAAAAAAAAiwPYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T16:37:54.142Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T16:37:54.142Z"
             }
           ]
         }

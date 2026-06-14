@@ -34,6 +34,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.totxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tobinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.towavToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSignalFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,7 +160,8 @@
             // 
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.totxtToolStripMenuItem,
-            this.tobinToolStripMenuItem});
+            this.tobinToolStripMenuItem,
+            this.towavToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.saveToolStripMenuItem.Text = "Save";
@@ -177,6 +179,13 @@
             this.tobinToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.tobinToolStripMenuItem.Text = "To .bin";
             this.tobinToolStripMenuItem.Click += new System.EventHandler(this.tobinToolStripMenuItem_Click);
+            // 
+            // towavToolStripMenuItem
+            // 
+            this.towavToolStripMenuItem.Name = "towavToolStripMenuItem";
+            this.towavToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.towavToolStripMenuItem.Text = "To .wav";
+            this.towavToolStripMenuItem.Click += new System.EventHandler(this.towavToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
@@ -932,6 +941,7 @@
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem totxtToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tobinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem towavToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabControl tabControl2;

@@ -268,6 +268,40 @@ namespace Lab_3
                 }
             }
 
+            public static int SaveSignalData(string path, double[] signal, uint sampleRate)
+            {
+                Debug.WriteLine($"[WaveReader.SaveSignalData] Start path={path}, signalLength={(signal == null ? 0 : signal.Length)}, sampleRate={sampleRate}");
+                if (signal == null || signal.Length == 0 || sampleRate == 0)
+                {
+                    Debug.WriteLine("[WaveReader.SaveSignalData] Invalid input.");
+                    return -1;
+                }
+
+                double max = 0;
+                for (int i = 0; i < signal.Length; i++)
+                {
+                    double a = Math.Abs(signal[i]);
+                    if (a > max) max = a;
+                }
+                if (max < double.Epsilon) max = 1;
+
+                short[] samples = new short[signal.Length];
+                for (int i = 0; i < signal.Length; i++)
+                {
+                    double scaled = signal[i] / max * 32767;
+                    scaled = Math.Max(-32768, Math.Min(32767, scaled));
+                    samples[i] = (short)Math.Round(scaled);
+                }
+
+                var fmt = new FmtChunk
+                {
+                    sampleRate = sampleRate,
+                    dataSize = 16
+                };
+
+                return WriteWaveFile(path, fmt, new List<short[]> { samples });
+            }
+
             public static double[] LoadSignalData(string path)
             {
                 Debug.WriteLine($"[WaveReader.LoadSignalData] Start path={path}");

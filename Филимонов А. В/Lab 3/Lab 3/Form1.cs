@@ -152,6 +152,37 @@ namespace Lab_3
                 Debug.WriteLine($"[SaveData] Saved {d} lines to bin file: {fd.FileName}");
             }
         }
+
+        void SaveSignalToWav()
+        {
+            if (signalData == null || signalData.Length == 0)
+            {
+                MessageBox.Show("Сначала сгенерируйте или загрузите сигнал.");
+                return;
+            }
+
+            var fd = new SaveFileDialog
+            {
+                Filter = "Wave files|*.wav"
+            };
+            if (fd.ShowDialog() != DialogResult.OK)
+            {
+                Debug.WriteLine("[SaveSignalToWav] Save canceled by user");
+                return;
+            }
+
+            uint sampleRate = (uint)Math.Max(1, generator.FreqSampling);
+            int result = RIFF_Files.WaveReader.SaveSignalData(fd.FileName, signalData, sampleRate);
+            if (result == 0)
+            {
+                Debug.WriteLine($"[SaveSignalToWav] Saved WAV: {fd.FileName}, sampleRate={sampleRate}, samples={signalData.Length}");
+                MessageBox.Show($"Сигнал сохранён в {fd.FileName}\nЧастота дискретизации: {sampleRate} Гц", "Save WAV");
+            }
+            else
+            {
+                MessageBox.Show("Не удалось сохранить WAV-файл.");
+            }
+        }
         void LoadData()
         {
             Debug.WriteLine("[LoadData] Start");
@@ -655,6 +686,11 @@ namespace Lab_3
             }
             SaveData("bin");
             data.Clear();
+        }
+
+        private void towavToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveSignalToWav();
         }
 
         private void showPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
