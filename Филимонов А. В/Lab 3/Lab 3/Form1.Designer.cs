@@ -244,7 +244,7 @@
             this.genSinToolStripMenuItem.Name = "genSinToolStripMenuItem";
             this.genSinToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.genSinToolStripMenuItem.Text = "Gen Signal";
-            this.genSinToolStripMenuItem.Click += new System.EventHandler(this.genSinToolStripMenuItem_Click);
+           // this.genSinToolStripMenuItem.Click += new System.EventHandler(this.genSinToolStripMenuItem_Click);
             // 
             // sinToolStripMenuItem
             // 

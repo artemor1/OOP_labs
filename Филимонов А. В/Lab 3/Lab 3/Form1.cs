@@ -662,10 +662,10 @@ namespace Lab_3
             ShowGeneratorProperties();
         }
 
-        private void genSinToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GenerateSinSignal();
-        }
+        //private void genSinToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    GenerateSinSignal();
+        //}
 
 
         private void loadSignalFromFileToolStripMenuItem_Click(object sender, EventArgs e)
